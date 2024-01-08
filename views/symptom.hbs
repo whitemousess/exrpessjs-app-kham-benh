@@ -1,0 +1,111 @@
+
+
+<div class="check-group">
+  
+  <label for="myCheckbox01" class="checkbox">
+    <input class="checkbox__input" type="checkbox" id="myCheckbox01" value="Đau bụng">
+    <svg class="checkbox__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 22 22">
+      <rect width="21" height="21" x=".5" y=".5" fill="#FFF" stroke="#006F94" rx="3" />
+      <path class="tick" stroke="#6EA340" fill="none" stroke-linecap="round" stroke-width="4" d="M4 10l5 5 9-9" />
+    </svg>
+    <span class="checkbox__label">Đau bụng</span>
+  </label>
+
+  <label for="myCheckbox02" class="checkbox">
+    <input class="checkbox__input" type="checkbox" id="myCheckbox02" value="Nổi ban da">
+    <svg class="checkbox__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 22 22">
+      <rect width="21" height="21" x=".5" y=".5" fill="#FFF" stroke="#006F94" rx="3" />
+      <path class="tick" stroke="#6EA340" fill="none" stroke-linecap="round" stroke-width="4" d="M4 10l5 5 9-9" />
+    </svg>
+    <span class="checkbox__label">Nổi ban da</span>
+  </label>
+
+  <label for="myCheckbox03" class="checkbox">
+    <input class="checkbox__input" type="checkbox" id="myCheckbox03" value="Buồn nôn">
+    <svg class="checkbox__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 22 22">
+      <rect width="21" height="21" x=".5" y=".5" fill="#FFF" stroke="#006F94" rx="3" />
+      <path class="tick" stroke="#6EA340" fill="none" stroke-linecap="round" stroke-width="4" d="M4 10l5 5 9-9" />
+    </svg>
+    <span class="checkbox__label">Buồn nôn</span>
+  </label>
+
+  <label for="myCheckbox04" class="checkbox">
+    <input class="checkbox__input" type="checkbox" id="myCheckbox04" value="Ngứa">
+    <svg class="checkbox__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 22 22">
+      <rect width="21" height="21" x=".5" y=".5" fill="#FFF" stroke="#006F94" rx="3" />
+      <path class="tick" stroke="#6EA340" fill="none" stroke-linecap="round" stroke-width="4" d="M4 10l5 5 9-9" />
+    </svg>
+    <span class="checkbox__label">Ngứa</span>
+  </label>
+  
+</div>
+
+<button type="submit"> Lọc</button> 
+
+
+   
+
+<style>
+  
+.check-group {
+  margin-top: 50px;
+  margin-left: 55px;
+  background: #fff;
+  max-width: 15rem;
+  padding: 1.5rem;
+  border-radius: 0.5rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 10, 0.2);
+  counter-reset: total;
+  counter-reset: checked;
+}
+.check-group > * + * {
+  margin-top: 0.75rem;
+}
+.check-group .checkbox {
+  counter-increment: total;
+}
+.check-group input[type=checkbox]:checked {
+  counter-increment: checked;
+}
+.check-group__result {
+  font-weight: bold;
+  padding-top: 0.75rem;
+  border-top: 1px solid rgba(0, 0, 0, 0.2);
+}
+.check-group__result:after {
+  content: counter(checked) " / " counter(total);
+  padding-left: 1ch;
+}
+
+.checkbox {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+}
+.checkbox__input {
+  position: absolute;
+  width: 1.375em;
+  height: 1.375em;
+  opacity: 0;
+  cursor: pointer;
+}
+.checkbox__input:checked + .checkbox__icon .tick {
+  stroke-dashoffset: 0;
+}
+.checkbox__icon {
+  width: 1.375em;
+  height: 1.375em;
+  flex-shrink: 0;
+  overflow: visible;
+}
+.checkbox__icon .tick {
+  stroke-dasharray: 20px;
+  stroke-dashoffset: 20px;
+  transition: stroke-dashoffset 0.2s ease-out;
+}
+.checkbox__label {
+  margin-left: 0.5em;
+}
+
+
+</style>

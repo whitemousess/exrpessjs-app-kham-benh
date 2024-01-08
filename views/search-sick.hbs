@@ -1,0 +1,891 @@
+{{#ifEquals info "edit"}}
+<div class="">
+    <div class="alert alert-success alert-dismissible fade show mb-0" role="alert">
+        <strong>Chỉnh sửa thông tin bệnh lý thành công.</strong>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+</div>
+{{/ifEquals}}
+{{#ifEquals info "delete"}}
+<div class="">
+    <div class="alert alert-success alert-dismissible fade show mb-0" role="alert">
+        <strong>Đã xóa bệnh lý.</strong>
+        <button type="button" class="btn-close" data-bs-dismiss="alert"  aria-label="Close"></button>
+    </div>
+</div>
+{{/ifEquals}}
+<div class="container" style="margin-top: 20px;">
+    <h3 class="text-center mt-2"><b>Danh sách bệnh lý</b></h3>
+
+     <div class="container">
+
+                            {{!-- <div class="nav-item dropdown me-2">
+
+                                {{#ifEquals role "patient"}}
+                                 <button class="btn  py-3 nav-link" data-bs-toggle="dropdown" aria-expanded="false" type="submit" data-bs-toggle="modal" data-bs-target="#add" style="margin-top: 20px;background-color:#1eb2c5;color:#fff;width:200px;border-radius:10px;margin-bottom: 20px">       
+                                    Triệu chứng của bạn
+                                 </button>
+                                 {{/ifEquals}}
+                                <a class=""  href="#"></a>
+                                <ul class="dropdown-menu dropdown-menu-end dropdown-menu-lg-start" style="padding: 20px;width:1300px;box-shadow: rgba(6, 24, 44, 0.4) 0px 0px 0px 2px, rgba(6, 24, 44, 0.65) 0px 4px 6px -1px, rgba(255, 255, 255, 0.08) 0px 1px 0px inset;">
+                                   
+                                <div style="display: flex; column-gap:20px">
+
+                                     <div>
+
+                                        <li>
+                                            <label for="myCheckbox01" class="checkbox">
+                                            <input class="checkbox__input"  name="pos" value="Da vàng, Nước tiểu đậm màu, Mắt đỏ, Bong da, Bụi bạc trên da" type="checkbox" name="pos"id="myCheckbox01" >
+                                            <svg class="checkbox__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 22 22">
+                                            <rect width="21" height="21" x=".5" y=".5" fill="#FFF" stroke="#006F94" rx="3" />
+                                            <path class="tick" stroke="#6EA340" fill="none" stroke-linecap="round" stroke-width="4" d="M4 10l5 5 9-9" />
+                                            </svg>
+                                            <span class="checkbox__label">Da vàng</span>
+                                        </li>
+                                        <br>
+
+                                        <li>
+                                            <label for="myCheckbox01" class="checkbox">
+                                            <input class="checkbox__input"  name="pos" type="checkbox" name="pos" value="Đau bụng, Nồng trong dạ dày, Vết loét ở lưỡi, Buồn nôn, Khó tiêu hóa, Táo bón, Tiêu chảy, Đau bụng, Chảy máu dạ dày, Phình bụng" id="myCheckbox01" >
+                                            <svg class="checkbox__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 22 22">
+                                            <rect width="21" height="21" x=".5" y=".5" fill="#FFF" stroke="#006F94" rx="3" />
+                                            <path class="tick" stroke="#6EA340" fill="none" stroke-linecap="round" stroke-width="4" d="M4 10l5 5 9-9" />
+                                            </svg>
+                                            <span class="checkbox__label">Vết loét ở lưỡi</span>
+                                        </li>
+                                        <br>
+
+                                        <li>
+                                            <label for="myCheckbox01" class="checkbox">
+                                            <input class="checkbox__input"  name="pos" type="checkbox" name="pos" value="Rùng mình, Khó thở, Đổ mồ hôi, Ho, Áp lực xoang mũi, Chảy nước mũi, Đờm" id="myCheckbox01" >
+                                            <svg class="checkbox__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 22 22">
+                                            <rect width="21" height="21" x=".5" y=".5" fill="#FFF" stroke="#006F94" rx="3" />
+                                            <path class="tick" stroke="#6EA340" fill="none" stroke-linecap="round" stroke-width="4" d="M4 10l5 5 9-9" />
+                                            </svg>
+                                            <span class="checkbox__label">Chảy nước mũi</span>
+                                        </li>
+                                        <br>
+
+                                         <li>
+                                            <label for="myCheckbox01" class="checkbox">
+                                            <input class="checkbox__input"  name="pos" type="checkbox" name="pos" value="Hôi miệng" id="myCheckbox01" >
+                                            <svg class="checkbox__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 22 22">
+                                            <rect width="21" height="21" x=".5" y=".5" fill="#FFF" stroke="#006F94" rx="3" />
+                                            <path class="tick" stroke="#6EA340" fill="none" stroke-linecap="round" stroke-width="4" d="M4 10l5 5 9-9" />
+                                            </svg>
+                                            <span class="checkbox__label">Hôi miệng</span>
+                                        </li>
+                                        <br>
+
+                                         <li>
+                                            <label for="myCheckbox01" class="checkbox">
+                                            <input class="checkbox__input"  name="pos" type="checkbox" name="pos" value="Đau khớp, Mất cơ, Yếu cơ, Cổ cứng, Các khớp sưng, Cứng cơ khi vận động, Chuyển động quay vòng, Mất cân bằng, Thiếu vững, Yếu ở một bên cơ thể" id="myCheckbox01" >
+                                            <svg class="checkbox__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 22 22">
+                                            <rect width="21" height="21" x=".5" y=".5" fill="#FFF" stroke="#006F94" rx="3" />
+                                            <path class="tick" stroke="#6EA340" fill="none" stroke-linecap="round" stroke-width="4" d="M4 10l5 5 9-9" />
+                                            </svg>
+                                            <span class="checkbox__label">Các khớp sưng</span>
+                                        </li>
+                                        <br>
+
+                                         <li>
+                                            <label for="myCheckbox01" class="checkbox">
+                                            <input class="checkbox__input"  name="pos" type="checkbox" name="pos" value="Ngứa, Nổi mẩn, Nổi ban da, Mụn có mủ, Mụn đen, Nứt nước, Chất nhầy màu vàng" id="myCheckbox01" >
+                                            <svg class="checkbox__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 22 22">
+                                            <rect width="21" height="21" x=".5" y=".5" fill="#FFF" stroke="#006F94" rx="3" />
+                                            <path class="tick" stroke="#6EA340" fill="none" stroke-linecap="round" stroke-width="4" d="M4 10l5 5 9-9" />
+                                            </svg>
+                                            <span class="checkbox__label">Chất nhầy màu vàng</span>
+                                        </li>
+                                        <br>
+
+                                          <li>
+                                            <label for="myCheckbox01" class="checkbox">
+                                            <input class="checkbox__input"  name="pos" type="checkbox" name="pos" value="Tăng cân, Giảm cân, Thèm ăn quá mức, Khát nước, Tiểu tiện nhiều, Ngứa nội tiết, Thay đổi ý thức, Trầm cảm, Dễ cáu kỉnh, Thay đổi tâm trạng" id="myCheckbox01" >
+                                            <svg class="checkbox__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 22 22">
+                                            <rect width="21" height="21" x=".5" y=".5" fill="#FFF" stroke="#006F94" rx="3" />
+                                            <path class="tick" stroke="#6EA340" fill="none" stroke-linecap="round" stroke-width="4" d="M4 10l5 5 9-9" />
+                                            </svg>
+                                            <span class="checkbox__label">Giảm cân</span>
+                                        </li>
+                                        <br>
+
+                                        <li>
+                                            <label for="myCheckbox01" class="checkbox">
+                                            <input class="checkbox__input"  name="pos" type="checkbox" name="pos" value="Đường huyết không đều, Đau thận, Khó chịu ở bàng quang, Mùi nước tiểu khó chịu, Cảm giác tiểu tiện liên tục, Chảy khí" id="myCheckbox01" >
+                                            <svg class="checkbox__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 22 22">
+                                            <rect width="21" height="21" x=".5" y=".5" fill="#FFF" stroke="#006F94" rx="3" />
+                                            <path class="tick" stroke="#6EA340" fill="none" stroke-linecap="round" stroke-width="4" d="M4 10l5 5 9-9" />
+                                            </svg>
+                                            <span class="checkbox__label">Khó chịu ở bàng quang</span>
+                                        </li>
+                                        <br>
+
+
+                                     
+
+                                    </label>
+                                    
+                                    </div>
+
+                                    <div>
+                                           <li>
+                                            <label for="myCheckbox01" class="checkbox">
+                                            <input class="checkbox__input"  name="pos" type="checkbox" name="pos" value="Ngứa, Nổi mẩn, Nổi ban da, Mụn có mủ, Mụn đen, Nứt nước, Chất nhầy màu vàng" id="myCheckbox01" >
+                                            <svg class="checkbox__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 22 22">
+                                            <rect width="21" height="21" x=".5" y=".5" fill="#FFF" stroke="#006F94" rx="3" />
+                                            <path class="tick" stroke="#6EA340" fill="none" stroke-linecap="round" stroke-width="4" d="M4 10l5 5 9-9" />
+                                            </svg>
+                                            <span class="checkbox__label">Nổi ban da</span>
+                                        </li>
+                                        <br>
+                                        <li>
+                                            <label for="myCheckbox01" class="checkbox">
+                                            <input class="checkbox__input"  name="pos" type="checkbox" name="pos" value="Da vàng, Nước tiểu đậm màu, Mắt đỏ, Bong da, Bụi bạc trên da" id="myCheckbox01" >
+                                            <svg class="checkbox__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 22 22">
+                                            <rect width="21" height="21" x=".5" y=".5" fill="#FFF" stroke="#006F94" rx="3" />
+                                            <path class="tick" stroke="#6EA340" fill="none" stroke-linecap="round" stroke-width="4" d="M4 10l5 5 9-9" />
+                                            </svg>
+                                            <span class="checkbox__label">Nước tiểu đậm màu</span>
+                                        </li>
+                                        <br>
+                                            <li>
+                                            <label for="myCheckbox01" class="checkbox">
+                                            <input class="checkbox__input"  name="pos" type="checkbox" name="pos" value="Đau khớp, Mất cơ, Yếu cơ, Cổ cứng, Các khớp sưng, Cứng cơ khi vận động, Chuyển động quay vòng, Mất cân bằng, Thiếu vững, Yếu ở một bên cơ thể" id="myCheckbox01" >
+                                            <svg class="checkbox__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 22 22">
+                                            <rect width="21" height="21" x=".5" y=".5" fill="#FFF" stroke="#006F94" rx="3" />
+                                            <path class="tick" stroke="#6EA340" fill="none" stroke-linecap="round" stroke-width="4" d="M4 10l5 5 9-9" />
+                                            </svg>
+                                            <span class="checkbox__label">Đau khớp</span>
+                                        </li>
+                                        <br>
+
+                                        <li>
+                                            <label for="myCheckbox01" class="checkbox">
+                                            <input class="checkbox__input"  name="pos" type="checkbox" name="pos" value="Đau khớp, Mất cơ, Yếu cơ, Cổ cứng, Các khớp sưng, Cứng cơ khi vận động, Chuyển động quay vòng, Mất cân bằng, Thiếu vững, Yếu ở một bên cơ thể" id="myCheckbox01" >
+                                            <svg class="checkbox__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 22 22">
+                                            <rect width="21" height="21" x=".5" y=".5" fill="#FFF" stroke="#006F94" rx="3" />
+                                            <path class="tick" stroke="#6EA340" fill="none" stroke-linecap="round" stroke-width="4" d="M4 10l5 5 9-9" />
+                                            </svg>
+                                            <span class="checkbox__label">Yếu ở một bên cơ thể</span>
+                                        </li>
+                                        <br>
+
+                                         <li>
+                                            <label for="myCheckbox01" class="checkbox">
+                                            <input class="checkbox__input"  name="pos" type="checkbox" name="pos" value="Tăng cân, Giảm cân, Thèm ăn quá mức, Khát nước, Tiểu tiện nhiều, Ngứa nội tiết, Thay đổi ý thức, Trầm cảm, Dễ cáu kỉnh, Thay đổi tâm trạng" id="myCheckbox01" >
+                                            <svg class="checkbox__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 22 22">
+                                            <rect width="21" height="21" x=".5" y=".5" fill="#FFF" stroke="#006F94" rx="3" />
+                                            <path class="tick" stroke="#6EA340" fill="none" stroke-linecap="round" stroke-width="4" d="M4 10l5 5 9-9" />
+                                            </svg>
+                                            <span class="checkbox__label">Khát nước</span>
+                                        </li>
+                                        <br>
+
+                                         <li>
+                                            <label for="myCheckbox01" class="checkbox">
+                                            <input class="checkbox__input"  name="pos" type="checkbox" name="pos" value="Ngứa, Nổi mẩn, Nổi ban da, Mụn có mủ, Mụn đen, Nứt nước, Chất nhầy màu vàng" id="myCheckbox01" >
+                                            <svg class="checkbox__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 22 22">
+                                            <rect width="21" height="21" x=".5" y=".5" fill="#FFF" stroke="#006F94" rx="3" />
+                                            <path class="tick" stroke="#6EA340" fill="none" stroke-linecap="round" stroke-width="4" d="M4 10l5 5 9-9" />
+                                            </svg>
+                                            <span class="checkbox__label">Ngứa</span>
+                                        </li>
+                                        <br>
+
+                                          <li>
+                                            <label for="myCheckbox01" class="checkbox">
+                                            <input class="checkbox__input"  name="pos" type="checkbox" name="pos" value="Đau ngực, Nhịp tim nhanh, Nhịp tim nhanh, Sưng chân, Mạch máu sưng, Mạch nổi trên bắp chân" id="myCheckbox01" >
+                                            <svg class="checkbox__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 22 22">
+                                            <rect width="21" height="21" x=".5" y=".5" fill="#FFF" stroke="#006F94" rx="3" />
+                                            <path class="tick" stroke="#6EA340" fill="none" stroke-linecap="round" stroke-width="4" d="M4 10l5 5 9-9" />
+                                            </svg>
+                                            <span class="checkbox__label">Mạch nổi trên bắp chân</span>
+                                        </li>
+                                        <br>
+
+                                        <li>
+                                            <label for="myCheckbox01" class="checkbox">
+                                            <input class="checkbox__input"  name="pos" type="checkbox" name="pos" value="Sổ mũi liên tục, Chảy nước mũi, Đau họng, Ho, Sốt cao, Lạnh lẽo, Mệt mỏi, Khó thở, Đau đầu" id="myCheckbox01" >
+                                            <svg class="checkbox__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 22 22">
+                                            <rect width="21" height="21" x=".5" y=".5" fill="#FFF" stroke="#006F94" rx="3" />
+                                            <path class="tick" stroke="#6EA340" fill="none" stroke-linecap="round" stroke-width="4" d="M4 10l5 5 9-9" />
+                                            </svg>
+                                            <span class="checkbox__label">Sốt cao</span>
+                                        </li>
+                                        <br>
+                                      
+                                    </div>
+
+                                    <div>
+                                           <li>
+                                            <label for="myCheckbox01" class="checkbox">
+                                            <input class="checkbox__input"  name="pos" type="checkbox" name="pos" value="Mắt lồi, Mắt đỏ, Tầm nhìn mờ và biến dạng, Kích thích họng" id="myCheckbox01" >
+                                            <svg class="checkbox__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 22 22">
+                                            <rect width="21" height="21" x=".5" y=".5" fill="#FFF" stroke="#006F94" rx="3" />
+                                            <path class="tick" stroke="#6EA340" fill="none" stroke-linecap="round" stroke-width="4" d="M4 10l5 5 9-9" />
+                                            </svg>
+                                            <span class="checkbox__label">Tầm nhìn mờ và biến dạng</span>
+                                        </li>
+                                        <br>
+                                            <li>
+                                            <label for="myCheckbox01" class="checkbox">
+                                            <input class="checkbox__input"  name="pos" type="checkbox" name="pos" value="Tăng cân, Giảm cân, Thèm ăn quá mức, Khát nước, Tiểu tiện nhiều, Ngứa nội tiết, Thay đổi ý thức, Trầm cảm, Dễ cáu kỉnh, Thay đổi tâm trạng" id="myCheckbox01" >
+                                            <svg class="checkbox__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 22 22">
+                                            <rect width="21" height="21" x=".5" y=".5" fill="#FFF" stroke="#006F94" rx="3" />
+                                            <path class="tick" stroke="#6EA340" fill="none" stroke-linecap="round" stroke-width="4" d="M4 10l5 5 9-9" />
+                                            </svg>
+                                            <span class="checkbox__label">Trầm cảm</span>
+                                        </li>
+                                        <br>
+
+                                            <li>
+                                            <label for="myCheckbox01" class="checkbox">
+                                            <input class="checkbox__input"  name="pos" type="checkbox" name="pos" value="Mắt lồi, Mắt đỏ, Tầm nhìn mờ và biến dạng, Kích thích họng" id="myCheckbox01" >
+                                            <svg class="checkbox__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 22 22">
+                                            <rect width="21" height="21" x=".5" y=".5" fill="#FFF" stroke="#006F94" rx="3" />
+                                            <path class="tick" stroke="#6EA340" fill="none" stroke-linecap="round" stroke-width="4" d="M4 10l5 5 9-9" />
+                                            </svg>
+                                            <span class="checkbox__label">Kích thích họng</span>
+                                        </li>
+                                        <br>
+
+                                          <li>
+                                            <label for="myCheckbox01" class="checkbox">
+                                            <input class="checkbox__input"  name="pos" type="checkbox" name="pos" value="Đau khớp, Mất cơ, Yếu cơ, Cổ cứng, Các khớp sưng, Cứng cơ khi vận động, Chuyển động quay vòng, Mất cân bằng, Thiếu vững, Yếu ở một bên cơ thể" id="myCheckbox01" >
+                                            <svg class="checkbox__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 22 22">
+                                            <rect width="21" height="21" x=".5" y=".5" fill="#FFF" stroke="#006F94" rx="3" />
+                                            <path class="tick" stroke="#6EA340" fill="none" stroke-linecap="round" stroke-width="4" d="M4 10l5 5 9-9" />
+                                            </svg>
+                                            <span class="checkbox__label">Cứng cơ khi vận động</span>
+                                        </li>
+                                        <br>
+
+                                         <li>
+                                            <label for="myCheckbox01" class="checkbox">
+                                            <input class="checkbox__input"  name="pos" type="checkbox" name="pos" value="Ngứa, Nổi mẩn, Nổi ban da, Mụn có mủ, Mụn đen, Nứt nước, Chất nhầy màu vàng" id="myCheckbox01" >
+                                            <svg class="checkbox__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 22 22">
+                                            <rect width="21" height="21" x=".5" y=".5" fill="#FFF" stroke="#006F94" rx="3" />
+                                            <path class="tick" stroke="#6EA340" fill="none" stroke-linecap="round" stroke-width="4" d="M4 10l5 5 9-9" />
+                                            </svg>
+                                            <span class="checkbox__label">Nổi mẩn</span>
+                                        </li>
+                                        <br>
+
+                                         <li>
+                                            <label for="myCheckbox01" class="checkbox">
+                                            <input class="checkbox__input"  name="pos" type="checkbox" name="pos" value="Rùng mình, Khó thở, Đổ mồ hôi, Ho, Áp lực xoang mũi, Chảy nước mũi, Đờm" id="myCheckbox01" >
+                                            <svg class="checkbox__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 22 22">
+                                            <rect width="21" height="21" x=".5" y=".5" fill="#FFF" stroke="#006F94" rx="3" />
+                                            <path class="tick" stroke="#6EA340" fill="none" stroke-linecap="round" stroke-width="4" d="M4 10l5 5 9-9" />
+                                            </svg>
+                                            <span class="checkbox__label"> Áp lực xoang mũi</span>
+                                        </li>
+                                        <br>
+
+                                         <li>
+                                            <label for="myCheckbox01" class="checkbox">
+                                            <input class="checkbox__input"  name="pos" type="checkbox" name="pos" value="Ngứa, Nổi mẩn, Nổi ban da, Mụn có mủ, Mụn đen, Nứt nước, Chất nhầy màu vàng" id="myCheckbox01" >
+                                            <svg class="checkbox__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 22 22">
+                                            <rect width="21" height="21" x=".5" y=".5" fill="#FFF" stroke="#006F94" rx="3" />
+                                            <path class="tick" stroke="#6EA340" fill="none" stroke-linecap="round" stroke-width="4" d="M4 10l5 5 9-9" />
+                                            </svg>
+                                            <span class="checkbox__label"> Mụn đen</span>
+                                        </li>
+                                        <br>
+
+                                          <li>
+                                            <label for="myCheckbox01" class="checkbox">
+                                            <input class="checkbox__input"  name="pos" type="checkbox" name="pos" value="Đau bụng, Nồng trong dạ dày, Vết loét ở lưỡi, Buồn nôn, Khó tiêu hóa, Táo bón, Tiêu chảy, Đau bụng, Chảy máu dạ dày, Phình bụng" id="myCheckbox01" >
+                                            <svg class="checkbox__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 22 22">
+                                            <rect width="21" height="21" x=".5" y=".5" fill="#FFF" stroke="#006F94" rx="3" />
+                                            <path class="tick" stroke="#6EA340" fill="none" stroke-linecap="round" stroke-width="4" d="M4 10l5 5 9-9" />
+                                            </svg>
+                                            <span class="checkbox__label">Nồng trong dạ dày</span>
+                                        </li>
+                                        <br>
+                                    </div>
+
+                                    <div>
+                                        
+                                            <li>
+                                            <label for="myCheckbox01" class="checkbox">
+                                            <input class="checkbox__input"  name="pos" type="checkbox" name="pos" value="Đau khi đi tiêu, Đau ở khu vực hậu môn, Chảy máu từ hậu môn, Kích thích ở hậu môn, Co giật" id="myCheckbox01" >
+                                            <svg class="checkbox__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 22 22">
+                                            <rect width="21" height="21" x=".5" y=".5" fill="#FFF" stroke="#006F94" rx="3" />
+                                            <path class="tick" stroke="#6EA340" fill="none" stroke-linecap="round" stroke-width="4" d="M4 10l5 5 9-9" />
+                                            </svg>
+                                            <span class="checkbox__label">Đau khi đi tiêu</span>
+                                        </li>
+                                        <br>
+
+                                         <li>
+                                            <label for="myCheckbox01" class="checkbox">
+                                            <input class="checkbox__input"  name="pos" type="checkbox" name="pos" value="Chuyển động quay vòng, Mất cân bằng, Thiếu vững" id="myCheckbox01" >
+                                            <svg class="checkbox__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 22 22">
+                                            <rect width="21" height="21" x=".5" y=".5" fill="#FFF" stroke="#006F94" rx="3" />
+                                            <path class="tick" stroke="#6EA340" fill="none" stroke-linecap="round" stroke-width="4" d="M4 10l5 5 9-9" />
+                                            </svg>
+                                            <span class="checkbox__label">Mất cân bằng</span>
+                                        </li>
+                                        <br>
+
+                                        <li>
+                                            <label for="myCheckbox01" class="checkbox">
+                                            <input class="checkbox__input"  name="pos" type="checkbox" name="pos" value="Đau ngực, Nhịp tim nhanh, Nhịp tim nhanh, Sưng chân, Mạch máu sưng, Mạch nổi trên bắp chân" id="myCheckbox01" >
+                                            <svg class="checkbox__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 22 22">
+                                            <rect width="21" height="21" x=".5" y=".5" fill="#FFF" stroke="#006F94" rx="3" />
+                                            <path class="tick" stroke="#6EA340" fill="none" stroke-linecap="round" stroke-width="4" d="M4 10l5 5 9-9" />
+                                            </svg>
+                                            <span class="checkbox__label">Nhịp tim nhanh</span>
+                                        </li>
+                                        <br>
+
+                                        <li>
+                                            <label for="myCheckbox01" class="checkbox">
+                                            <input class="checkbox__input"  name="pos" type="checkbox" name="pos" value="Đau khớp, Mất cơ, Yếu cơ, Cổ cứng, Các khớp sưng, Cứng cơ khi vận động, Chuyển động quay vòng, Mất cân bằng, Thiếu vững, Yếu ở một bên cơ thể" id="myCheckbox01" >
+                                            <svg class="checkbox__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 22 22">
+                                            <rect width="21" height="21" x=".5" y=".5" fill="#FFF" stroke="#006F94" rx="3" />
+                                            <path class="tick" stroke="#6EA340" fill="none" stroke-linecap="round" stroke-width="4" d="M4 10l5 5 9-9" />
+                                            </svg>
+                                            <span class="checkbox__label">Mất cơ</span>
+                                        </li>
+                                        <br>
+
+                                         <li>
+                                            <label for="myCheckbox01" class="checkbox">
+                                            <input class="checkbox__input"  name="pos" type="checkbox" name="pos" value="Đau khi đi tiêu, Đau ở khu vực hậu môn, Chảy máu từ hậu môn, Kích thích ở hậu môn, Co giật" id="myCheckbox01" >
+                                            <svg class="checkbox__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 22 22">
+                                            <rect width="21" height="21" x=".5" y=".5" fill="#FFF" stroke="#006F94" rx="3" />
+                                            <path class="tick" stroke="#6EA340" fill="none" stroke-linecap="round" stroke-width="4" d="M4 10l5 5 9-9" />
+                                            </svg>
+                                            <span class="checkbox__label">Chảy máu từ hậu môn</span>
+                                        </li>
+                                        <br>
+
+                                         <li>
+                                            <label for="myCheckbox01" class="checkbox">
+                                            <input class="checkbox__input"  name="pos" type="checkbox" name="pos" value="Tăng cân, Giảm cân, Thèm ăn quá mức, Khát nước, Tiểu tiện nhiều, Ngứa nội tiết, Thay đổi ý thức, Trầm cảm, Dễ cáu kỉnh, Thay đổi tâm trạng" id="myCheckbox01" >
+                                            <svg class="checkbox__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 22 22">
+                                            <rect width="21" height="21" x=".5" y=".5" fill="#FFF" stroke="#006F94" rx="3" />
+                                            <path class="tick" stroke="#6EA340" fill="none" stroke-linecap="round" stroke-width="4" d="M4 10l5 5 9-9" />
+                                            </svg>
+                                            <span class="checkbox__label">Dễ cáu kỉnh</span>
+                                        </li>
+                                        <br>
+
+                                          <li>
+                                            <label for="myCheckbox01" class="checkbox">
+                                            <input class="checkbox__input"  name="pos" type="checkbox" name="pos" value="Sổ mũi liên tục, Chảy nước mũi, Đau họng, Ho, Sốt cao, Lạnh lẽo, Mệt mỏi, Khó thở, Đau đầu" id="myCheckbox01" >
+                                            <svg class="checkbox__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 22 22">
+                                            <rect width="21" height="21" x=".5" y=".5" fill="#FFF" stroke="#006F94" rx="3" />
+                                            <path class="tick" stroke="#6EA340" fill="none" stroke-linecap="round" stroke-width="4" d="M4 10l5 5 9-9" />
+                                            </svg>
+                                            <span class="checkbox__label">	Sổ mũi liên tục</span>
+                                        </li>
+                                        <br>
+                                        
+                                          <li>
+                                            <label for="myCheckbox01" class="checkbox">
+                                            <input class="checkbox__input"  name="pos" type="checkbox" name="pos" value="Rùng mình, Khó thở, Đổ mồ hôi, Ho, Áp lực xoang mũi, Chảy nước mũi, Đờm" id="myCheckbox01" >
+                                            <svg class="checkbox__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 22 22">
+                                            <rect width="21" height="21" x=".5" y=".5" fill="#FFF" stroke="#006F94" rx="3" />
+                                            <path class="tick" stroke="#6EA340" fill="none" stroke-linecap="round" stroke-width="4" d="M4 10l5 5 9-9" />
+                                            </svg>
+                                            <span class="checkbox__label">	Rùng mình</span>
+                                        </li>
+                                        <br>
+
+                                     
+                                    </div>
+
+                                    <div>
+                                            <li>
+                                            <label for="myCheckbox01" class="checkbox">
+                                            <input class="checkbox__input"  name="pos" type="checkbox" name="pos" value="Đau bụng, Nồng trong dạ dày, Vết loét ở lưỡi, Buồn nôn, Khó tiêu hóa, Táo bón, Tiêu chảy, Đau bụng, Chảy máu dạ dày, Phình bụng" id="myCheckbox01" >
+                                            <svg class="checkbox__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 22 22">
+                                            <rect width="21" height="21" x=".5" y=".5" fill="#FFF" stroke="#006F94" rx="3" />
+                                            <path class="tick" stroke="#6EA340" fill="none" stroke-linecap="round" stroke-width="4" d="M4 10l5 5 9-9" />
+                                            </svg>
+                                            <span class="checkbox__label">Chảy máu dạ dày</span>
+                                        </li>
+                                        <br>
+
+                                        <li>
+                                            <label for="myCheckbox01" class="checkbox">
+                                            <input class="checkbox__input"  name="pos" type="checkbox" name="pos" value="Mất chức năng gan cấp" id="myCheckbox01" >
+                                            <svg class="checkbox__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 22 22">
+                                            <rect width="21" height="21" x=".5" y=".5" fill="#FFF" stroke="#006F94" rx="3" />
+                                            <path class="tick" stroke="#6EA340" fill="none" stroke-linecap="round" stroke-width="4" d="M4 10l5 5 9-9" />
+                                            </svg>
+                                            <span class="checkbox__label">Mất chức năng gan cấp</span>
+                                        </li>
+                                        <br>
+
+                                         <li>
+                                            <label for="myCheckbox01" class="checkbox">
+                                            <input class="checkbox__input"  name="pos" type="checkbox" name="pos" value="Thiếu máu, Huyết áp cao" id="myCheckbox01" >
+                                            <svg class="checkbox__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 22 22">
+                                            <rect width="21" height="21" x=".5" y=".5" fill="#FFF" stroke="#006F94" rx="3" />
+                                            <path class="tick" stroke="#6EA340" fill="none" stroke-linecap="round" stroke-width="4" d="M4 10l5 5 9-9" />
+                                            </svg>
+                                            <span class="checkbox__label">Huyết áp cao</span>
+                                        </li>
+                                        <br>
+
+                                         <li>
+                                            <label for="myCheckbox01" class="checkbox">
+                                            <input class="checkbox__input"  name="pos" type="checkbox" name="pos" value="Đau bụng, Nồng trong dạ dày, Vết loét ở lưỡi, Buồn nôn, Khó tiêu hóa, Táo bón, Tiêu chảy, Đau bụng, Chảy máu dạ dày, Phình bụng" id="myCheckbox01" >
+                                            <svg class="checkbox__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 22 22">
+                                            <rect width="21" height="21" x=".5" y=".5" fill="#FFF" stroke="#006F94" rx="3" />
+                                            <path class="tick" stroke="#6EA340" fill="none" stroke-linecap="round" stroke-width="4" d="M4 10l5 5 9-9" />
+                                            </svg>
+                                            <span class="checkbox__label">Nồng trong dạ dày</span>
+                                        </li>
+                                        <br>
+
+                                         <li>
+                                            <label for="myCheckbox01" class="checkbox">
+                                            <input class="checkbox__input"  name="pos" type="checkbox" name="pos" value="Thiếu máu, Huyết áp cao" id="myCheckbox01" >
+                                            <svg class="checkbox__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 22 22">
+                                            <rect width="21" height="21" x=".5" y=".5" fill="#FFF" stroke="#006F94" rx="3" />
+                                            <path class="tick" stroke="#6EA340" fill="none" stroke-linecap="round" stroke-width="4" d="M4 10l5 5 9-9" />
+                                            </svg>
+                                            <span class="checkbox__label">Thiếu máu</span>
+                                        </li>
+                                        <br>
+
+                                          <li>
+                                            <label for="myCheckbox01" class="checkbox">
+                                            <input class="checkbox__input"  name="pos" type="checkbox" name="pos" value="Mắt lồi, Mắt đỏ, Tầm nhìn mờ và biến dạng, Kích thích họng" id="myCheckbox01" >
+                                            <svg class="checkbox__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 22 22">
+                                            <rect width="21" height="21" x=".5" y=".5" fill="#FFF" stroke="#006F94" rx="3" />
+                                            <path class="tick" stroke="#6EA340" fill="none" stroke-linecap="round" stroke-width="4" d="M4 10l5 5 9-9" />
+                                            </svg>
+                                            <span class="checkbox__label">	Mắt lồi</span>
+                                        </li>
+                                        <br>
+
+                                        <li>
+                                            <label for="myCheckbox01" class="checkbox">
+                                            <input class="checkbox__input"  name="pos" type="checkbox" name="pos" value="Đau khớp, Mất cơ, Yếu cơ, Cổ cứng, Các khớp sưng, Cứng cơ khi vận động, Chuyển động quay vòng, Mất cân bằng, Thiếu vững, Yếu ở một bên cơ thể" id="myCheckbox01" >
+                                            <svg class="checkbox__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 22 22">
+                                            <rect width="21" height="21" x=".5" y=".5" fill="#FFF" stroke="#006F94" rx="3" />
+                                            <path class="tick" stroke="#6EA340" fill="none" stroke-linecap="round" stroke-width="4" d="M4 10l5 5 9-9" />
+                                            </svg>
+                                            <span class="checkbox__label">Yếu cơ</span>
+                                        </li>
+                                        <br>
+
+                                        <li>
+                                            <label for="myCheckbox01" class="checkbox">
+                                            <input class="checkbox__input"  name="pos" type="checkbox" name="pos" value="Sổ mũi liên tục, Chảy nước mũi, Đau họng, Ho, Sốt cao, Lạnh lẽo, Mệt mỏi, Khó thở, Đau đầu" id="myCheckbox01" >
+                                            <svg class="checkbox__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 22 22">
+                                            <rect width="21" height="21" x=".5" y=".5" fill="#FFF" stroke="#006F94" rx="3" />
+                                            <path class="tick" stroke="#6EA340" fill="none" stroke-linecap="round" stroke-width="4" d="M4 10l5 5 9-9" />
+                                            </svg>
+                                            <span class="checkbox__label">Lạnh lẽo</span>
+                                        </li>
+                                        <br>
+
+
+                                         
+                                    </div>
+
+                                    <div>
+                                        <li>
+                                            <label for="myCheckbox01" class="checkbox">
+                                            <input class="checkbox__input"  name="pos" type="checkbox" name="pos" value="Ngứa, Nổi mẩn, Nổi ban da, Mụn có mủ, Mụn đen, Nứt nước, Chất nhầy màu vàng" id="myCheckbox01" >
+                                            <svg class="checkbox__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 22 22">
+                                            <rect width="21" height="21" x=".5" y=".5" fill="#FFF" stroke="#006F94" rx="3" />
+                                            <path class="tick" stroke="#6EA340" fill="none" stroke-linecap="round" stroke-width="4" d="M4 10l5 5 9-9" />
+                                            </svg>
+                                            <span class="checkbox__label"> Mụn có mủ</span>
+                                        </li>
+                                        <br>
+
+                                         <li>
+                                            <label for="myCheckbox01" class="checkbox">
+                                            <input class="checkbox__input"  name="pos" type="checkbox" name="pos" value="Kinh nguyệt bất thường" id="myCheckbox01" >
+                                            <svg class="checkbox__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 22 22">
+                                            <rect width="21" height="21" x=".5" y=".5" fill="#FFF" stroke="#006F94" rx="3" />
+                                            <path class="tick" stroke="#6EA340" fill="none" stroke-linecap="round" stroke-width="4" d="M4 10l5 5 9-9" />
+                                            </svg>
+                                            <span class="checkbox__label">Kinh nguyệt bất thường</span>
+                                        </li>
+                                        <br>
+
+                                          <li>
+                                            <label for="myCheckbox01" class="checkbox">
+                                            <input class="checkbox__input"  name="pos" type="checkbox" name="pos" value="Kinh nguyệt bất thường" id="myCheckbox01" >
+                                            <svg class="checkbox__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 22 22">
+                                            <rect width="21" height="21" x=".5" y=".5" fill="#FFF" stroke="#006F94" rx="3" />
+                                            <path class="tick" stroke="#6EA340" fill="none" stroke-linecap="round" stroke-width="4" d="M4 10l5 5 9-9" />
+                                            </svg>
+                                            <span class="checkbox__label">Đau ngực</span>
+                                        </li>
+                                        <br>
+
+                                          <li>
+                                            <label for="myCheckbox01" class="checkbox">
+                                            <input class="checkbox__input"  name="pos" type="checkbox" name="pos" value="Ngứa, Nổi mẩn, Nổi ban da, Mụn có mủ, Mụn đen, Nứt nước, Chất nhầy màu vàng" id="myCheckbox01" >
+                                            <svg class="checkbox__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 22 22">
+                                            <rect width="21" height="21" x=".5" y=".5" fill="#FFF" stroke="#006F94" rx="3" />
+                                            <path class="tick" stroke="#6EA340" fill="none" stroke-linecap="round" stroke-width="4" d="M4 10l5 5 9-9" />
+                                            </svg>
+                                            <span class="checkbox__label"> Nứt nước</span>
+                                        </li>
+                                        <br>
+
+                                         <li>
+                                            <label for="myCheckbox01" class="checkbox">
+                                            <input class="checkbox__input"  name="pos" type="checkbox" name="pos" value="Đường huyết không đều, Đau thận, Khó chịu ở bàng quang, Mùi nước tiểu khó chịu, Cảm giác tiểu tiện liên tục, Chảy khí" id="myCheckbox01" >
+                                            <svg class="checkbox__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 22 22">
+                                            <rect width="21" height="21" x=".5" y=".5" fill="#FFF" stroke="#006F94" rx="3" />
+                                            <path class="tick" stroke="#6EA340" fill="none" stroke-linecap="round" stroke-width="4" d="M4 10l5 5 9-9" />
+                                            </svg>
+                                            <span class="checkbox__label"> Đau thận</span>
+                                        </li>
+                                        <br>
+
+                                        
+                                         <li>
+                                            <label for="myCheckbox01" class="checkbox">
+                                            <input class="checkbox__input"  name="pos" type="checkbox" name="pos" value="Đau ngực, Nhịp tim nhanh, Nhịp tim nhanh, Sưng chân, Mạch máu sưng, Mạch nổi trên bắp chân" id="myCheckbox01" >
+                                            <svg class="checkbox__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 22 22">
+                                            <rect width="21" height="21" x=".5" y=".5" fill="#FFF" stroke="#006F94" rx="3" />
+                                            <path class="tick" stroke="#6EA340" fill="none" stroke-linecap="round" stroke-width="4" d="M4 10l5 5 9-9" />
+                                            </svg>
+                                            <span class="checkbox__label"> Sưng chân</span>
+                                        </li>
+                                        <br>
+
+                                         <li>
+                                            <label for="myCheckbox01" class="checkbox">
+                                            <input class="checkbox__input"  name="pos" type="checkbox" name="pos" value="Co giật, Mất khả năng ngửi, Thiếu tập trung, Rối loạn thị giác" id="myCheckbox01" >
+                                            <svg class="checkbox__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 22 22">
+                                            <rect width="21" height="21" x=".5" y=".5" fill="#FFF" stroke="#006F94" rx="3" />
+                                            <path class="tick" stroke="#6EA340" fill="none" stroke-linecap="round" stroke-width="4" d="M4 10l5 5 9-9" />
+                                            </svg>
+                                            <span class="checkbox__label">Mất khả năng ngửi</span>
+                                        </li>
+                                        <br>
+
+                                          <li>
+                                            <label for="myCheckbox01" class="checkbox">
+                                            <input class="checkbox__input"  name="pos" type="checkbox" name="pos" value="Chuyển động quay vòng, Mất cân bằng, Thiếu vững" id="myCheckbox01" >
+                                            <svg class="checkbox__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 22 22">
+                                            <rect width="21" height="21" x=".5" y=".5" fill="#FFF" stroke="#006F94" rx="3" />
+                                            <path class="tick" stroke="#6EA340" fill="none" stroke-linecap="round" stroke-width="4" d="M4 10l5 5 9-9" />
+                                            </svg>
+                                            <span class="checkbox__label">Chuyển động quay vòng</span>
+                                        </li>
+                                        <br>
+                                        <br>
+                                    </div>
+                                     
+                                </div>
+                                <hr>
+                                   <button class="btn  py-3"   style="margin-top: 2px;background-color:#1eb2c5;color:#fff;width:200px;border-radius:10px;">       
+                                           Tra cứu
+                                    </button>
+                                </ul>
+                                
+                                
+                            </div> --}}
+                            <br>
+
+	  <table  id="example" >
+	  <thead>
+            <tr>
+                <th>Tên bệnh</th>
+                <th>Triệu chứng</th>
+              
+                <th>Phương án </th>
+                {{#ifEquals role "doctor"}}
+                <th>Hành động</th>
+                {{/ifEquals}}
+            </tr>
+        </thead>
+        {{#ifEquals role "doctor"}}
+       <button class="btn  py-3" type="submit" data-bs-toggle="modal" data-bs-target="#add" style="margin-top: 20px;background-color:#1eb2c5;color:#fff;width:200px;border-radius:10px;margin-bottom: 20px">       
+                   Thêm bệnh lý
+       </button>
+     {{/ifEquals}}
+        <tbody>
+            {{#each sicks}}
+            <tr>
+                <td>{{SickName}}</td>
+                <td>{{Symptom}}</td>
+                <td>{{Desc}}</td>
+               
+                {{#ifEquals ../role "doctor"}}
+                <td>
+                    <div class="d-flex">
+                        <a type="button" class="d-block me-2" data-bs-toggle="modal" data-bs-target="#editServiceModal{{ID}}">
+                            <i class="bi bi-pencil-square"></i>
+                        </button>
+                        <a type="button" class="d-block" data-bs-toggle="modal" data-bs-target="#deleteServiceModal{{ID}}">
+                            <i class="bi bi-trash3"></i>
+                        </a>
+                    </div>
+                </td>
+                {{/ifEquals}}
+            </tr>
+            {{/each}}
+        
+	</table>
+</div>
+</div>
+
+
+{{#each sicks}}
+<!-- Modal -->
+<div class="modal fade" id="editServiceModal{{ID}}" tabindex="-1" aria-labelledby="editServiceModal{{ID}}"
+    aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Chỉnh sửa thông tin bệnh lý</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form class="px-md-2" id="editServiceForm{{ID}}" action="/chinh-sua/benh-ly/{{ID}}" method="POST">
+                    {{!-- Drug name input --}}
+                    <div class="form-floating mb-4">
+                        <input type="text" id="SickName{{ID}}" class="form-control" name="SickName"
+                            value="{{SickName}}" required />
+                        <label class="form-label" for="SickName{{ID}}">Tên bệnh lý</label>
+                    </div>
+                    <div class="form-floating mb-4">
+                        <input type="text" id="Symptom{{ID}}" class="form-control" name="Symptom"
+                            value="{{Symptom}}" required />
+                        <label class="form-label" for="Symptom{{ID}}">Triệu chứng</label>
+                    </div>
+                   <div class="form-floating mb-4">
+                        <input type="text" id="Desc{{ID}}" class="form-control" name="Desc"
+                            value="{{Desc}}" required />
+                        <label class="form-label" for="Desc{{ID}}">Phương án xử lý</label>
+                    </div>
+                    {{!-- Unit input --}}
+                    
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+                <button type="submit" class="btn btn-primary" form="editServiceForm{{ID}}">Xác nhận</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Modal -->
+<div class="modal fade" id="deleteServiceModal{{ID}}" tabindex="-1" aria-labelledby="deleteServiceModal{{ID}}"
+    aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Xóa bệnh lý</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                Bạn có chắc chắn muốn xóa dịch vụ <i>{{SickName}}</i>?
+                <form class="px-md-2" id="deleteServiceForm{{ID}}" action="/chinh-sua/benh-ly/xoa/{{ID}}" method="POST">
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+                <button type="submit" class="btn btn-primary" form="deleteServiceForm{{ID}}">Xác nhận</button>
+            </div>
+        </div>
+    </div>
+</div>
+{{/each}}
+
+<div class="modal fade" id="add" tabindex="-1" aria-labelledby="add"
+    aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Thêm bệnh lý</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form class="px-md-2" id="editServiceForm" action="/tai-lieu/them-benh-ly" method="POST">
+                    {{!-- Drug name input --}}
+                  
+                    <div class="form-floating mb-4">
+                        <input type="text" id="SickName" class="form-control" name="SickName" value="" required />
+
+                        <label class="form-label" for="SickName">Tên bệnh lý</label>
+                    </div>
+                    <div class="form-floating mb-4">
+                        <input type="text" id="Symptom" class="form-control" name="Symptom"
+                            value="" required />
+                        <label class="form-label" for="Symptom">Triệu chứng </label>
+                    </div>
+                   <div class="form-floating mb-4">
+                        <input type="text" id="Desc" class="form-control" name="Desc"
+                            value="" required />
+                        <label class="form-label" for="Desc">Phương án xử lý</label>
+                    </div>
+                       <div class="form-floating mb-4" style="visibility: hidden;">
+                    <input type="text" id="ID" class="form-control" name="ID" value="" readonly />
+
+                    <label class="form-label" for="ID">Mã bệnh lý</label>
+                    </div>
+                  
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+                <button type="submit" class="btn btn-primary" >Xác nhận</button>
+            </div>
+                </form>
+            </div>
+           
+        </div>
+    </div>
+</div>
+
+<script>
+    
+</script>
+
+<style>
+    html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: sans-serif;
+  font-weight: 100;
+}
+
+table {
+  width: 1280px;
+  border-collapse: collapse;
+  border-radius: 5px;
+  overflow: hidden;
+  margin-bottom: 30px;
+   box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
+}
+th,
+td {
+  padding: 20px;
+  background-color: rgba(255, 255, 255, 0.2);
+  color: #000000;
+}
+th {
+  text-align: left;
+}
+thead th {
+  background-color: #1eb2c5;
+  color: aliceblue;
+}
+tbody tr:hover {
+  background-color: rgba(255, 255, 255, 0.3);
+}
+tbody td {
+  position: relative;
+}
+tbody td:hover:before {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: -9999px;
+  bottom: -9999px;
+  background-color: rgba(255, 255, 255, 0.2);
+  z-index: -1;
+}
+
+.check-group {
+  margin-top: 50px;
+  margin-left: 55px;
+  background: #fff;
+  max-width: 15rem;
+  padding: 1.5rem;
+  border-radius: 0.5rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 10, 0.2);
+  counter-reset: total;
+  counter-reset: checked;
+}
+.check-group > * + * {
+  margin-top: 0.75rem;
+}
+.check-group .checkbox {
+  counter-increment: total;
+}
+.check-group input[type=checkbox]:checked {
+  counter-increment: checked;
+}
+.check-group__result {
+  font-weight: bold;
+  padding-top: 0.75rem;
+  border-top: 1px solid rgba(0, 0, 0, 0.2);
+}
+.check-group__result:after {
+  content: counter(checked) " / " counter(total);
+  padding-left: 1ch;
+}
+
+.checkbox {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+}
+.checkbox__input {
+  position: absolute;
+  width: 1.375em;
+  height: 1.375em;
+  opacity: 0;
+  cursor: pointer;
+}
+.checkbox__input:checked + .checkbox__icon .tick {
+  stroke-dashoffset: 0;
+}
+.checkbox__icon {
+  width: 1.375em;
+  height: 1.375em;
+  flex-shrink: 0;
+  overflow: visible;
+}
+.checkbox__icon .tick {
+  stroke-dasharray: 20px;
+  stroke-dashoffset: 20px;
+  transition: stroke-dashoffset 0.2s ease-out;
+}
+.checkbox__label {
+  margin-left: 0.5em;
+}
+
+
+</style>
+
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<script>
+    // Sử dụng jQuery để xử lý sự kiện khi nhập liệu vào trường Tên bệnh lý
+    $(document).ready(function () {
+        $('#SickName').on('input', function () {
+            // Lấy giá trị từ trường Tên bệnh lý
+            var sickNameValue = $(this).val();
+            
+            // Chuyển đổi giá trị thành slug và cập nhật trường Mã bệnh lý
+            var slugValue = slugify(sickNameValue);
+            $('#ID').val(slugValue);
+        });
+    });
+
+    // Hàm chuyển đổi chuỗi thành slug
+    function slugify(text) {
+        return text.toString().toLowerCase()
+            .replace(/\s+/g, '-')           // Thay thế khoảng trắng bằng dấu gạch ngang
+            .replace(/[^\w\-]+/g, '')       // Xóa các ký tự không phải chữ cái, số, dấu gạch ngang
+            .replace(/\-\-+/g, '-')         // Thay thế nhiều dấu gạch ngang liên tiếp bằng một dấu gạch ngang
+            .replace(/^-+/, '')             // Loại bỏ dấu gạch ngang ở đầu chuỗi
+            .replace(/-+$/, '');            // Loại bỏ dấu gạch ngang ở cuối chuỗi
+    }
+
+
+    
+</script>

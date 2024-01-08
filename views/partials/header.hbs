@@ -1,0 +1,140 @@
+<nav class="navbar navbar-expand-lg navbar-dark " style="background-color:#1eb2c5" id="header">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="/">
+            <div class="d-flex flex-row align-items-center">
+                <div>
+                    <img style="width:70px;height:70px" src="/img/logo.png">
+                </div>
+                <div>
+                    <div>
+                        <p class="large rise">An Tam Hospital</p>
+                    </div>
+                </div>
+            </div>
+        </a>
+        <div class="d-flex justify-content-end">
+            <div class="d-flex flex-column">
+                <div class="d-flex">
+                    <div id="navbarSupportedContent">
+                        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                          
+                            <li class="nav-item dropdown me-2">
+                                <a class="nav-link" data-bs-toggle="dropdown" aria-expanded="false" href="#">Tra cứu thông tin</a>
+                                <ul class="dropdown-menu dropdown-menu-end dropdown-menu-lg-start">
+                                    <li><a class="dropdown-item" href="/tim-kiem/thuoc"> Danh sách thuốc</a></li>
+                                    <li><a class="dropdown-item" href="/tim-kiem/bac-si">Danh sách bác sĩ</a></li>
+                                    <li><a class="dropdown-item" href="/tim-kiem/dich-vu">Danh sách dịch vụ</a></li>
+                                    <li><a class="dropdown-item" href="/tim-kiem/benh-ly">Danh sách bệnh lý</a></li>
+                                    {{#ifEquals role "doctor"}}
+                                    <li><a class="dropdown-item" href="/tim-kiem/benh-nhan"> Danh sách bệnh nhân</a></li>
+                                    <li><a class="dropdown-item" href="/tai-lieu/danh-sach-kham-benh">Danh sách khám
+                                            bệnh</a></li>
+                                    <li><a class="dropdown-item" href="/tim-kiem/ho-so-benh-an">Hồ sơ bệnh án</a></li>
+                                    {{/ifEquals}}
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="dropdown ms-2">
+                        <a class="dropdown-toggle d-flex align-items-center hidden-arrow" href="#"
+                            id="navbarDropdownMenuAvatar" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="white"
+                                class="bi bi-person-circle me-2" viewBox="0 0 16 16">
+                                <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z" />
+                                <path fill-rule="evenodd"
+                                    d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z" />
+                            </svg>
+                        </a>
+                           {{#ifEquals role "patient"}}
+                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuAvatar">
+                            <li>
+                                <a class="dropdown-item {{display1}}" href="/dang-nhap">Đăng nhập</a>
+                                <a class="dropdown-item {{display2}}" href="/tai-khoan">Tài khoản</a>
+                                <a class="dropdown-item {{display2}}" href="/dang-xuat">Đăng xuất</a>
+                            </li>
+                        </ul>
+                            {{/ifEquals}}
+
+                             {{#ifEquals role "doctor"}}
+                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuAvatar">
+                            <li>
+                                <a class="dropdown-item {{display1}}" href="/dang-nhap">Đăng nhập</a>
+                                <a class="dropdown-item {{display2}}" href="/tai-khoan">Tài khoản</a>
+                                <a class="dropdown-item {{display2}}" href="/dang-xuat">Đăng xuất</a>
+                            </li>
+                        </ul>
+                            {{/ifEquals}}
+
+                             {{#ifEquals role "admin"}}
+                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuAvatar">
+                           <li>
+                                <a class="dropdown-item {{display2}}" href="/dang-xuat">Đăng xuất</a>
+                            </li>
+                        </ul>
+                            {{/ifEquals}}
+                    </div>
+                </div>
+                <div class="text-white d-flex justify-content-end">
+                    {{#if session.Name}}
+                    <div class="row">
+                        <div class="d-flex alert alert-info alert-dismissible fade show mb-0" role="alert" style="display: inline-block;font-size: small; height: 30px;line-height: 30px;padding: 0px 20px;">
+                            <div>Xin chào, {{session.Name}}!</div>
+                        </div>
+                    </div>
+                    {{/if}}
+                </div>
+            </div>
+        </div>
+    </div>
+</nav>
+
+<style>
+@import url("https://fonts.googleapis.com/css2?family=Audiowide&display=swap");
+
+
+
+p {
+	margin: auto;
+}
+
+.large {
+	font-size: 1.5rem;
+    	font-family: "Audiowide", cursive;
+
+}
+
+.small {
+	font-size: 3rem;
+}
+
+.rise {
+	text-shadow: -0.01em -0.01em 0.01em #000;
+	animation: rise 2s ease-in-out 0.5s forwards;
+}
+
+@keyframes rise {
+	to {
+		text-shadow: 0em 0.01em rgb(85, 136, 255), 0em 0.02em rgb(85, 136, 255), 0em 0.02em 0.03em rgb(85, 136, 255),
+			-0.01em 0.01em #333, -0.02em 0.02em #333, -0.03em 0.03em #333,
+			-0.04em 0.04em #333, -0.01em -0.01em 0.03em #000, -0.02em -0.02em 0.03em #000,
+			-0.03em -0.03em 0.03em #000;
+		transform: translateY(-0.025em) translateX(0.04em);
+	}
+}
+
+.outline {
+	background-clip: text;
+	color: #ffdd40;
+	animation: outline 1s ease-in-out 1.5s forwards;
+}
+
+@keyframes outline {
+	from {
+		text-shadow: 0em -7em 10em #fff;
+	}
+	to {
+		text-shadow: 0 0.02em #fff, 0.02em 0 #fff, -0.02em 0 #fff, 0 -0.02em #fff;
+	}
+}
+
+</style>

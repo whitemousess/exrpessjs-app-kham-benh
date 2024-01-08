@@ -1,0 +1,2120 @@
+<div class="container py-5">
+    <div class="row-lg-12">
+        <div class="col">
+            <nav aria-label="breadcrumb" class="bg-light rounded-3 p-3 mb-4">
+                <ol class="breadcrumb mb-0">
+                    <li class="breadcrumb-item"><a href="#">Trang chủ</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Lập phiếu hẹn</li>
+                </ol>
+            </nav>
+        </div>
+    </div>
+
+    <div class="nav-item dropdown me-2">
+
+        {{#ifEquals role "patient"}}
+        <button class="btn py-3 nav-link" id="dropdownBtn" data-bs-toggle="dropdown" aria-expanded="false"
+            data-bs-target="#add"
+            style="margin-top: 20px; background-color:#1eb2c5; color:#fff; width:200px; border-radius:10px; margin-bottom: 20px">
+            Triệu chứng của bạn
+        </button>
+        {{/ifEquals}}
+
+        <div id="resultContainer">
+            <h3>Kết quả tra cứu:</h3>
+            <div id="noResultMessage" style="display: none;">Không tìm thấy kết quả.</div>
+            <table id="predictedDiseasesTable">
+                <thead>
+                    <tr>
+                        <th>Tên bệnh</th>
+                        <th>Bác sĩ phụ trách</th>
+                        <th>Học vị</th>
+                        <th>Chuyên khoa</th>
+                        <th>Liên hệ</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+
+
+        <ul class="dropdown-menu dropdown-menu-end dropdown-menu-lg-start"
+            style="padding: 20px;width:1300px;box-shadow: rgba(6, 24, 44, 0.4) 0px 0px 0px 2px, rgba(6, 24, 44, 0.65) 0px 4px 6px -1px, rgba(255, 255, 255, 0.08) 0px 1px 0px inset;">
+
+            <div style="display: flex; column-gap:20px">
+
+                <div>
+
+                    <li>
+                        <label for="myCheckbox01" class="checkbox">
+                            <input class="checkbox__input" name="checkbox" value="itching" type="checkbox"
+                                name="checkbox" id="myCheckbox01">
+                            <svg class="checkbox__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 22 22">
+                                <rect width="21" height="21" x=".5" y=".5" fill="#FFF" stroke="#006F94" rx="3" />
+                                <path class="tick" stroke="#6EA340" fill="none" stroke-linecap="round" stroke-width="4"
+                                    d="M4 10l5 5 9-9" />
+                            </svg>
+                            <span class="checkbox__label">Ngứa</span>
+                    </li>
+                    <br>
+
+                    <li>
+                        <label for="myCheckbox01" class="checkbox">
+                            <input class="checkbox__input" name="checkbox" type="checkbox" name="checkbox"
+                                value="skin_rash" id="myCheckbox01">
+                            <svg class="checkbox__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 22 22">
+                                <rect width="21" height="21" x=".5" y=".5" fill="#FFF" stroke="#006F94" rx="3" />
+                                <path class="tick" stroke="#6EA340" fill="none" stroke-linecap="round" stroke-width="4"
+                                    d="M4 10l5 5 9-9" />
+                            </svg>
+                            <span class="checkbox__label">Nổi mẩn</span>
+                    </li>
+                    <br>
+
+                    <li>
+                        <label for="myCheckbox01" class="checkbox">
+                            <input class="checkbox__input" name="checkbox" type="checkbox" name="checkbox"
+                                value="nodal_skin_eruptions" id="myCheckbox01">
+                            <svg class="checkbox__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 22 22">
+                                <rect width="21" height="21" x=".5" y=".5" fill="#FFF" stroke="#006F94" rx="3" />
+                                <path class="tick" stroke="#6EA340" fill="none" stroke-linecap="round" stroke-width="4"
+                                    d="M4 10l5 5 9-9" />
+                            </svg>
+                            <span class="checkbox__label">Nổi ban da</span>
+                    </li>
+                    <br>
+
+                    <li>
+                        <label for="myCheckbox01" class="checkbox">
+                            <input class="checkbox__input" name="checkbox" type="checkbox" name="checkbox"
+                                value="continuous_sneezing" id="myCheckbox01">
+                            <svg class="checkbox__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 22 22">
+                                <rect width="21" height="21" x=".5" y=".5" fill="#FFF" stroke="#006F94" rx="3" />
+                                <path class="tick" stroke="#6EA340" fill="none" stroke-linecap="round" stroke-width="4"
+                                    d="M4 10l5 5 9-9" />
+                            </svg>
+                            <span class="checkbox__label">Sổ mũi liên tục</span>
+                    </li>
+                    <br>
+
+                    <li>
+                        <label for="myCheckbox01" class="checkbox">
+                            <input class="checkbox__input" name="checkbox" type="checkbox" name="checkbox"
+                                value="shivering" id="myCheckbox01">
+                            <svg class="checkbox__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 22 22">
+                                <rect width="21" height="21" x=".5" y=".5" fill="#FFF" stroke="#006F94" rx="3" />
+                                <path class="tick" stroke="#6EA340" fill="none" stroke-linecap="round" stroke-width="4"
+                                    d="M4 10l5 5 9-9" />
+                            </svg>
+                            <span class="checkbox__label">Rùng mình</span>
+                    </li>
+                    <br>
+
+                    <li>
+                        <label for="myCheckbox01" class="checkbox">
+                            <input class="checkbox__input" name="checkbox" type="checkbox" name="checkbox"
+                                value="chills" id="myCheckbox01">
+                            <svg class="checkbox__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 22 22">
+                                <rect width="21" height="21" x=".5" y=".5" fill="#FFF" stroke="#006F94" rx="3" />
+                                <path class="tick" stroke="#6EA340" fill="none" stroke-linecap="round" stroke-width="4"
+                                    d="M4 10l5 5 9-9" />
+                            </svg>
+                            <span class="checkbox__label">Lạnh lẽo</span>
+                    </li>
+                    <br>
+
+                    <li>
+                        <label for="myCheckbox01" class="checkbox">
+                            <input class="checkbox__input" name="checkbox" type="checkbox" name="checkbox"
+                                value="joint_pain" id="myCheckbox01">
+                            <svg class="checkbox__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 22 22">
+                                <rect width="21" height="21" x=".5" y=".5" fill="#FFF" stroke="#006F94" rx="3" />
+                                <path class="tick" stroke="#6EA340" fill="none" stroke-linecap="round" stroke-width="4"
+                                    d="M4 10l5 5 9-9" />
+                            </svg>
+                            <span class="checkbox__label">Đau khớp</span>
+                    </li>
+                    <br>
+
+                    <li>
+                        <label for="myCheckbox01" class="checkbox">
+                            <input class="checkbox__input" name="checkbox" type="checkbox" name="checkbox"
+                                value="stomach_pain" id="myCheckbox01">
+                            <svg class="checkbox__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 22 22">
+                                <rect width="21" height="21" x=".5" y=".5" fill="#FFF" stroke="#006F94" rx="3" />
+                                <path class="tick" stroke="#6EA340" fill="none" stroke-linecap="round" stroke-width="4"
+                                    d="M4 10l5 5 9-9" />
+                            </svg>
+                            <span class="checkbox__label">Đau bụng</span>
+                    </li>
+                    <br>
+
+                    <li>
+                        <label for="myCheckbox01" class="checkbox">
+                            <input class="checkbox__input" name="checkbox" type="checkbox" name="checkbox"
+                                value="acidity" id="myCheckbox01">
+                            <svg class="checkbox__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 22 22">
+                                <rect width="21" height="21" x=".5" y=".5" fill="#FFF" stroke="#006F94" rx="3" />
+                                <path class="tick" stroke="#6EA340" fill="none" stroke-linecap="round" stroke-width="4"
+                                    d="M4 10l5 5 9-9" />
+                            </svg>
+                            <span class="checkbox__label">Nồng trong dạ dày</span>
+                    </li>
+                    <br>
+
+                    <li>
+                        <label for="myCheckbox01" class="checkbox">
+                            <input class="checkbox__input" name="checkbox" type="checkbox" name="checkbox"
+                                value="ulcers_on_tongue" id="myCheckbox01">
+                            <svg class="checkbox__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 22 22">
+                                <rect width="21" height="21" x=".5" y=".5" fill="#FFF" stroke="#006F94" rx="3" />
+                                <path class="tick" stroke="#6EA340" fill="none" stroke-linecap="round" stroke-width="4"
+                                    d="M4 10l5 5 9-9" />
+                            </svg>
+                            <span class="checkbox__label">Vết loét ở lưỡi</span>
+                    </li>
+                    <br>
+
+                    <li>
+                        <label for="myCheckbox01" class="checkbox">
+                            <input class="checkbox__input" name="checkbox" type="checkbox" name="checkbox"
+                                value="muscle_wasting" id="myCheckbox01">
+                            <svg class="checkbox__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 22 22">
+                                <rect width="21" height="21" x=".5" y=".5" fill="#FFF" stroke="#006F94" rx="3" />
+                                <path class="tick" stroke="#6EA340" fill="none" stroke-linecap="round" stroke-width="4"
+                                    d="M4 10l5 5 9-9" />
+                            </svg>
+                            <span class="checkbox__label">Mất cơ</span>
+                    </li>
+                    <br>
+
+                    <li>
+                        <label for="myCheckbox01" class="checkbox">
+                            <input class="checkbox__input" name="checkbox" type="checkbox" name="checkbox"
+                                value="vomiting" id="myCheckbox01">
+                            <svg class="checkbox__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 22 22">
+                                <rect width="21" height="21" x=".5" y=".5" fill="#FFF" stroke="#006F94" rx="3" />
+                                <path class="tick" stroke="#6EA340" fill="none" stroke-linecap="round" stroke-width="4"
+                                    d="M4 10l5 5 9-9" />
+                            </svg>
+                            <span class="checkbox__label">Buồn nôn</span>
+                    </li>
+                    <br>
+
+                    <li>
+                        <label for="myCheckbox01" class="checkbox">
+                            <input class="checkbox__input" name="checkbox" type="checkbox" name="checkbox"
+                                value="burning_micturition" id="myCheckbox01">
+                            <svg class="checkbox__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 22 22">
+                                <rect width="21" height="21" x=".5" y=".5" fill="#FFF" stroke="#006F94" rx="3" />
+                                <path class="tick" stroke="#6EA340" fill="none" stroke-linecap="round" stroke-width="4"
+                                    d="M4 10l5 5 9-9" />
+                            </svg>
+                            <span class="checkbox__label">Tiểu tiện rát</span>
+                    </li>
+                    <br>
+
+                    <li>
+                        <label for="myCheckbox01" class="checkbox">
+                            <input class="checkbox__input" name="checkbox" type="checkbox" name="checkbox"
+                                value="spotting_urination" id="myCheckbox01">
+                            <svg class="checkbox__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 22 22">
+                                <rect width="21" height="21" x=".5" y=".5" fill="#FFF" stroke="#006F94" rx="3" />
+                                <path class="tick" stroke="#6EA340" fill="none" stroke-linecap="round" stroke-width="4"
+                                    d="M4 10l5 5 9-9" />
+                            </svg>
+                            <span class="checkbox__label">Tiểu tiện có đốm</span>
+                    </li>
+                    <br>
+
+                    <li>
+                        <label for="myCheckbox01" class="checkbox">
+                            <input class="checkbox__input" name="checkbox" type="checkbox" name="checkbox"
+                                value="fatigue" id="myCheckbox01">
+                            <svg class="checkbox__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 22 22">
+                                <rect width="21" height="21" x=".5" y=".5" fill="#FFF" stroke="#006F94" rx="3" />
+                                <path class="tick" stroke="#6EA340" fill="none" stroke-linecap="round" stroke-width="4"
+                                    d="M4 10l5 5 9-9" />
+                            </svg>
+                            <span class="checkbox__label">Mệt mỏi</span>
+                    </li>
+                    <br>
+
+                    <li>
+                        <label for="myCheckbox01" class="checkbox">
+                            <input class="checkbox__input" name="checkbox" type="checkbox" name="checkbox"
+                                value="weight_gain" id="myCheckbox01">
+                            <svg class="checkbox__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 22 22">
+                                <rect width="21" height="21" x=".5" y=".5" fill="#FFF" stroke="#006F94" rx="3" />
+                                <path class="tick" stroke="#6EA340" fill="none" stroke-linecap="round" stroke-width="4"
+                                    d="M4 10l5 5 9-9" />
+                            </svg>
+                            <span class="checkbox__label">Tăng cân</span>
+                    </li>
+                    <br>
+
+                    <li>
+                        <label for="myCheckbox01" class="checkbox">
+                            <input class="checkbox__input" name="checkbox" type="checkbox" name="checkbox"
+                                value="anxiety" id="myCheckbox01">
+                            <svg class="checkbox__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 22 22">
+                                <rect width="21" height="21" x=".5" y=".5" fill="#FFF" stroke="#006F94" rx="3" />
+                                <path class="tick" stroke="#6EA340" fill="none" stroke-linecap="round" stroke-width="4"
+                                    d="M4 10l5 5 9-9" />
+                            </svg>
+                            <span class="checkbox__label">Lo lắng</span>
+                    </li>
+                    <br>
+
+                    <li>
+                        <label for="myCheckbox01" class="checkbox">
+                            <input class="checkbox__input" name="checkbox" type="checkbox" name="checkbox"
+                                value="cold_hands_and_feets" id="myCheckbox01">
+                            <svg class="checkbox__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 22 22">
+                                <rect width="21" height="21" x=".5" y=".5" fill="#FFF" stroke="#006F94" rx="3" />
+                                <path class="tick" stroke="#6EA340" fill="none" stroke-linecap="round" stroke-width="4"
+                                    d="M4 10l5 5 9-9" />
+                            </svg>
+                            <span class="checkbox__label">Tay và chân lạnh</span>
+                    </li>
+                    <br>
+
+                    <li>
+                        <label for="myCheckbox01" class="checkbox">
+                            <input class="checkbox__input" name="checkbox" type="checkbox" name="checkbox"
+                                value="mood_swings" id="myCheckbox01">
+                            <svg class="checkbox__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 22 22">
+                                <rect width="21" height="21" x=".5" y=".5" fill="#FFF" stroke="#006F94" rx="3" />
+                                <path class="tick" stroke="#6EA340" fill="none" stroke-linecap="round" stroke-width="4"
+                                    d="M4 10l5 5 9-9" />
+                            </svg>
+                            <span class="checkbox__label">Thay đổi tâm trạng</span>
+                    </li>
+                    <br>
+
+                    <li>
+                        <label for="myCheckbox01" class="checkbox">
+                            <input class="checkbox__input" name="checkbox" type="checkbox" name="checkbox"
+                                value="weight_loss" id="myCheckbox01">
+                            <svg class="checkbox__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 22 22">
+                                <rect width="21" height="21" x=".5" y=".5" fill="#FFF" stroke="#006F94" rx="3" />
+                                <path class="tick" stroke="#6EA340" fill="none" stroke-linecap="round" stroke-width="4"
+                                    d="M4 10l5 5 9-9" />
+                            </svg>
+                            <span class="checkbox__label">Giảm cân</span>
+                    </li>
+                    <br>
+
+                    <li>
+                        <label for="myCheckbox01" class="checkbox">
+                            <input class="checkbox__input" name="checkbox" type="checkbox" name="checkbox"
+                                value="restlessness" id="myCheckbox01">
+                            <svg class="checkbox__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 22 22">
+                                <rect width="21" height="21" x=".5" y=".5" fill="#FFF" stroke="#006F94" rx="3" />
+                                <path class="tick" stroke="#6EA340" fill="none" stroke-linecap="round" stroke-width="4"
+                                    d="M4 10l5 5 9-9" />
+                            </svg>
+                            <span class="checkbox__label">Không yên</span>
+                    </li>
+                    <br>
+                    <li>
+                        <label for="myCheckbox01" class="checkbox">
+                            <input class="checkbox__input" name="checkbox" type="checkbox" name="checkbox"
+                                value="yellow_crust_ooze" id="myCheckbox01">
+                            <svg class="checkbox__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 22 22">
+                                <rect width="21" height="21" x=".5" y=".5" fill="#FFF" stroke="#006F94" rx="3" />
+                                <path class="tick" stroke="#6EA340" fill="none" stroke-linecap="round" stroke-width="4"
+                                    d="M4 10l5 5 9-9" />
+                            </svg>
+                            <span class="checkbox__label">Chất nhầy màu vàng</span>
+                    </li>
+                    <br>
+
+
+                    </label>
+
+                </div>
+
+                <div>
+                    <li>
+                        <label for="myCheckbox01" class="checkbox">
+                            <input class="checkbox__input" name="checkbox" type="checkbox" name="checkbox"
+                                value="lethargy" id="myCheckbox01">
+                            <svg class="checkbox__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 22 22">
+                                <rect width="21" height="21" x=".5" y=".5" fill="#FFF" stroke="#006F94" rx="3" />
+                                <path class="tick" stroke="#6EA340" fill="none" stroke-linecap="round" stroke-width="4"
+                                    d="M4 10l5 5 9-9" />
+                            </svg>
+                            <span class="checkbox__label">Buồn ngủ</span>
+                    </li>
+                    <br>
+                    <li>
+                        <label for="myCheckbox01" class="checkbox">
+                            <input class="checkbox__input" name="checkbox" type="checkbox" name="checkbox"
+                                value="patches_in_throat" id="myCheckbox01">
+                            <svg class="checkbox__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 22 22">
+                                <rect width="21" height="21" x=".5" y=".5" fill="#FFF" stroke="#006F94" rx="3" />
+                                <path class="tick" stroke="#6EA340" fill="none" stroke-linecap="round" stroke-width="4"
+                                    d="M4 10l5 5 9-9" />
+                            </svg>
+                            <span class="checkbox__label">Mảng trắng trong họng</span>
+                    </li>
+                    <br>
+                    <li>
+                        <label for="myCheckbox01" class="checkbox">
+                            <input class="checkbox__input" name="checkbox" type="checkbox" name="checkbox"
+                                value="irregular_sugar_level" id="myCheckbox01">
+                            <svg class="checkbox__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 22 22">
+                                <rect width="21" height="21" x=".5" y=".5" fill="#FFF" stroke="#006F94" rx="3" />
+                                <path class="tick" stroke="#6EA340" fill="none" stroke-linecap="round" stroke-width="4"
+                                    d="M4 10l5 5 9-9" />
+                            </svg>
+                            <span class="checkbox__label">Đường huyết không đều</span>
+                    </li>
+                    <br>
+
+                    <li>
+                        <label for="myCheckbox01" class="checkbox">
+                            <input class="checkbox__input" name="checkbox" type="checkbox" name="checkbox" value="cough"
+                                id="myCheckbox01">
+                            <svg class="checkbox__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 22 22">
+                                <rect width="21" height="21" x=".5" y=".5" fill="#FFF" stroke="#006F94" rx="3" />
+                                <path class="tick" stroke="#6EA340" fill="none" stroke-linecap="round" stroke-width="4"
+                                    d="M4 10l5 5 9-9" />
+                            </svg>
+                            <span class="checkbox__label">Ho</span>
+                    </li>
+                    <br>
+
+                    <li>
+                        <label for="myCheckbox01" class="checkbox">
+                            <input class="checkbox__input" name="checkbox" type="checkbox" name="checkbox"
+                                value="high_fever" id="myCheckbox01">
+                            <svg class="checkbox__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 22 22">
+                                <rect width="21" height="21" x=".5" y=".5" fill="#FFF" stroke="#006F94" rx="3" />
+                                <path class="tick" stroke="#6EA340" fill="none" stroke-linecap="round" stroke-width="4"
+                                    d="M4 10l5 5 9-9" />
+                            </svg>
+                            <span class="checkbox__label">Sốt cao</span>
+                    </li>
+                    <br>
+
+                    <li>
+                        <label for="myCheckbox01" class="checkbox">
+                            <input class="checkbox__input" name="checkbox" type="checkbox" name="checkbox"
+                                value="sunken_eyes" id="myCheckbox01">
+                            <svg class="checkbox__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 22 22">
+                                <rect width="21" height="21" x=".5" y=".5" fill="#FFF" stroke="#006F94" rx="3" />
+                                <path class="tick" stroke="#6EA340" fill="none" stroke-linecap="round" stroke-width="4"
+                                    d="M4 10l5 5 9-9" />
+                            </svg>
+                            <span class="checkbox__label">Mắt lồi</span>
+                    </li>
+                    <br>
+
+                    <li>
+                        <label for="myCheckbox01" class="checkbox">
+                            <input class="checkbox__input" name="checkbox" type="checkbox" name="checkbox"
+                                value="breathlessness" id="myCheckbox01">
+                            <svg class="checkbox__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 22 22">
+                                <rect width="21" height="21" x=".5" y=".5" fill="#FFF" stroke="#006F94" rx="3" />
+                                <path class="tick" stroke="#6EA340" fill="none" stroke-linecap="round" stroke-width="4"
+                                    d="M4 10l5 5 9-9" />
+                            </svg>
+                            <span class="checkbox__label">Khó thở</span>
+                    </li>
+                    <br>
+
+                    <li>
+                        <label for="myCheckbox01" class="checkbox">
+                            <input class="checkbox__input" name="checkbox" type="checkbox" name="checkbox"
+                                value="sweating" id="myCheckbox01">
+                            <svg class="checkbox__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 22 22">
+                                <rect width="21" height="21" x=".5" y=".5" fill="#FFF" stroke="#006F94" rx="3" />
+                                <path class="tick" stroke="#6EA340" fill="none" stroke-linecap="round" stroke-width="4"
+                                    d="M4 10l5 5 9-9" />
+                            </svg>
+                            <span class="checkbox__label">Đổ mồ hôi</span>
+                    </li>
+                    <br>
+
+
+                    <li>
+                        <label for="myCheckbox01" class="checkbox">
+                            <input class="checkbox__input" name="checkbox" type="checkbox" name="checkbox"
+                                value="dehydration" id="myCheckbox01">
+                            <svg class="checkbox__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 22 22">
+                                <rect width="21" height="21" x=".5" y=".5" fill="#FFF" stroke="#006F94" rx="3" />
+                                <path class="tick" stroke="#6EA340" fill="none" stroke-linecap="round" stroke-width="4"
+                                    d="M4 10l5 5 9-9" />
+                            </svg>
+                            <span class="checkbox__label">Mất nước</span>
+                    </li>
+                    <br>
+
+
+                    <li>
+                        <label for="myCheckbox01" class="checkbox">
+                            <input class="checkbox__input" name="checkbox" type="checkbox" name="checkbox"
+                                value="indigestion" id="myCheckbox01">
+                            <svg class="checkbox__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 22 22">
+                                <rect width="21" height="21" x=".5" y=".5" fill="#FFF" stroke="#006F94" rx="3" />
+                                <path class="tick" stroke="#6EA340" fill="none" stroke-linecap="round" stroke-width="4"
+                                    d="M4 10l5 5 9-9" />
+                            </svg>
+                            <span class="checkbox__label">Khó tiêu hóa</span>
+                    </li>
+                    <br>
+
+                    <li>
+                        <label for="myCheckbox01" class="checkbox">
+                            <input class="checkbox__input" name="checkbox" type="checkbox" name="checkbox"
+                                value="headache" id="myCheckbox01">
+                            <svg class="checkbox__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 22 22">
+                                <rect width="21" height="21" x=".5" y=".5" fill="#FFF" stroke="#006F94" rx="3" />
+                                <path class="tick" stroke="#6EA340" fill="none" stroke-linecap="round" stroke-width="4"
+                                    d="M4 10l5 5 9-9" />
+                            </svg>
+                            <span class="checkbox__label">Đau đầu</span>
+                    </li>
+                    <br>
+
+                    <li>
+                        <label for="myCheckbox01" class="checkbox">
+                            <input class="checkbox__input" name="checkbox" type="checkbox" name="checkbox"
+                                value="yellowish_skin" id="myCheckbox01">
+                            <svg class="checkbox__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 22 22">
+                                <rect width="21" height="21" x=".5" y=".5" fill="#FFF" stroke="#006F94" rx="3" />
+                                <path class="tick" stroke="#6EA340" fill="none" stroke-linecap="round" stroke-width="4"
+                                    d="M4 10l5 5 9-9" />
+                            </svg>
+                            <span class="checkbox__label">Da vàng</span>
+                    </li>
+                    <br>
+
+                    <li>
+                        <label for="myCheckbox01" class="checkbox">
+                            <input class="checkbox__input" name="checkbox" type="checkbox" name="checkbox"
+                                value="dark_urine" id="myCheckbox01">
+                            <svg class="checkbox__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 22 22">
+                                <rect width="21" height="21" x=".5" y=".5" fill="#FFF" stroke="#006F94" rx="3" />
+                                <path class="tick" stroke="#6EA340" fill="none" stroke-linecap="round" stroke-width="4"
+                                    d="M4 10l5 5 9-9" />
+                            </svg>
+                            <span class="checkbox__label">Nước tiểu đậm màu</span>
+                    </li>
+                    <br>
+
+                    <li>
+                        <label for="myCheckbox01" class="checkbox">
+                            <input class="checkbox__input" name="checkbox" type="checkbox" name="checkbox"
+                                value="nausea" id="myCheckbox01">
+                            <svg class="checkbox__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 22 22">
+                                <rect width="21" height="21" x=".5" y=".5" fill="#FFF" stroke="#006F94" rx="3" />
+                                <path class="tick" stroke="#6EA340" fill="none" stroke-linecap="round" stroke-width="4"
+                                    d="M4 10l5 5 9-9" />
+                            </svg>
+                            <span class="checkbox__label">Buồn nôn</span>
+                    </li>
+                    <br>
+
+                    <li>
+                        <label for="myCheckbox01" class="checkbox">
+                            <input class="checkbox__input" name="checkbox" type="checkbox" name="checkbox"
+                                value="loss_of_appetite" id="myCheckbox01">
+                            <svg class="checkbox__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 22 22">
+                                <rect width="21" height="21" x=".5" y=".5" fill="#FFF" stroke="#006F94" rx="3" />
+                                <path class="tick" stroke="#6EA340" fill="none" stroke-linecap="round" stroke-width="4"
+                                    d="M4 10l5 5 9-9" />
+                            </svg>
+                            <span class="checkbox__label">Mất khẩu</span>
+                    </li>
+                    <br>
+
+
+                    <li>
+                        <label for="myCheckbox01" class="checkbox">
+                            <input class="checkbox__input" name="checkbox" type="checkbox" name="checkbox"
+                                value="pain_behind_the_eyes" id="myCheckbox01">
+                            <svg class="checkbox__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 22 22">
+                                <rect width="21" height="21" x=".5" y=".5" fill="#FFF" stroke="#006F94" rx="3" />
+                                <path class="tick" stroke="#6EA340" fill="none" stroke-linecap="round" stroke-width="4"
+                                    d="M4 10l5 5 9-9" />
+                            </svg>
+                            <span class="checkbox__label">Đau sau mắt</span>
+                    </li>
+                    <br>
+
+
+                    <li>
+                        <label for="myCheckbox01" class="checkbox">
+                            <input class="checkbox__input" name="checkbox" type="checkbox" name="checkbox"
+                                value="back_pain" id="myCheckbox01">
+                            <svg class="checkbox__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 22 22">
+                                <rect width="21" height="21" x=".5" y=".5" fill="#FFF" stroke="#006F94" rx="3" />
+                                <path class="tick" stroke="#6EA340" fill="none" stroke-linecap="round" stroke-width="4"
+                                    d="M4 10l5 5 9-9" />
+                            </svg>
+                            <span class="checkbox__label">Đau lưng</span>
+                    </li>
+                    <br>
+
+
+                    <li>
+                        <label for="myCheckbox01" class="checkbox">
+                            <input class="checkbox__input" name="checkbox" type="checkbox" name="checkbox"
+                                value="constipation" id="myCheckbox01">
+                            <svg class="checkbox__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 22 22">
+                                <rect width="21" height="21" x=".5" y=".5" fill="#FFF" stroke="#006F94" rx="3" />
+                                <path class="tick" stroke="#6EA340" fill="none" stroke-linecap="round" stroke-width="4"
+                                    d="M4 10l5 5 9-9" />
+                            </svg>
+                            <span class="checkbox__label">Táo bón</span>
+                    </li>
+                    <br>
+
+
+                    <li>
+                        <label for="myCheckbox01" class="checkbox">
+                            <input class="checkbox__input" name="checkbox" type="checkbox" name="checkbox"
+                                value="abdominal_pain" id="myCheckbox01">
+                            <svg class="checkbox__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 22 22">
+                                <rect width="21" height="21" x=".5" y=".5" fill="#FFF" stroke="#006F94" rx="3" />
+                                <path class="tick" stroke="#6EA340" fill="none" stroke-linecap="round" stroke-width="4"
+                                    d="M4 10l5 5 9-9" />
+                            </svg>
+                            <span class="checkbox__label">Đau bụng</span>
+                    </li>
+                    <br>
+
+
+                    <li>
+                        <label for="myCheckbox01" class="checkbox">
+                            <input class="checkbox__input" name="checkbox" type="checkbox" name="checkbox"
+                                value="diarrhoea" id="myCheckbox01">
+                            <svg class="checkbox__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 22 22">
+                                <rect width="21" height="21" x=".5" y=".5" fill="#FFF" stroke="#006F94" rx="3" />
+                                <path class="tick" stroke="#6EA340" fill="none" stroke-linecap="round" stroke-width="4"
+                                    d="M4 10l5 5 9-9" />
+                            </svg>
+                            <span class="checkbox__label">Tiêu chảy</span>
+                    </li>
+                    <br>
+
+
+                    <li>
+                        <label for="myCheckbox01" class="checkbox">
+                            <input class="checkbox__input" name="checkbox" type="checkbox" name="checkbox"
+                                value="mild_fever" id="myCheckbox01">
+                            <svg class="checkbox__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 22 22">
+                                <rect width="21" height="21" x=".5" y=".5" fill="#FFF" stroke="#006F94" rx="3" />
+                                <path class="tick" stroke="#6EA340" fill="none" stroke-linecap="round" stroke-width="4"
+                                    d="M4 10l5 5 9-9" />
+                            </svg>
+                            <span class="checkbox__label">Sốt nhẹ</span>
+                    </li>
+                    <br>
+
+                    <li>
+                        <label for="myCheckbox01" class="checkbox">
+                            <input class="checkbox__input" name="checkbox" type="checkbox" name="checkbox"
+                                value="red_sore_around_nose" id="myCheckbox01">
+                            <svg class="checkbox__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 22 22">
+                                <rect width="21" height="21" x=".5" y=".5" fill="#FFF" stroke="#006F94" rx="3" />
+                                <path class="tick" stroke="#6EA340" fill="none" stroke-linecap="round" stroke-width="4"
+                                    d="M4 10l5 5 9-9" />
+                            </svg>
+                            <span class="checkbox__label">Vùng đỏ sưng xung quanh mũi</span>
+                    </li>
+                    <br>
+
+                    <li>
+                        <label for="myCheckbox01" class="checkbox">
+                            <input class="checkbox__input" name="checkbox" type="checkbox" name="checkbox"
+                                value="blister" id="myCheckbox01">
+                            <svg class="checkbox__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 22 22">
+                                <rect width="21" height="21" x=".5" y=".5" fill="#FFF" stroke="#006F94" rx="3" />
+                                <path class="tick" stroke="#6EA340" fill="none" stroke-linecap="round" stroke-width="4"
+                                    d="M4 10l5 5 9-9" />
+                            </svg>
+                            <span class="checkbox__label">Nứt nước</span>
+                    </li>
+                    <br>
+
+                </div>
+
+                <div>
+                    <li>
+                        <label for="myCheckbox01" class="checkbox">
+                            <input class="checkbox__input" name="checkbox" type="checkbox" name="checkbox"
+                                value="yellow_urine" id="myCheckbox01">
+                            <svg class="checkbox__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 22 22">
+                                <rect width="21" height="21" x=".5" y=".5" fill="#FFF" stroke="#006F94" rx="3" />
+                                <path class="tick" stroke="#6EA340" fill="none" stroke-linecap="round" stroke-width="4"
+                                    d="M4 10l5 5 9-9" />
+                            </svg>
+                            <span class="checkbox__label">Nước tiểu màu vàng</span>
+                    </li>
+                    <br>
+                    <li>
+                        <label for="myCheckbox01" class="checkbox">
+                            <input class="checkbox__input" name="checkbox" type="checkbox" name="checkbox"
+                                value="yellowing_of_eyes" id="myCheckbox01">
+                            <svg class="checkbox__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 22 22">
+                                <rect width="21" height="21" x=".5" y=".5" fill="#FFF" stroke="#006F94" rx="3" />
+                                <path class="tick" stroke="#6EA340" fill="none" stroke-linecap="round" stroke-width="4"
+                                    d="M4 10l5 5 9-9" />
+                            </svg>
+                            <span class="checkbox__label">Những bộ phận mắt vàng</span>
+                    </li>
+                    <br>
+
+                    <li>
+                        <label for="myCheckbox01" class="checkbox">
+                            <input class="checkbox__input" name="checkbox" type="checkbox" name="checkbox"
+                                value="acute_liver_failure" id="myCheckbox01">
+                            <svg class="checkbox__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 22 22">
+                                <rect width="21" height="21" x=".5" y=".5" fill="#FFF" stroke="#006F94" rx="3" />
+                                <path class="tick" stroke="#6EA340" fill="none" stroke-linecap="round" stroke-width="4"
+                                    d="M4 10l5 5 9-9" />
+                            </svg>
+                            <span class="checkbox__label">Mất chức năng gan cấp</span>
+                    </li>
+                    <br>
+
+                    <li>
+                        <label for="myCheckbox01" class="checkbox">
+                            <input class="checkbox__input" name="checkbox" type="checkbox" name="checkbox"
+                                value="fluid_overload" id="myCheckbox01">
+                            <svg class="checkbox__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 22 22">
+                                <rect width="21" height="21" x=".5" y=".5" fill="#FFF" stroke="#006F94" rx="3" />
+                                <path class="tick" stroke="#6EA340" fill="none" stroke-linecap="round" stroke-width="4"
+                                    d="M4 10l5 5 9-9" />
+                            </svg>
+                            <span class="checkbox__label">Tăng nhiễm nước</span>
+                    </li>
+                    <br>
+
+                    <li>
+                        <label for="myCheckbox01" class="checkbox">
+                            <input class="checkbox__input" name="checkbox" type="checkbox" name="checkbox"
+                                value="swelling_of_stomach" id="myCheckbox01">
+                            <svg class="checkbox__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 22 22">
+                                <rect width="21" height="21" x=".5" y=".5" fill="#FFF" stroke="#006F94" rx="3" />
+                                <path class="tick" stroke="#6EA340" fill="none" stroke-linecap="round" stroke-width="4"
+                                    d="M4 10l5 5 9-9" />
+                            </svg>
+                            <span class="checkbox__label">Sưng bụng</span>
+                    </li>
+                    <br>
+
+                    <li>
+                        <label for="myCheckbox01" class="checkbox">
+                            <input class="checkbox__input" name="checkbox" type="checkbox" name="checkbox"
+                                value="swelled_lymph_nodes" id="myCheckbox01">
+                            <svg class="checkbox__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 22 22">
+                                <rect width="21" height="21" x=".5" y=".5" fill="#FFF" stroke="#006F94" rx="3" />
+                                <path class="tick" stroke="#6EA340" fill="none" stroke-linecap="round" stroke-width="4"
+                                    d="M4 10l5 5 9-9" />
+                            </svg>
+                            <span class="checkbox__label">Sưng nút huyết khối</span>
+                    </li>
+                    <br>
+
+                    <li>
+                        <label for="myCheckbox01" class="checkbox">
+                            <input class="checkbox__input" name="checkbox" type="checkbox" name="checkbox"
+                                value="malaise" id="myCheckbox01">
+                            <svg class="checkbox__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 22 22">
+                                <rect width="21" height="21" x=".5" y=".5" fill="#FFF" stroke="#006F94" rx="3" />
+                                <path class="tick" stroke="#6EA340" fill="none" stroke-linecap="round" stroke-width="4"
+                                    d="M4 10l5 5 9-9" />
+                            </svg>
+                            <span class="checkbox__label">Tình trạng tồi tệ</span>
+                    </li>
+                    <br>
+
+                    <li>
+                        <label for="myCheckbox01" class="checkbox">
+                            <input class="checkbox__input" name="checkbox" type="checkbox" name="checkbox"
+                                value="blurred_and_distorted_vision" id="myCheckbox01">
+                            <svg class="checkbox__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 22 22">
+                                <rect width="21" height="21" x=".5" y=".5" fill="#FFF" stroke="#006F94" rx="3" />
+                                <path class="tick" stroke="#6EA340" fill="none" stroke-linecap="round" stroke-width="4"
+                                    d="M4 10l5 5 9-9" />
+                            </svg>
+                            <span class="checkbox__label">Tầm nhìn mờ và biến dạng</span>
+                    </li>
+                    <br>
+
+                    <li>
+                        <label for="myCheckbox01" class="checkbox">
+                            <input class="checkbox__input" name="checkbox" type="checkbox" name="checkbox"
+                                value="phlegm" id="myCheckbox01">
+                            <svg class="checkbox__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 22 22">
+                                <rect width="21" height="21" x=".5" y=".5" fill="#FFF" stroke="#006F94" rx="3" />
+                                <path class="tick" stroke="#6EA340" fill="none" stroke-linecap="round" stroke-width="4"
+                                    d="M4 10l5 5 9-9" />
+                            </svg>
+                            <span class="checkbox__label">Đờm</span>
+                    </li>
+                    <br>
+
+                    <li>
+                        <label for="myCheckbox01" class="checkbox">
+                            <input class="checkbox__input" name="checkbox" type="checkbox" name="checkbox"
+                                value="throat_irritation" id="myCheckbox01">
+                            <svg class="checkbox__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 22 22">
+                                <rect width="21" height="21" x=".5" y=".5" fill="#FFF" stroke="#006F94" rx="3" />
+                                <path class="tick" stroke="#6EA340" fill="none" stroke-linecap="round" stroke-width="4"
+                                    d="M4 10l5 5 9-9" />
+                            </svg>
+                            <span class="checkbox__label">Kích thích họng</span>
+                    </li>
+                    <br>
+
+                    <li>
+                        <label for="myCheckbox01" class="checkbox">
+                            <input class="checkbox__input" name="checkbox" type="checkbox" name="checkbox"
+                                value="redness_of_eyes" id="myCheckbox01">
+                            <svg class="checkbox__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 22 22">
+                                <rect width="21" height="21" x=".5" y=".5" fill="#FFF" stroke="#006F94" rx="3" />
+                                <path class="tick" stroke="#6EA340" fill="none" stroke-linecap="round" stroke-width="4"
+                                    d="M4 10l5 5 9-9" />
+                            </svg>
+                            <span class="checkbox__label">Mắt đỏ</span>
+                    </li>
+                    <br>
+
+                    <li>
+                        <label for="myCheckbox01" class="checkbox">
+                            <input class="checkbox__input" name="checkbox" type="checkbox" name="checkbox"
+                                value="sinus_pressure" id="myCheckbox01">
+                            <svg class="checkbox__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 22 22">
+                                <rect width="21" height="21" x=".5" y=".5" fill="#FFF" stroke="#006F94" rx="3" />
+                                <path class="tick" stroke="#6EA340" fill="none" stroke-linecap="round" stroke-width="4"
+                                    d="M4 10l5 5 9-9" />
+                            </svg>
+                            <span class="checkbox__label">Áp lực xoang mũi</span>
+                    </li>
+                    <br>
+
+                    <li>
+                        <label for="myCheckbox01" class="checkbox">
+                            <input class="checkbox__input" name="checkbox" type="checkbox" name="checkbox"
+                                value="runny_nose" id="myCheckbox01">
+                            <svg class="checkbox__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 22 22">
+                                <rect width="21" height="21" x=".5" y=".5" fill="#FFF" stroke="#006F94" rx="3" />
+                                <path class="tick" stroke="#6EA340" fill="none" stroke-linecap="round" stroke-width="4"
+                                    d="M4 10l5 5 9-9" />
+                            </svg>
+                            <span class="checkbox__label">Chảy nước mũi</span>
+                    </li>
+                    <br>
+
+                    <li>
+                        <label for="myCheckbox01" class="checkbox">
+                            <input class="checkbox__input" name="checkbox" type="checkbox" name="checkbox"
+                                value="congestion" id="myCheckbox01">
+                            <svg class="checkbox__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 22 22">
+                                <rect width="21" height="21" x=".5" y=".5" fill="#FFF" stroke="#006F94" rx="3" />
+                                <path class="tick" stroke="#6EA340" fill="none" stroke-linecap="round" stroke-width="4"
+                                    d="M4 10l5 5 9-9" />
+                            </svg>
+                            <span class="checkbox__label">Tắc nghẽn</span>
+                    </li>
+                    <br>
+
+                    <li>
+                        <label for="myCheckbox01" class="checkbox">
+                            <input class="checkbox__input" name="checkbox" type="checkbox" name="checkbox"
+                                value="chest_pain" id="myCheckbox01">
+                            <svg class="checkbox__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 22 22">
+                                <rect width="21" height="21" x=".5" y=".5" fill="#FFF" stroke="#006F94" rx="3" />
+                                <path class="tick" stroke="#6EA340" fill="none" stroke-linecap="round" stroke-width="4"
+                                    d="M4 10l5 5 9-9" />
+                            </svg>
+                            <span class="checkbox__label">Đau ngực</span>
+                    </li>
+                    <br>
+
+                    <li>
+                        <label for="myCheckbox01" class="checkbox">
+                            <input class="checkbox__input" name="checkbox" type="checkbox" name="checkbox"
+                                value="weakness_in_limbs" id="myCheckbox01">
+                            <svg class="checkbox__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 22 22">
+                                <rect width="21" height="21" x=".5" y=".5" fill="#FFF" stroke="#006F94" rx="3" />
+                                <path class="tick" stroke="#6EA340" fill="none" stroke-linecap="round" stroke-width="4"
+                                    d="M4 10l5 5 9-9" />
+                            </svg>
+                            <span class="checkbox__label">Yếu đuối ở cả chi</span>
+                    </li>
+                    <br>
+
+                    <li>
+                        <label for="myCheckbox01" class="checkbox">
+                            <input class="checkbox__input" name="checkbox" type="checkbox" name="checkbox"
+                                value="fast_heart_rate" id="myCheckbox01">
+                            <svg class="checkbox__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 22 22">
+                                <rect width="21" height="21" x=".5" y=".5" fill="#FFF" stroke="#006F94" rx="3" />
+                                <path class="tick" stroke="#6EA340" fill="none" stroke-linecap="round" stroke-width="4"
+                                    d="M4 10l5 5 9-9" />
+                            </svg>
+                            <span class="checkbox__label">Nhịp tim nhanh</span>
+                    </li>
+                    <br>
+
+                    <li>
+                        <label for="myCheckbox01" class="checkbox">
+                            <input class="checkbox__input" name="checkbox" type="checkbox" name="checkbox"
+                                value="pain_during_bowel_movements" id="myCheckbox01">
+                            <svg class="checkbox__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 22 22">
+                                <rect width="21" height="21" x=".5" y=".5" fill="#FFF" stroke="#006F94" rx="3" />
+                                <path class="tick" stroke="#6EA340" fill="none" stroke-linecap="round" stroke-width="4"
+                                    d="M4 10l5 5 9-9" />
+                            </svg>
+                            <span class="checkbox__label">Đau khi đi tiêu</span>
+                    </li>
+                    <br>
+
+                    <li>
+                        <label for="myCheckbox01" class="checkbox">
+                            <input class="checkbox__input" name="checkbox" type="checkbox" name="checkbox"
+                                value="pain_in_anal_region" id="myCheckbox01">
+                            <svg class="checkbox__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 22 22">
+                                <rect width="21" height="21" x=".5" y=".5" fill="#FFF" stroke="#006F94" rx="3" />
+                                <path class="tick" stroke="#6EA340" fill="none" stroke-linecap="round" stroke-width="4"
+                                    d="M4 10l5 5 9-9" />
+                            </svg>
+                            <span class="checkbox__label">Đau ở khu vực hậu môn</span>
+                    </li>
+                    <br>
+
+                    <li>
+                        <label for="myCheckbox01" class="checkbox">
+                            <input class="checkbox__input" name="checkbox" type="checkbox" name="checkbox"
+                                value="bloody_stool" id="myCheckbox01">
+                            <svg class="checkbox__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 22 22">
+                                <rect width="21" height="21" x=".5" y=".5" fill="#FFF" stroke="#006F94" rx="3" />
+                                <path class="tick" stroke="#6EA340" fill="none" stroke-linecap="round" stroke-width="4"
+                                    d="M4 10l5 5 9-9" />
+                            </svg>
+                            <span class="checkbox__label">Chảy máu từ hậu môn</span>
+                    </li>
+                    <br>
+
+                    <li>
+                        <label for="myCheckbox01" class="checkbox">
+                            <input class="checkbox__input" name="checkbox" type="checkbox" name="checkbox"
+                                value="irritation_in_anus" id="myCheckbox01">
+                            <svg class="checkbox__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 22 22">
+                                <rect width="21" height="21" x=".5" y=".5" fill="#FFF" stroke="#006F94" rx="3" />
+                                <path class="tick" stroke="#6EA340" fill="none" stroke-linecap="round" stroke-width="4"
+                                    d="M4 10l5 5 9-9" />
+                            </svg>
+                            <span class="checkbox__label">Kích thích ở hậu môn</span>
+                    </li>
+                    <br>
+
+
+
+
+                </div>
+
+                <div>
+
+                    <li>
+                        <label for="myCheckbox01" class="checkbox">
+                            <input class="checkbox__input" name="checkbox" type="checkbox" name="checkbox"
+                                value="neck_pain" id="myCheckbox01">
+                            <svg class="checkbox__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 22 22">
+                                <rect width="21" height="21" x=".5" y=".5" fill="#FFF" stroke="#006F94" rx="3" />
+                                <path class="tick" stroke="#6EA340" fill="none" stroke-linecap="round" stroke-width="4"
+                                    d="M4 10l5 5 9-9" />
+                            </svg>
+                            <span class="checkbox__label">Đau cổ</span>
+                    </li>
+                    <br>
+
+                    <li>
+                        <label for="myCheckbox01" class="checkbox">
+                            <input class="checkbox__input" name="checkbox" type="checkbox" name="checkbox"
+                                value="dizziness" id="myCheckbox01">
+                            <svg class="checkbox__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 22 22">
+                                <rect width="21" height="21" x=".5" y=".5" fill="#FFF" stroke="#006F94" rx="3" />
+                                <path class="tick" stroke="#6EA340" fill="none" stroke-linecap="round" stroke-width="4"
+                                    d="M4 10l5 5 9-9" />
+                            </svg>
+                            <span class="checkbox__label">Chói lọi</span>
+                    </li>
+                    <br>
+
+                    <li>
+                        <label for="myCheckbox01" class="checkbox">
+                            <input class="checkbox__input" name="checkbox" type="checkbox" name="checkbox"
+                                value="cramps" id="myCheckbox01">
+                            <svg class="checkbox__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 22 22">
+                                <rect width="21" height="21" x=".5" y=".5" fill="#FFF" stroke="#006F94" rx="3" />
+                                <path class="tick" stroke="#6EA340" fill="none" stroke-linecap="round" stroke-width="4"
+                                    d="M4 10l5 5 9-9" />
+                            </svg>
+                            <span class="checkbox__label">Co giật</span>
+                    </li>
+                    <br>
+
+                    <li>
+                        <label for="myCheckbox01" class="checkbox">
+                            <input class="checkbox__input" name="checkbox" type="checkbox" name="checkbox"
+                                value="bruising" id="myCheckbox01">
+                            <svg class="checkbox__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 22 22">
+                                <rect width="21" height="21" x=".5" y=".5" fill="#FFF" stroke="#006F94" rx="3" />
+                                <path class="tick" stroke="#6EA340" fill="none" stroke-linecap="round" stroke-width="4"
+                                    d="M4 10l5 5 9-9" />
+                            </svg>
+                            <span class="checkbox__label">Thâm tím</span>
+                    </li>
+                    <br>
+
+                    <li>
+                        <label for="myCheckbox01" class="checkbox">
+                            <input class="checkbox__input" name="checkbox" type="checkbox" name="checkbox"
+                                value="obesity" id="myCheckbox01">
+                            <svg class="checkbox__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 22 22">
+                                <rect width="21" height="21" x=".5" y=".5" fill="#FFF" stroke="#006F94" rx="3" />
+                                <path class="tick" stroke="#6EA340" fill="none" stroke-linecap="round" stroke-width="4"
+                                    d="M4 10l5 5 9-9" />
+                            </svg>
+                            <span class="checkbox__label">Béo phì</span>
+                    </li>
+                    <br>
+
+                    <li>
+                        <label for="myCheckbox01" class="checkbox">
+                            <input class="checkbox__input" name="checkbox" type="checkbox" name="checkbox"
+                                value="swollen_legs" id="myCheckbox01">
+                            <svg class="checkbox__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 22 22">
+                                <rect width="21" height="21" x=".5" y=".5" fill="#FFF" stroke="#006F94" rx="3" />
+                                <path class="tick" stroke="#6EA340" fill="none" stroke-linecap="round" stroke-width="4"
+                                    d="M4 10l5 5 9-9" />
+                            </svg>
+                            <span class="checkbox__label">Chân sưng</span>
+                    </li>
+                    <br>
+
+                    <li>
+                        <label for="myCheckbox01" class="checkbox">
+                            <input class="checkbox__input" name="checkbox" type="checkbox" name="checkbox"
+                                value="swollen_blood_vessels" id="myCheckbox01">
+                            <svg class="checkbox__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 22 22">
+                                <rect width="21" height="21" x=".5" y=".5" fill="#FFF" stroke="#006F94" rx="3" />
+                                <path class="tick" stroke="#6EA340" fill="none" stroke-linecap="round" stroke-width="4"
+                                    d="M4 10l5 5 9-9" />
+                            </svg>
+                            <span class="checkbox__label">Mạch máu sưng</span>
+                    </li>
+                    <br>
+
+                    <li>
+                        <label for="myCheckbox01" class="checkbox">
+                            <input class="checkbox__input" name="checkbox" type="checkbox" name="checkbox"
+                                value="puffy_face_and_eyes" id="myCheckbox01">
+                            <svg class="checkbox__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 22 22">
+                                <rect width="21" height="21" x=".5" y=".5" fill="#FFF" stroke="#006F94" rx="3" />
+                                <path class="tick" stroke="#6EA340" fill="none" stroke-linecap="round" stroke-width="4"
+                                    d="M4 10l5 5 9-9" />
+                            </svg>
+                            <span class="checkbox__label">Mặt và mắt sưng</span>
+                    </li>
+                    <br>
+
+                    <li>
+                        <label for="myCheckbox01" class="checkbox">
+                            <input class="checkbox__input" name="checkbox" type="checkbox" name="checkbox"
+                                value="enlarged_thyroid" id="myCheckbox01">
+                            <svg class="checkbox__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 22 22">
+                                <rect width="21" height="21" x=".5" y=".5" fill="#FFF" stroke="#006F94" rx="3" />
+                                <path class="tick" stroke="#6EA340" fill="none" stroke-linecap="round" stroke-width="4"
+                                    d="M4 10l5 5 9-9" />
+                            </svg>
+                            <span class="checkbox__label">Tăng kích thước tuyến giáp</span>
+                    </li>
+                    <br>
+
+                    <li>
+                        <label for="myCheckbox01" class="checkbox">
+                            <input class="checkbox__input" name="checkbox" type="checkbox" name="checkbox"
+                                value="brittle_nails" id="myCheckbox01">
+                            <svg class="checkbox__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 22 22">
+                                <rect width="21" height="21" x=".5" y=".5" fill="#FFF" stroke="#006F94" rx="3" />
+                                <path class="tick" stroke="#6EA340" fill="none" stroke-linecap="round" stroke-width="4"
+                                    d="M4 10l5 5 9-9" />
+                            </svg>
+                            <span class="checkbox__label">Móng giòn</span>
+                    </li>
+                    <br>
+
+                    <li>
+                        <label for="myCheckbox01" class="checkbox">
+                            <input class="checkbox__input" name="checkbox" type="checkbox" name="checkbox"
+                                value="swollen_extremeties" id="myCheckbox01">
+                            <svg class="checkbox__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 22 22">
+                                <rect width="21" height="21" x=".5" y=".5" fill="#FFF" stroke="#006F94" rx="3" />
+                                <path class="tick" stroke="#6EA340" fill="none" stroke-linecap="round" stroke-width="4"
+                                    d="M4 10l5 5 9-9" />
+                            </svg>
+                            <span class="checkbox__label">Các chi sưng</span>
+                    </li>
+                    <br>
+
+                    <li>
+                        <label for="myCheckbox01" class="checkbox">
+                            <input class="checkbox__input" name="checkbox" type="checkbox" name="checkbox"
+                                value="excessive_hunger" id="myCheckbox01">
+                            <svg class="checkbox__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 22 22">
+                                <rect width="21" height="21" x=".5" y=".5" fill="#FFF" stroke="#006F94" rx="3" />
+                                <path class="tick" stroke="#6EA340" fill="none" stroke-linecap="round" stroke-width="4"
+                                    d="M4 10l5 5 9-9" />
+                            </svg>
+                            <span class="checkbox__label">Thèm ăn quá mức</span>
+                    </li>
+                    <br>
+
+                    <li>
+                        <label for="myCheckbox01" class="checkbox">
+                            <input class="checkbox__input" name="checkbox" type="checkbox" name="checkbox"
+                                value="extra_marital_contacts" id="myCheckbox01">
+                            <svg class="checkbox__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 22 22">
+                                <rect width="21" height="21" x=".5" y=".5" fill="#FFF" stroke="#006F94" rx="3" />
+                                <path class="tick" stroke="#6EA340" fill="none" stroke-linecap="round" stroke-width="4"
+                                    d="M4 10l5 5 9-9" />
+                            </svg>
+                            <span class="checkbox__label">Quan hệ tình dục ngoại tình</span>
+                    </li>
+                    <br>
+
+                    <li>
+                        <label for="myCheckbox01" class="checkbox">
+                            <input class="checkbox__input" name="checkbox" type="checkbox" name="checkbox"
+                                value="drying_and_tingling_lips" id="myCheckbox01">
+                            <svg class="checkbox__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 22 22">
+                                <rect width="21" height="21" x=".5" y=".5" fill="#FFF" stroke="#006F94" rx="3" />
+                                <path class="tick" stroke="#6EA340" fill="none" stroke-linecap="round" stroke-width="4"
+                                    d="M4 10l5 5 9-9" />
+                            </svg>
+                            <span class="checkbox__label">Môi khô và cảm giác châm châm</span>
+                    </li>
+                    <br>
+
+                    <li>
+                        <label for="myCheckbox01" class="checkbox">
+                            <input class="checkbox__input" name="checkbox" type="checkbox" name="checkbox"
+                                value="slurred_speech" id="myCheckbox01">
+                            <svg class="checkbox__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 22 22">
+                                <rect width="21" height="21" x=".5" y=".5" fill="#FFF" stroke="#006F94" rx="3" />
+                                <path class="tick" stroke="#6EA340" fill="none" stroke-linecap="round" stroke-width="4"
+                                    d="M4 10l5 5 9-9" />
+                            </svg>
+                            <span class="checkbox__label">Nói lắp bắp</span>
+                    </li>
+                    <br>
+
+                    <li>
+                        <label for="myCheckbox01" class="checkbox">
+                            <input class="checkbox__input" name="checkbox" type="checkbox" name="checkbox"
+                                value="knee_pain" id="myCheckbox01">
+                            <svg class="checkbox__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 22 22">
+                                <rect width="21" height="21" x=".5" y=".5" fill="#FFF" stroke="#006F94" rx="3" />
+                                <path class="tick" stroke="#6EA340" fill="none" stroke-linecap="round" stroke-width="4"
+                                    d="M4 10l5 5 9-9" />
+                            </svg>
+                            <span class="checkbox__label">Đau đầu gối</span>
+                    </li>
+                    <br>
+
+                    <li>
+                        <label for="myCheckbox01" class="checkbox">
+                            <input class="checkbox__input" name="checkbox" type="checkbox" name="checkbox"
+                                value="hip_joint_pain" id="myCheckbox01">
+                            <svg class="checkbox__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 22 22">
+                                <rect width="21" height="21" x=".5" y=".5" fill="#FFF" stroke="#006F94" rx="3" />
+                                <path class="tick" stroke="#6EA340" fill="none" stroke-linecap="round" stroke-width="4"
+                                    d="M4 10l5 5 9-9" />
+                            </svg>
+                            <span class="checkbox__label">Đau khớp háng</span>
+                    </li>
+                    <br>
+
+                    <li>
+                        <label for="myCheckbox01" class="checkbox">
+                            <input class="checkbox__input" name="checkbox" type="checkbox" name="checkbox"
+                                value="muscle_weakness" id="myCheckbox01">
+                            <svg class="checkbox__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 22 22">
+                                <rect width="21" height="21" x=".5" y=".5" fill="#FFF" stroke="#006F94" rx="3" />
+                                <path class="tick" stroke="#6EA340" fill="none" stroke-linecap="round" stroke-width="4"
+                                    d="M4 10l5 5 9-9" />
+                            </svg>
+                            <span class="checkbox__label">Yếu cơ</span>
+                    </li>
+                    <br>
+
+                    <li>
+                        <label for="myCheckbox01" class="checkbox">
+                            <input class="checkbox__input" name="checkbox" type="checkbox" name="checkbox"
+                                value="stiff_neck" id="myCheckbox01">
+                            <svg class="checkbox__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 22 22">
+                                <rect width="21" height="21" x=".5" y=".5" fill="#FFF" stroke="#006F94" rx="3" />
+                                <path class="tick" stroke="#6EA340" fill="none" stroke-linecap="round" stroke-width="4"
+                                    d="M4 10l5 5 9-9" />
+                            </svg>
+                            <span class="checkbox__label">Cổ cứng</span>
+                    </li>
+                    <br>
+
+                    <li>
+                        <label for="myCheckbox01" class="checkbox">
+                            <input class="checkbox__input" name="checkbox" type="checkbox" name="checkbox"
+                                value="swelling_joints" id="myCheckbox01">
+                            <svg class="checkbox__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 22 22">
+                                <rect width="21" height="21" x=".5" y=".5" fill="#FFF" stroke="#006F94" rx="3" />
+                                <path class="tick" stroke="#6EA340" fill="none" stroke-linecap="round" stroke-width="4"
+                                    d="M4 10l5 5 9-9" />
+                            </svg>
+                            <span class="checkbox__label">Các khớp sưng</span>
+                    </li>
+                    <br>
+
+                    <li>
+                        <label for="myCheckbox01" class="checkbox">
+                            <input class="checkbox__input" name="checkbox" type="checkbox" name="checkbox"
+                                value="movement_stiffness" id="myCheckbox01">
+                            <svg class="checkbox__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 22 22">
+                                <rect width="21" height="21" x=".5" y=".5" fill="#FFF" stroke="#006F94" rx="3" />
+                                <path class="tick" stroke="#6EA340" fill="none" stroke-linecap="round" stroke-width="4"
+                                    d="M4 10l5 5 9-9" />
+                            </svg>
+                            <span class="checkbox__label">Cứng cơ khi vận động</span>
+                    </li>
+                    <br>
+                    <li>
+                        <label for="myCheckbox01" class="checkbox">
+                            <input class="checkbox__input" name="checkbox" type="checkbox" name="checkbox"
+                                value="inflammatory_nails" id="myCheckbox01">
+                            <svg class="checkbox__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 22 22">
+                                <rect width="21" height="21" x=".5" y=".5" fill="#FFF" stroke="#006F94" rx="3" />
+                                <path class="tick" stroke="#6EA340" fill="none" stroke-linecap="round" stroke-width="4"
+                                    d="M4 10l5 5 9-9" />
+                            </svg>
+                            <span class="checkbox__label">Nổi mẩn ở móng</span>
+                    </li>
+                    <br>
+
+
+
+                </div>
+
+                <div>
+                    <li>
+                        <label for="myCheckbox01" class="checkbox">
+                            <input class="checkbox__input" name="checkbox" type="checkbox" name="checkbox"
+                                value="spinning_movements" id="myCheckbox01">
+                            <svg class="checkbox__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 22 22">
+                                <rect width="21" height="21" x=".5" y=".5" fill="#FFF" stroke="#006F94" rx="3" />
+                                <path class="tick" stroke="#6EA340" fill="none" stroke-linecap="round" stroke-width="4"
+                                    d="M4 10l5 5 9-9" />
+                            </svg>
+                            <span class="checkbox__label">Chuyển động quay vòng</span>
+                    </li>
+                    <br>
+
+                    <li>
+                        <label for="myCheckbox01" class="checkbox">
+                            <input class="checkbox__input" name="checkbox" type="checkbox" name="checkbox"
+                                value="loss_of_balance" id="myCheckbox01">
+                            <svg class="checkbox__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 22 22">
+                                <rect width="21" height="21" x=".5" y=".5" fill="#FFF" stroke="#006F94" rx="3" />
+                                <path class="tick" stroke="#6EA340" fill="none" stroke-linecap="round" stroke-width="4"
+                                    d="M4 10l5 5 9-9" />
+                            </svg>
+                            <span class="checkbox__label">Mất cân bằng</span>
+                    </li>
+                    <br>
+
+                    <li>
+                        <label for="myCheckbox01" class="checkbox">
+                            <input class="checkbox__input" name="checkbox" type="checkbox" name="checkbox"
+                                value="unsteadiness" id="myCheckbox01">
+                            <svg class="checkbox__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 22 22">
+                                <rect width="21" height="21" x=".5" y=".5" fill="#FFF" stroke="#006F94" rx="3" />
+                                <path class="tick" stroke="#6EA340" fill="none" stroke-linecap="round" stroke-width="4"
+                                    d="M4 10l5 5 9-9" />
+                            </svg>
+                            <span class="checkbox__label">Thiếu vững</span>
+                    </li>
+                    <br>
+
+                    <li>
+                        <label for="myCheckbox01" class="checkbox">
+                            <input class="checkbox__input" name="checkbox" type="checkbox" name="checkbox"
+                                value="weakness_of_one_body_side" id="myCheckbox01">
+                            <svg class="checkbox__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 22 22">
+                                <rect width="21" height="21" x=".5" y=".5" fill="#FFF" stroke="#006F94" rx="3" />
+                                <path class="tick" stroke="#6EA340" fill="none" stroke-linecap="round" stroke-width="4"
+                                    d="M4 10l5 5 9-9" />
+                            </svg>
+                            <span class="checkbox__label">Yếu ở một bên cơ thể</span>
+                    </li>
+                    <br>
+
+                    <li>
+                        <label for="myCheckbox01" class="checkbox">
+                            <input class="checkbox__input" name="checkbox" type="checkbox" name="checkbox"
+                                value="loss_of_smell" id="myCheckbox01">
+                            <svg class="checkbox__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 22 22">
+                                <rect width="21" height="21" x=".5" y=".5" fill="#FFF" stroke="#006F94" rx="3" />
+                                <path class="tick" stroke="#6EA340" fill="none" stroke-linecap="round" stroke-width="4"
+                                    d="M4 10l5 5 9-9" />
+                            </svg>
+                            <span class="checkbox__label">Mất khả năng ngửi</span>
+                    </li>
+                    <br>
+
+                    <li>
+                        <label for="myCheckbox01" class="checkbox">
+                            <input class="checkbox__input" name="checkbox" type="checkbox" name="checkbox"
+                                value="bladder_discomfort" id="myCheckbox01">
+                            <svg class="checkbox__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 22 22">
+                                <rect width="21" height="21" x=".5" y=".5" fill="#FFF" stroke="#006F94" rx="3" />
+                                <path class="tick" stroke="#6EA340" fill="none" stroke-linecap="round" stroke-width="4"
+                                    d="M4 10l5 5 9-9" />
+                            </svg>
+                            <span class="checkbox__label">Khó chịu ở bàng quang</span>
+                    </li>
+                    <br>
+
+                    <li>
+                        <label for="myCheckbox01" class="checkbox">
+                            <input class="checkbox__input" name="checkbox" type="checkbox" name="checkbox"
+                                value="foul_smell_of_urine" id="myCheckbox01">
+                            <svg class="checkbox__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 22 22">
+                                <rect width="21" height="21" x=".5" y=".5" fill="#FFF" stroke="#006F94" rx="3" />
+                                <path class="tick" stroke="#6EA340" fill="none" stroke-linecap="round" stroke-width="4"
+                                    d="M4 10l5 5 9-9" />
+                            </svg>
+                            <span class="checkbox__label">Mùi nước tiểu khó chịu</span>
+                    </li>
+                    <br>
+
+                    <li>
+                        <label for="myCheckbox01" class="checkbox">
+                            <input class="checkbox__input" name="checkbox" type="checkbox" name="checkbox"
+                                value="continuous_feel_of_urine" id="myCheckbox01">
+                            <svg class="checkbox__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 22 22">
+                                <rect width="21" height="21" x=".5" y=".5" fill="#FFF" stroke="#006F94" rx="3" />
+                                <path class="tick" stroke="#6EA340" fill="none" stroke-linecap="round" stroke-width="4"
+                                    d="M4 10l5 5 9-9" />
+                            </svg>
+                            <span class="checkbox__label">Cảm giác tiểu tiện liên tục</span>
+                    </li>
+                    <br>
+
+                    <li>
+                        <label for="myCheckbox01" class="checkbox">
+                            <input class="checkbox__input" name="checkbox" type="checkbox" name="checkbox"
+                                value="passage_of_gases" id="myCheckbox01">
+                            <svg class="checkbox__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 22 22">
+                                <rect width="21" height="21" x=".5" y=".5" fill="#FFF" stroke="#006F94" rx="3" />
+                                <path class="tick" stroke="#6EA340" fill="none" stroke-linecap="round" stroke-width="4"
+                                    d="M4 10l5 5 9-9" />
+                            </svg>
+                            <span class="checkbox__label">Chảy khí</span>
+                    </li>
+                    <br>
+
+                    <li>
+                        <label for="myCheckbox01" class="checkbox">
+                            <input class="checkbox__input" name="checkbox" type="checkbox" name="checkbox"
+                                value="internal_itching" id="myCheckbox01">
+                            <svg class="checkbox__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 22 22">
+                                <rect width="21" height="21" x=".5" y=".5" fill="#FFF" stroke="#006F94" rx="3" />
+                                <path class="tick" stroke="#6EA340" fill="none" stroke-linecap="round" stroke-width="4"
+                                    d="M4 10l5 5 9-9" />
+                            </svg>
+                            <span class="checkbox__label">Ngứa nội tiết</span>
+                    </li>
+                    <br>
+
+                    <li>
+                        <label for="myCheckbox01" class="checkbox">
+                            <input class="checkbox__input" name="checkbox" type="checkbox" name="checkbox"
+                                value="toxic_look_(typhos)" id="myCheckbox01">
+                            <svg class="checkbox__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 22 22">
+                                <rect width="21" height="21" x=".5" y=".5" fill="#FFF" stroke="#006F94" rx="3" />
+                                <path class="tick" stroke="#6EA340" fill="none" stroke-linecap="round" stroke-width="4"
+                                    d="M4 10l5 5 9-9" />
+                            </svg>
+                            <span class="checkbox__label">Tình trạng ngoại hình độc hại</span>
+                    </li>
+                    <br>
+
+                    <li>
+                        <label for="myCheckbox01" class="checkbox">
+                            <input class="checkbox__input" name="checkbox" type="checkbox" name="checkbox"
+                                value="depression" id="myCheckbox01">
+                            <svg class="checkbox__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 22 22">
+                                <rect width="21" height="21" x=".5" y=".5" fill="#FFF" stroke="#006F94" rx="3" />
+                                <path class="tick" stroke="#6EA340" fill="none" stroke-linecap="round" stroke-width="4"
+                                    d="M4 10l5 5 9-9" />
+                            </svg>
+                            <span class="checkbox__label">Trầm cảm</span>
+                    </li>
+                    <br>
+
+                    <li>
+                        <label for="myCheckbox01" class="checkbox">
+                            <input class="checkbox__input" name="checkbox" type="checkbox" name="checkbox"
+                                value="irritability" id="myCheckbox01">
+                            <svg class="checkbox__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 22 22">
+                                <rect width="21" height="21" x=".5" y=".5" fill="#FFF" stroke="#006F94" rx="3" />
+                                <path class="tick" stroke="#6EA340" fill="none" stroke-linecap="round" stroke-width="4"
+                                    d="M4 10l5 5 9-9" />
+                            </svg>
+                            <span class="checkbox__label">Dễ cáu kỉnh</span>
+                    </li>
+                    <br>
+
+                    <li>
+                        <label for="myCheckbox01" class="checkbox">
+                            <input class="checkbox__input" name="checkbox" type="checkbox" name="checkbox"
+                                value="muscle_pain" id="myCheckbox01">
+                            <svg class="checkbox__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 22 22">
+                                <rect width="21" height="21" x=".5" y=".5" fill="#FFF" stroke="#006F94" rx="3" />
+                                <path class="tick" stroke="#6EA340" fill="none" stroke-linecap="round" stroke-width="4"
+                                    d="M4 10l5 5 9-9" />
+                            </svg>
+                            <span class="checkbox__label">Đau cơ</span>
+                    </li>
+                    <br>
+
+                    <li>
+                        <label for="myCheckbox01" class="checkbox">
+                            <input class="checkbox__input" name="checkbox" type="checkbox" name="checkbox"
+                                value="altered_sensorium" id="myCheckbox01">
+                            <svg class="checkbox__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 22 22">
+                                <rect width="21" height="21" x=".5" y=".5" fill="#FFF" stroke="#006F94" rx="3" />
+                                <path class="tick" stroke="#6EA340" fill="none" stroke-linecap="round" stroke-width="4"
+                                    d="M4 10l5 5 9-9" />
+                            </svg>
+                            <span class="checkbox__label">Thay đổi ý thức</span>
+                    </li>
+                    <br>
+
+                    <li>
+                        <label for="myCheckbox01" class="checkbox">
+                            <input class="checkbox__input" name="checkbox" type="checkbox" name="checkbox"
+                                value="red_spots_over_body" id="myCheckbox01">
+                            <svg class="checkbox__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 22 22">
+                                <rect width="21" height="21" x=".5" y=".5" fill="#FFF" stroke="#006F94" rx="3" />
+                                <path class="tick" stroke="#6EA340" fill="none" stroke-linecap="round" stroke-width="4"
+                                    d="M4 10l5 5 9-9" />
+                            </svg>
+                            <span class="checkbox__label">Đốm đỏ trên cơ thể</span>
+                    </li>
+                    <br>
+
+                    <li>
+                        <label for="myCheckbox01" class="checkbox">
+                            <input class="checkbox__input" name="checkbox" type="checkbox" name="checkbox"
+                                value="belly_pain" id="myCheckbox01">
+                            <svg class="checkbox__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 22 22">
+                                <rect width="21" height="21" x=".5" y=".5" fill="#FFF" stroke="#006F94" rx="3" />
+                                <path class="tick" stroke="#6EA340" fill="none" stroke-linecap="round" stroke-width="4"
+                                    d="M4 10l5 5 9-9" />
+                            </svg>
+                            <span class="checkbox__label">Đau bụng dưới</span>
+                    </li>
+                    <br>
+
+                    <li>
+                        <label for="myCheckbox01" class="checkbox">
+                            <input class="checkbox__input" name="checkbox" type="checkbox" name="checkbox"
+                                value="abnormal_menstruation" id="myCheckbox01">
+                            <svg class="checkbox__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 22 22">
+                                <rect width="21" height="21" x=".5" y=".5" fill="#FFF" stroke="#006F94" rx="3" />
+                                <path class="tick" stroke="#6EA340" fill="none" stroke-linecap="round" stroke-width="4"
+                                    d="M4 10l5 5 9-9" />
+                            </svg>
+                            <span class="checkbox__label">Kinh nguyệt bất thường</span>
+                    </li>
+                    <br>
+
+                    <li>
+                        <label for="myCheckbox01" class="checkbox">
+                            <input class="checkbox__input" name="checkbox" type="checkbox" name="checkbox"
+                                value="dischromic_patches" id="myCheckbox01">
+                            <svg class="checkbox__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 22 22">
+                                <rect width="21" height="21" x=".5" y=".5" fill="#FFF" stroke="#006F94" rx="3" />
+                                <path class="tick" stroke="#6EA340" fill="none" stroke-linecap="round" stroke-width="4"
+                                    d="M4 10l5 5 9-9" />
+                            </svg>
+                            <span class="checkbox__label">Đốm màu không đồng đều</span>
+                    </li>
+                    <br>
+
+                    <li>
+                        <label for="myCheckbox01" class="checkbox">
+                            <input class="checkbox__input" name="checkbox" type="checkbox" name="checkbox"
+                                value="watering_from_eyes" id="myCheckbox01">
+                            <svg class="checkbox__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 22 22">
+                                <rect width="21" height="21" x=".5" y=".5" fill="#FFF" stroke="#006F94" rx="3" />
+                                <path class="tick" stroke="#6EA340" fill="none" stroke-linecap="round" stroke-width="4"
+                                    d="M4 10l5 5 9-9" />
+                            </svg>
+                            <span class="checkbox__label">Nước mắt</span>
+                    </li>
+                    <br>
+
+                    <li>
+                        <label for="myCheckbox01" class="checkbox">
+                            <input class="checkbox__input" name="checkbox" type="checkbox" name="checkbox"
+                                value="increased_appetite" id="myCheckbox01">
+                            <svg class="checkbox__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 22 22">
+                                <rect width="21" height="21" x=".5" y=".5" fill="#FFF" stroke="#006F94" rx="3" />
+                                <path class="tick" stroke="#6EA340" fill="none" stroke-linecap="round" stroke-width="4"
+                                    d="M4 10l5 5 9-9" />
+                            </svg>
+                            <span class="checkbox__label">Tăng cảm giác ngon miệng</span>
+                    </li>
+                    <br>
+
+                    <li>
+                        <label for="myCheckbox01" class="checkbox">
+                            <input class="checkbox__input" name="checkbox" type="checkbox" name="checkbox"
+                                value="small_dents_in_nails" id="myCheckbox01">
+                            <svg class="checkbox__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 22 22">
+                                <rect width="21" height="21" x=".5" y=".5" fill="#FFF" stroke="#006F94" rx="3" />
+                                <path class="tick" stroke="#6EA340" fill="none" stroke-linecap="round" stroke-width="4"
+                                    d="M4 10l5 5 9-9" />
+                            </svg>
+                            <span class="checkbox__label">Lún nhỏ ở móng</span>
+                    </li>
+                    <br>
+
+
+
+                </div>
+
+                <div>
+                    <li>
+                        <label for="myCheckbox01" class="checkbox">
+                            <input class="checkbox__input" name="checkbox" type="checkbox" name="checkbox"
+                                value="polyuria" id="myCheckbox01">
+                            <svg class="checkbox__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 22 22">
+                                <rect width="21" height="21" x=".5" y=".5" fill="#FFF" stroke="#006F94" rx="3" />
+                                <path class="tick" stroke="#6EA340" fill="none" stroke-linecap="round" stroke-width="4"
+                                    d="M4 10l5 5 9-9" />
+                            </svg>
+                            <span class="checkbox__label"> Tiểu tiện nhiều</span>
+                    </li>
+                    <br>
+
+                    <li>
+                        <label for="myCheckbox01" class="checkbox">
+                            <input class="checkbox__input" name="checkbox" type="checkbox" name="checkbox"
+                                value="family_history" id="myCheckbox01">
+                            <svg class="checkbox__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 22 22">
+                                <rect width="21" height="21" x=".5" y=".5" fill="#FFF" stroke="#006F94" rx="3" />
+                                <path class="tick" stroke="#6EA340" fill="none" stroke-linecap="round" stroke-width="4"
+                                    d="M4 10l5 5 9-9" />
+                            </svg>
+                            <span class="checkbox__label">Tiền sử gia đình</span>
+                    </li>
+                    <br>
+
+                    <li>
+                        <label for="myCheckbox01" class="checkbox">
+                            <input class="checkbox__input" name="checkbox" type="checkbox" name="checkbox"
+                                value="mucoid_sputum" id="myCheckbox01">
+                            <svg class="checkbox__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 22 22">
+                                <rect width="21" height="21" x=".5" y=".5" fill="#FFF" stroke="#006F94" rx="3" />
+                                <path class="tick" stroke="#6EA340" fill="none" stroke-linecap="round" stroke-width="4"
+                                    d="M4 10l5 5 9-9" />
+                            </svg>
+                            <span class="checkbox__label">Đờm nhầy</span>
+                    </li>
+                    <br>
+
+                    <li>
+                        <label for="myCheckbox01" class="checkbox">
+                            <input class="checkbox__input" name="checkbox" type="checkbox" name="checkbox"
+                                value="rusty_sputum" id="myCheckbox01">
+                            <svg class="checkbox__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 22 22">
+                                <rect width="21" height="21" x=".5" y=".5" fill="#FFF" stroke="#006F94" rx="3" />
+                                <path class="tick" stroke="#6EA340" fill="none" stroke-linecap="round" stroke-width="4"
+                                    d="M4 10l5 5 9-9" />
+                            </svg>
+                            <span class="checkbox__label">Đờm màu gỉ</span>
+                    </li>
+                    <br>
+
+                    <li>
+                        <label for="myCheckbox01" class="checkbox">
+                            <input class="checkbox__input" name="checkbox" type="checkbox" name="checkbox"
+                                value="lack_of_concentration" id="myCheckbox01">
+                            <svg class="checkbox__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 22 22">
+                                <rect width="21" height="21" x=".5" y=".5" fill="#FFF" stroke="#006F94" rx="3" />
+                                <path class="tick" stroke="#6EA340" fill="none" stroke-linecap="round" stroke-width="4"
+                                    d="M4 10l5 5 9-9" />
+                            </svg>
+                            <span class="checkbox__label">Thiếu tập trung</span>
+                    </li>
+                    <br>
+
+
+                    <li>
+                        <label for="myCheckbox01" class="checkbox">
+                            <input class="checkbox__input" name="checkbox" type="checkbox" name="checkbox"
+                                value="visual_disturbances" id="myCheckbox01">
+                            <svg class="checkbox__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 22 22">
+                                <rect width="21" height="21" x=".5" y=".5" fill="#FFF" stroke="#006F94" rx="3" />
+                                <path class="tick" stroke="#6EA340" fill="none" stroke-linecap="round" stroke-width="4"
+                                    d="M4 10l5 5 9-9" />
+                            </svg>
+                            <span class="checkbox__label">Rối loạn thị giác</span>
+                    </li>
+                    <br>
+
+                    <li>
+                        <label for="myCheckbox01" class="checkbox">
+                            <input class="checkbox__input" name="checkbox" type="checkbox" name="checkbox"
+                                value="receiving_blood_transfusion" id="myCheckbox01">
+                            <svg class="checkbox__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 22 22">
+                                <rect width="21" height="21" x=".5" y=".5" fill="#FFF" stroke="#006F94" rx="3" />
+                                <path class="tick" stroke="#6EA340" fill="none" stroke-linecap="round" stroke-width="4"
+                                    d="M4 10l5 5 9-9" />
+                            </svg>
+                            <span class="checkbox__label">Nhận máu</span>
+                    </li>
+                    <br>
+
+                    <li>
+                        <label for="myCheckbox01" class="checkbox">
+                            <input class="checkbox__input" name="checkbox" type="checkbox" name="checkbox"
+                                value="receiving_unsterile_injections" id="myCheckbox01">
+                            <svg class="checkbox__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 22 22">
+                                <rect width="21" height="21" x=".5" y=".5" fill="#FFF" stroke="#006F94" rx="3" />
+                                <path class="tick" stroke="#6EA340" fill="none" stroke-linecap="round" stroke-width="4"
+                                    d="M4 10l5 5 9-9" />
+                            </svg>
+                            <span class="checkbox__label">Tiêm không đảm bảo vệ sinh</span>
+                    </li>
+                    <br>
+
+                    <li>
+                        <label for="myCheckbox01" class="checkbox">
+                            <input class="checkbox__input" name="checkbox" type="checkbox" name="checkbox" value="coma"
+                                id="myCheckbox01">
+                            <svg class="checkbox__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 22 22">
+                                <rect width="21" height="21" x=".5" y=".5" fill="#FFF" stroke="#006F94" rx="3" />
+                                <path class="tick" stroke="#6EA340" fill="none" stroke-linecap="round" stroke-width="4"
+                                    d="M4 10l5 5 9-9" />
+                            </svg>
+                            <span class="checkbox__label">Hôn mê</span>
+                    </li>
+                    <br>
+
+                    <li>
+                        <label for="myCheckbox01" class="checkbox">
+                            <input class="checkbox__input" name="checkbox" type="checkbox" name="checkbox"
+                                value="stomach_bleeding" id="myCheckbox01">
+                            <svg class="checkbox__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 22 22">
+                                <rect width="21" height="21" x=".5" y=".5" fill="#FFF" stroke="#006F94" rx="3" />
+                                <path class="tick" stroke="#6EA340" fill="none" stroke-linecap="round" stroke-width="4"
+                                    d="M4 10l5 5 9-9" />
+                            </svg>
+                            <span class="checkbox__label">Chảy máu dạ dày</span>
+                    </li>
+                    <br>
+
+                    <li>
+                        <label for="myCheckbox01" class="checkbox">
+                            <input class="checkbox__input" name="checkbox" type="checkbox" name="checkbox"
+                                value="distention_of_abdomen" id="myCheckbox01">
+                            <svg class="checkbox__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 22 22">
+                                <rect width="21" height="21" x=".5" y=".5" fill="#FFF" stroke="#006F94" rx="3" />
+                                <path class="tick" stroke="#6EA340" fill="none" stroke-linecap="round" stroke-width="4"
+                                    d="M4 10l5 5 9-9" />
+                            </svg>
+                            <span class="checkbox__label">Phình bụng</span>
+                    </li>
+                    <br>
+
+                    <li>
+                        <label for="myCheckbox01" class="checkbox">
+                            <input class="checkbox__input" name="checkbox" type="checkbox" name="checkbox"
+                                value="history_of_alcohol_consumption" id="myCheckbox01">
+                            <svg class="checkbox__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 22 22">
+                                <rect width="21" height="21" x=".5" y=".5" fill="#FFF" stroke="#006F94" rx="3" />
+                                <path class="tick" stroke="#6EA340" fill="none" stroke-linecap="round" stroke-width="4"
+                                    d="M4 10l5 5 9-9" />
+                            </svg>
+                            <span class="checkbox__label">Lịch sử tiêu thụ rượu bia</span>
+                    </li>
+                    <br>
+
+                    <li>
+                        <label for="myCheckbox01" class="checkbox">
+                            <input class="checkbox__input" name="checkbox" type="checkbox" name="checkbox"
+                                value="fluid_overload" id="myCheckbox01">
+                            <svg class="checkbox__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 22 22">
+                                <rect width="21" height="21" x=".5" y=".5" fill="#FFF" stroke="#006F94" rx="3" />
+                                <path class="tick" stroke="#6EA340" fill="none" stroke-linecap="round" stroke-width="4"
+                                    d="M4 10l5 5 9-9" />
+                            </svg>
+                            <span class="checkbox__label">Tăng nhiễm nước</span>
+                    </li>
+                    <br>
+
+                    <li>
+                        <label for="myCheckbox01" class="checkbox">
+                            <input class="checkbox__input" name="checkbox" type="checkbox" name="checkbox"
+                                value="blood_in_sputum" id="myCheckbox01">
+                            <svg class="checkbox__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 22 22">
+                                <rect width="21" height="21" x=".5" y=".5" fill="#FFF" stroke="#006F94" rx="3" />
+                                <path class="tick" stroke="#6EA340" fill="none" stroke-linecap="round" stroke-width="4"
+                                    d="M4 10l5 5 9-9" />
+                            </svg>
+                            <span class="checkbox__label">Máu trong đờm</span>
+                    </li>
+                    <br>
+
+                    <li>
+                        <label for="myCheckbox01" class="checkbox">
+                            <input class="checkbox__input" name="checkbox" type="checkbox" name="checkbox"
+                                value="prominent_veins_on_calf" id="myCheckbox01">
+                            <svg class="checkbox__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 22 22">
+                                <rect width="21" height="21" x=".5" y=".5" fill="#FFF" stroke="#006F94" rx="3" />
+                                <path class="tick" stroke="#6EA340" fill="none" stroke-linecap="round" stroke-width="4"
+                                    d="M4 10l5 5 9-9" />
+                            </svg>
+                            <span class="checkbox__label">Mạch nổi trên bắp chân</span>
+                    </li>
+                    <br>
+
+                    <li>
+                        <label for="myCheckbox01" class="checkbox">
+                            <input class="checkbox__input" name="checkbox" type="checkbox" name="checkbox"
+                                value="palpitations" id="myCheckbox01">
+                            <svg class="checkbox__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 22 22">
+                                <rect width="21" height="21" x=".5" y=".5" fill="#FFF" stroke="#006F94" rx="3" />
+                                <path class="tick" stroke="#6EA340" fill="none" stroke-linecap="round" stroke-width="4"
+                                    d="M4 10l5 5 9-9" />
+                            </svg>
+                            <span class="checkbox__label">Nhịp tim nhanh</span>
+                    </li>
+                    <br>
+
+                    <li>
+                        <label for="myCheckbox01" class="checkbox">
+                            <input class="checkbox__input" name="checkbox" type="checkbox" name="checkbox"
+                                value="painful_walking" id="myCheckbox01">
+                            <svg class="checkbox__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 22 22">
+                                <rect width="21" height="21" x=".5" y=".5" fill="#FFF" stroke="#006F94" rx="3" />
+                                <path class="tick" stroke="#6EA340" fill="none" stroke-linecap="round" stroke-width="4"
+                                    d="M4 10l5 5 9-9" />
+                            </svg>
+                            <span class="checkbox__label">Đau khi đi bộ</span>
+                    </li>
+                    <br>
+
+                    <li>
+                        <label for="myCheckbox01" class="checkbox">
+                            <input class="checkbox__input" name="checkbox" type="checkbox" name="checkbox"
+                                value="pus_filled_pimples" id="myCheckbox01">
+                            <svg class="checkbox__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 22 22">
+                                <rect width="21" height="21" x=".5" y=".5" fill="#FFF" stroke="#006F94" rx="3" />
+                                <path class="tick" stroke="#6EA340" fill="none" stroke-linecap="round" stroke-width="4"
+                                    d="M4 10l5 5 9-9" />
+                            </svg>
+                            <span class="checkbox__label">Mụn có mủ</span>
+                    </li>
+                    <br>
+
+                    <li>
+                        <label for="myCheckbox01" class="checkbox">
+                            <input class="checkbox__input" name="checkbox" type="checkbox" name="checkbox"
+                                value="blackheads" id="myCheckbox01">
+                            <svg class="checkbox__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 22 22">
+                                <rect width="21" height="21" x=".5" y=".5" fill="#FFF" stroke="#006F94" rx="3" />
+                                <path class="tick" stroke="#6EA340" fill="none" stroke-linecap="round" stroke-width="4"
+                                    d="M4 10l5 5 9-9" />
+                            </svg>
+                            <span class="checkbox__label">Mụn đen</span>
+                    </li>
+                    <br>
+
+                    <li>
+                        <label for="myCheckbox01" class="checkbox">
+                            <input class="checkbox__input" name="checkbox" type="checkbox" name="checkbox"
+                                value="scurring" id="myCheckbox01">
+                            <svg class="checkbox__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 22 22">
+                                <rect width="21" height="21" x=".5" y=".5" fill="#FFF" stroke="#006F94" rx="3" />
+                                <path class="tick" stroke="#6EA340" fill="none" stroke-linecap="round" stroke-width="4"
+                                    d="M4 10l5 5 9-9" />
+                            </svg>
+                            <span class="checkbox__label">Bong tróc</span>
+                    </li>
+                    <br>
+
+                    <li>
+                        <label for="myCheckbox01" class="checkbox">
+                            <input class="checkbox__input" name="checkbox" type="checkbox" name="checkbox"
+                                value="skin_peeling" id="myCheckbox01">
+                            <svg class="checkbox__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 22 22">
+                                <rect width="21" height="21" x=".5" y=".5" fill="#FFF" stroke="#006F94" rx="3" />
+                                <path class="tick" stroke="#6EA340" fill="none" stroke-linecap="round" stroke-width="4"
+                                    d="M4 10l5 5 9-9" />
+                            </svg>
+                            <span class="checkbox__label">Bong da</span>
+                    </li>
+                    <br>
+
+                    <li>
+                        <label for="myCheckbox01" class="checkbox">
+                            <input class="checkbox__input" name="checkbox" type="checkbox" name="checkbox"
+                                value="silver_like_dusting" id="myCheckbox01">
+                            <svg class="checkbox__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 22 22">
+                                <rect width="21" height="21" x=".5" y=".5" fill="#FFF" stroke="#006F94" rx="3" />
+                                <path class="tick" stroke="#6EA340" fill="none" stroke-linecap="round" stroke-width="4"
+                                    d="M4 10l5 5 9-9" />
+                            </svg>
+                            <span class="checkbox__label">Bụi bạc trên da</span>
+                    </li>
+                    <br>
+
+                    <br>
+                </div>
+
+            </div>
+            <hr>
+            <button class="btn  py-3" id="submitBtn"
+                style="margin-top: 2px;background-color:#1eb2c5;color:#fff;width:200px;border-radius:10px;">
+                Tra cứu
+            </button>
+        </ul>
+
+        {{!-- <input type="checkbox" name="checkbox" id="" value="mot">
+        <input type="checkbox" name="checkbox" id="" value="hai">
+        <input type="checkbox" name="checkbox" id="" value="ba"> --}}
+
+        {{!-- <button onclick="getSelectedValues()">Get Selected Values</button> --}}
+
+
+    </div>
+
+    <div class="container-fluid p-3 mb-2 text-dark my-5  py-5 "
+        style=" box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;border-radius:10px">
+        <div class="container py-5">
+            <div class="row gx-5">
+                <div class="col-lg-11" style="margin-left: 55px;">
+                    <div class="bg-white text-center  p-5"
+                        style=" box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px; border-radius:10px">
+                        <h1 class="mb-4 text-black">Điền thông tin phiếu khám bệnh</h1>
+                        <form class="px-md-2" action="/tai-lieu/lap-phieu-hen" method="post">
+                            <div class="row g-2">
+                                {{!-- Select doctors --}}
+                                <div class="col-12">
+                                    <select class="form-select bg-light" style="border-radius: 10px;" name="Doctor"
+                                        required>
+                                        <option value="">Chọn bác sĩ &#8727;</option>
+                                        {{#each doctors}}
+                                        <option value='{"ID":"{{ID}}", "Name":"{{Name}}"}'>{{Name}}</option>
+                                        {{/each}}
+                                    </select>
+                                </div>
+
+                                {{!-- Name input auto --}}
+                                <div class="col-12 col-sm-6 text-start">
+                                    <label class="form-label text-black" for="name">Họ và tên &#8727;</label>
+                                    <input type="text" id="name" class="form-control bg-light" name="Name"
+                                        value="{{user.Name}}" required>
+                                </div>
+
+                                <input class="d-none" name="Username" type="text" value="{{user.Username}}">
+
+                                {{!-- Phone input auto --}}
+                                <div class="col-12 col-sm-6 text-start">
+                                    <label class="form-label text-black" for="phone-number">Số điện thoại
+                                        &#8727;</label>
+                                    <input type="text" id="phone-number" class="form-control bg-light" name="Phone"
+                                        value="{{user.Phone}}" required>
+                                </div>
+
+                                {{!-- Email input auto --}}
+                                <div class="col-sm-12 text-start">
+                                    <label class="form-label text-black" for="email">Email</label>
+                                    <input type="email" id="email" class="form-control bg-light" name="Email"
+                                        value="{{user.Email}}">
+                                </div>
+
+                                {{!-- Date of birth input --}}
+                                <div class="col-12 col-sm-6 text-start">
+                                    <label for="date-of-birth" class="form-label text-black">Ngày sinh &#8727;</label>
+                                    <input type="date" class="form-control datetimepicker-input bg-light"
+                                        id="date-of-birth" name="DOB" value="{{user.DOB}}" required>
+                                </div>
+
+                                {{!-- Sex input --}}
+                                <div class="col-12 col-sm-6 text-start">
+                                    <label class="form-label text-black" for="sex">Giới tính</label>
+                                    <div class="d-flex">
+                                        <input style="margin-top: 10px;" class="form-check-input bg-light" type="radio"
+                                            name="Gender" id="male" value="Nam" {{#ifEquals user.Gender "Nam"
+                                            }}checked{{/ifEquals}}>
+                                        <label style="margin-top: 10px; margin-left: 4px;"
+                                            class="form-check-label text-black" for="male">Nam</label>
+                                        <input style="margin-top: 10px; margin-left: 20px;"
+                                            class="form-check-input bg-light" type="radio" name="Gender" id="female"
+                                            value="Nữ" {{#ifEquals user.Gender "Nữ" }}checked{{/ifEquals}}>
+                                        <label style="margin-top: 10px;" class="form-check-label text-black"
+                                            for="female">Nữ</label>
+                                    </div>
+                                </div>
+
+                                {{!-- Time appointment --}}
+                                <div class="col-12 col-sm-4 text-start">
+                                    <label for="time-meet" class="form-label text-black">Ngày hẹn &#8727;</label>
+                                    <input type="date" class="form-control datetimepicker-input bg-light" id="date-meet"
+                                        name="Date" required>
+                                </div>
+                                <div class="col-12 col-sm-4 text-start">
+                                    <label for="time-meet" class="form-label text-black">Giờ hẹn &#8727;</label>
+                                    <input type="time" class="form-control datetimepicker-input bg-light" id="time-meet"
+                                        name="Time" required>
+                                </div>
+                                <div class="col-sm-2"></div>
+
+                                <div class="col-sm-12 text-start">
+                                    <label class="form-label text-black" for="">Nội dung khám</label>
+                                    <textarea type="text" id="desc" rows="5" class="form-control bg-light"
+                                        name="Desc"></textarea>
+                                </div>
+
+                                {{!-- <div class="col-sm-12 text-start">
+                                    <label class="form-label text-black" for="">Ghi chú</label>
+                                    <textarea type="text" id="note" rows="2" class="form-control bg-light"
+                                        name="Note"></textarea>
+                                </div> --}}
+
+                                <div class="col-sm-6">
+                                    <button class="btn  py-3" type="submit"
+                                        style="margin-top: 20px;background-color:#1eb2c5;color:#fff;width:1020px;border-radius:10px">
+                                        Submit
+                                    </button>
+                                </div>
+                                <div id="status" class="col-sm-12 text-start" style="color: red;">(*) Thông tin bắt buộc
+                                    phải nhập</div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<style>
+    #desc {
+        width: 100%;
+        padding: 10px;
+        box-sizing: border-box;
+        resize: vertical;
+        /* Cho phép chỉnh kích thước theo chiều dọc */
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        font-family: 'Arial', sans-serif;
+        font-size: 14px;
+        color: #333;
+    }
+
+    /* Hiệu ứng hover khi trỏ chuột vào textarea */
+    #desc:hover {
+        border-color: #888;
+    }
+
+    body {
+        font-family: 'Arial', sans-serif;
+        background-color: #f8f9fa;
+    }
+
+    .breadcrumb {
+        border-radius: 5px;
+        padding: 1rem;
+    }
+
+    .container-form {
+        background-color: #ffffff;
+        border-radius: 10px;
+
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+        padding: 2rem;
+        margin-top: 2rem;
+    }
+
+    .form-title {
+        color: #343a40;
+        margin-bottom: 2rem;
+    }
+
+    .form-label {
+        color: #495057;
+    }
+
+    .form-control {
+        background-color: #f8f9fa;
+        border: 1px solid #ced4da;
+        border-radius: 10px;
+
+        padding: 1rem;
+        margin-bottom: 1.5rem;
+        transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+    }
+
+    .form-control:focus {
+        border-color: #1eb2c5;
+        outline: 0;
+        box-shadow: 0 0 0 0.2rem rgba(30, 178, 197, 0.25);
+    }
+
+    .btn-submit {
+        background-color: #1eb2c5;
+        color: #ffffff;
+        width: 100%;
+        padding: 1rem;
+        border: none;
+        border-radius: 0.25rem;
+        cursor: pointer;
+        transition: background-color 0.3s;
+    }
+
+    .btn-submit:hover {
+        background-color: #117a8b;
+    }
+
+    #status {
+        color: red;
+    }
+
+    textarea {
+        width: 100%;
+        padding: 1rem;
+        box-sizing: border-box;
+        resize: vertical;
+        border: 1px solid #ced4da;
+        border-radius: 10px;
+
+        font-size: 14px;
+        color: #495057;
+        margin-bottom: 1.5rem;
+        transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+    }
+
+    textarea:hover,
+    textarea:focus {
+        border-color: #1eb2c5;
+        outline: 0;
+        box-shadow: 0 0 0 0.2rem rgba(30, 178, 197, 0.25);
+    }
+
+    .check-group {
+        margin-top: 50px;
+        margin-left: 55px;
+        background: #fff;
+        max-width: 15rem;
+        padding: 1.5rem;
+        border-radius: 0.5rem;
+        box-shadow: 0 1px 3px rgba(0, 0, 10, 0.2);
+        counter-reset: total;
+        counter-reset: checked;
+    }
+
+    .check-group>*+* {
+        margin-top: 0.75rem;
+    }
+
+    .check-group .checkbox {
+        counter-increment: total;
+    }
+
+    .check-group input[type=checkbox]:checked {
+        counter-increment: checked;
+    }
+
+    .check-group__result {
+        font-weight: bold;
+        padding-top: 0.75rem;
+        border-top: 1px solid rgba(0, 0, 0, 0.2);
+    }
+
+    .check-group__result:after {
+        content: counter(checked) " / " counter(total);
+        padding-left: 1ch;
+    }
+
+    .checkbox {
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+    }
+
+    .checkbox__input {
+        position: absolute;
+        width: 1.375em;
+        height: 1.375em;
+        opacity: 0;
+        cursor: pointer;
+    }
+
+    .checkbox__input:checked+.checkbox__icon .tick {
+        stroke-dashoffset: 0;
+    }
+
+    .checkbox__icon {
+        width: 1.375em;
+        height: 1.375em;
+        flex-shrink: 0;
+        overflow: visible;
+    }
+
+    .checkbox__icon .tick {
+        stroke-dasharray: 20px;
+        stroke-dashoffset: 20px;
+        transition: stroke-dashoffset 0.2s ease-out;
+    }
+
+    .checkbox__label {
+        margin-left: 0.5em;
+    }
+
+    #resultContainer {
+        display: none;
+    }
+
+    table {
+        border-collapse: collapse;
+        width: 100%;
+        margin-top: 20px;
+    }
+
+    th,
+    td {
+        border: 1px solid #ddd;
+        padding: 8px;
+        text-align: left;
+    }
+
+    th {
+        background-color: #f2f2f2;
+    }
+</style>

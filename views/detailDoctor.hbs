@@ -1,0 +1,239 @@
+<section style="background-color: #ffffff;">
+    <div class="container py-5">
+        <div class="row">
+            <div class="col">
+                <nav aria-label="breadcrumb" class="bg-light rounded-3 p-3 mb-4">
+                    <ol class="breadcrumb mb-0">
+                        <li class="breadcrumb-item"><a href="/">Trang chủ</a></li>
+                        {{#if session.Doctor}}
+                            {{#ifEquals session.Username data.Username}}
+                                <li class="breadcrumb-item"><a href="/tai-khoan">Tài khoản</a></li>
+                            {{else}}
+                                <li class="breadcrumb-item"><a href="/tim-kiem/bac-si">Tìm kiếm bác sĩ</a></li>
+                            {{/ifEquals}}
+                        {{else}}
+                            <li class="breadcrumb-item"><a href="/tim-kiem/bac-si">Tìm kiếm bác sĩ</a></li>
+                        {{/if}}
+                        <li class="breadcrumb-item active" aria-current="page">{{data.Name}}</li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-4">
+                <div class="card mb-4"  style=" box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;">
+                    <div class="card-body text-center">
+                        <img src="/img/doctor.png" alt="avatar" class="rounded-circle img-fluid" style="width: 150px;">
+                        <h5 class="my-3">{{u.Name}}</h5>
+                        <p class="text-muted mb-4">@{{data.Name}}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-8" >
+                <div class="card mb-4" style=" box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <p class="mb-0">Họ tên</p>
+                            </div>
+                            <div class="col-sm-9">
+                                <p class="text-muted mb-0">{{data.Name}}</p>
+                            </div>
+                        </div>
+                        <hr style="visibility: hidden;">
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <p class="mb-0">Giới tính</p>
+                            </div>
+                            <div class="col-sm-9">
+                                <p class="text-muted mb-0">{{data.Gender}}</p>
+                            </div>
+                        </div>
+                        <hr style="visibility: hidden;">
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <p class="mb-0">Học vị</p>
+                            </div>
+                            <div class="col-sm-9">
+                                <p class="text-muted mb-0">{{data.Title}}</p>
+                            </div>
+                        </div>
+                         <hr style="visibility: hidden;">
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <p class="mb-0">Chuyên khoa</p>
+                            </div>
+                            <div class="col-sm-9">
+                                <p class="text-muted mb-0">{{data.Specialist}}</p>
+                            </div>
+                        </div>
+                               <hr style="visibility: hidden;">
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <p class="mb-0">Điện thoại</p>
+                            </div>
+                            <div class="col-sm-9">
+                                <p class="text-muted mb-0">{{data.Phone}}</p>
+                            </div>
+                        </div>
+                        <hr style="visibility: hidden;">
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <p class="mb-0"><a href="{{data.href}}" target="_blank">Tìm hiểu thêm</a></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {{#ifEquals role "doctor"}}
+        <div class="row">
+            <div class="card mb-4">
+                <div class="card-body">
+                    <p class="mb-4">Phiếu hẹn khám bệnh
+                    </p>
+                    <div class="container">
+                        <table id="table_appointment">
+                            <thead>
+                                <tr>
+                                    <th>Ngày </th>
+                                    <th>Bệnh nhân</th>
+                                    <th>Sđt</th>
+                                    <th>Nội dung </th>
+                                    <th>Ghi chú</th>
+                                    <th>Trạng thái</th>
+                                    <th>Nhập ghi chú</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {{#each appointments}}
+                                <tr>
+                                    <td>{{Date}}</td>
+                                    <td>{{Name}}</td>
+                                    <td>{{Phone}}</td>
+                                    <td>{{Desc}}</td>
+                                    <td>{{Note}}</td>
+                                    <td class="select-container">
+                                        <select class="changeStatus" id="{{_id}}">
+                                            <option value="{{Status}}" selected>{{Status}}</option>
+                                            {{#ifEquals Status "Hủy"}}
+                                            <option value="Chấp nhận">Chấp nhận</option>
+                                            <option value="Đã khám">Đã khám</option>
+                                            {{/ifEquals}}
+                                            {{#ifEquals Status "Chấp nhận"}}
+                                            <option value="Hủy">Hủy</option>
+                                            <option value="Đã khám">Đã khám</option>
+                                            {{/ifEquals}}
+                                              {{#ifEquals Status "Đã khám"}}
+                                            <option value="Chấp nhận">Chấp nhận</option>
+                                            <option value="Hủy">Hủy</option>
+                                            {{/ifEquals}}
+                                            {{#ifEquals Status "Đang chờ"}}
+                                            <option value="Chấp nhận">Chấp nhận</option>
+                                            <option value="Hủy">Hủy</option>
+                                            <option value="Đã khám">Đã khám</option>
+                                            {{/ifEquals}}
+                                        </select>
+                                    </td>
+                                     <td  class="input-container">
+                                        <input type="text" class="changeNote" id="{{_id}}" value="{{Note}}">
+                                        <a href="/tai-khoan">Lưu</a>
+                                     </td>
+                                </tr>
+                                {{/each}}
+                           
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {{/ifEquals}}
+    </div>
+</section>
+
+<style>
+    html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: sans-serif;
+  font-weight: 100;
+}
+
+table {
+  width: 1220px;
+  border-collapse: collapse;
+  border-radius: 5px;
+  overflow: hidden;
+  margin-bottom: 30px;
+   box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
+}
+th,
+td {
+  padding: 20px;
+  background-color: rgba(255, 255, 255, 0.2);
+  color: #000000;
+}
+th {
+  text-align: left;
+}
+thead th {
+  background-color: #1eb2c5;
+  color: aliceblue;
+}
+tbody tr:hover {
+  background-color: rgba(255, 255, 255, 0.3);
+}
+tbody td {
+  position: relative;
+}
+tbody td:hover:before {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: -9999px;
+  bottom: -9999px;
+  background-color: rgba(255, 255, 255, 0.2);
+  z-index: -1;
+}
+/* Style cho thẻ select */
+.select-container {
+    position: relative;
+}
+
+.select-container select {
+    width: 150px; /* Điều chỉnh chiều rộng theo ý muốn */
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+/* Style cho thẻ input và nút Lưu */
+.input-container {
+    display: flex;
+    column-gap: 5px;
+}
+
+.input-container input {
+    width: 150px; /* Điều chỉnh chiều rộng theo ý muốn */
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+.input-container a {
+    display: inline-block;
+    padding: 8px;
+    background-color: #4CAF50;
+    color: white;
+    text-decoration: none;
+    border-radius: 4px;
+}
+
+</style>
