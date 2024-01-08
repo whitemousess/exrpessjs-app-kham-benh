@@ -22,113 +22,70 @@ exports.check = async (req, res, next) => {
   try {
     var user = req.body;
 
-    if (user.role == "patient") {
-      userM.getByUsername(user.Username).then((rs) => {
-        if (rs.length == 0) {
-          res.render("login", {
-            errWrongPassword: "none",
-            errWrongUsername: "block",
-            Username: user.Username,
-            Password: user.Password,
-            display1: "d-block",
-            display2: "d-none",
-            role: user.role,
-          });
-
-          return false;
-        } else {
-          const pwDb = rs[0].Password;
-
-          const salt = pwDb.slice(hashLength);
-
-          const pwSalt = user.Password + salt;
-
-          const pwHashed = CryptoJS.SHA3(pwSalt, {
-            outputLength: hashLength * 4,
-          }).toString(CryptoJS.enc.Hex);
-
-          if (pwDb !== pwHashed + salt) {
-            res.render("login", {
-              errWrongPassword: "block",
-              errWrongUsername: "none",
-              Username: user.Username,
-              Password: user.Password,
-              display1: "d-block",
-              display2: "d-none",
-              role: user.role,
-            });
-
-            return false;
-          }
-
-          req.session.Username = rs[0].Username;
-
-          req.session.Name = rs[0].Name;
-
-          res.redirect("/");
-
-          return true;
-        }
+    const notifications = () => {
+      return res.render("login", {
+        errWrongPassword: "block",
+        errWrongUsername: "none",
+        Username: user.Username,
+        Password: user.Password,
+        display1: "d-block",
+        display2: "d-none",
+        role: user.role,
       });
-    } else if (user.role == "doctor") {
-      doctorM.getByUsername(user.Username).then((rs) => {
-        if (rs.length == 0) {
-          res.render("login", {
-            errWrongPassword: "none",
-            errWrongUsername: "block",
-            Username: user.Username,
-            Password: user.Password,
-            display1: "d-block",
-            display2: "d-none",
-            role: user.role,
-          });
+    };
 
-          return false;
-        } else {
-          if (rs[0].Password !== user.Password) {
-            res.render("login", {
-              errWrongPassword: "block",
-              errWrongUsername: "none",
-              Username: user.Username,
-              Password: user.Password,
-              display1: "d-block",
-              display2: "d-none",
-              role: user.role,
-            });
-
-            return false;
-          }
-
-          req.session.Username = rs[0].Username;
-
-          req.session.Name = rs[0].Name;
-
-          req.session.Doctor = true;
-
-          res.redirect("/");
-
-          return true;
-        }
+    const checkUser = await userM.getByUsername(user.Username);
+    const checkDoctor = await doctorM.getByUsername(user.Username);
+    const checkAdmin = await adminM.getByUsername(user.Username);
+    if (
+      checkUser.length == 0 &&
+      checkDoctor.length == 0 &&
+      checkAdmin.length == 0
+    ) {
+      res.render("login", {
+        errWrongPassword: "none",
+        errWrongUsername: "block",
+        Username: user.Username,
+        Password: user.Password,
+        display1: "d-block",
+        display2: "d-none",
+        role: user.role,
       });
-    } else if (user.role == "admin") {
-      adminM.getByUsername(user.Username).then((rs) => {
-        if (rs.length == 0 || rs[0].Password !== user.Password) {
-          res.render("login", {
-            errWrongPassword: "block",
-            errWrongUsername: "none",
-            Username: user.Username,
-            Password: user.Password,
-            display1: "d-block",
-            display2: "d-none",
-            role: user.role,
-          });
-        } else {
-          req.session.Username = rs[0].Username;
-          req.session.Name = rs[0].Name;
-          req.session.Admin = true;
-          res.redirect("/");
-        }
-      });
+    }
+
+    if (checkUser.length > 0) {
+      const pwDb = checkUser[0].Password;
+      const salt = pwDb.slice(hashLength);
+      const pwSalt = user.Password + salt;
+      const pwHashed = CryptoJS.SHA3(pwSalt, {
+        outputLength: hashLength * 4,
+      }).toString(CryptoJS.enc.Hex);
+
+      if (pwDb !== pwHashed + salt) {
+        notifications();
+      } else {
+        req.session.Username = checkUser[0].Username;
+        req.session.Name = checkUser[0].Name;
+        res.redirect("/");
+      }
+    } else if (checkDoctor.length > 0) {
+      if (checkDoctor[0].Password !== user.Password) {
+        notifications();
+      } else {
+        req.session.Username = checkDoctor[0].Username;
+        req.session.Name = checkDoctor[0].Name;
+        req.session.Doctor = true;
+        res.redirect("/");
+      }
+    } else if (checkAdmin.length > 0) {
+      if (checkAdmin[0].Password !== user.Password) {
+        notifications();
+      } else {
+        req.session.Username = checkAdmin[0].Username;
+        req.session.Name = checkAdmin[0].Name;
+        req.session.Admin = true;
+        res.redirect("/");
+      }
     }
   } catch (err) {
     next(err);

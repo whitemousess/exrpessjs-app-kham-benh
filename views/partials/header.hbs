@@ -12,24 +12,52 @@
                 </div>
             </div>
         </a>
+        <div class="d-none d-xl-flex">
+            <div><a class="px-2 text-white" href="/tim-kiem/thuoc"> Danh sách thuốc</a></div>
+            <div><a class="px-2 text-white" href="/tim-kiem/bac-si">Danh sách bác sĩ</a></div>
+            <div><a class="px-2 text-white" href="/tim-kiem/dich-vu">Danh sách dịch vụ</a></div>
+            <div><a class="px-2 text-white" href="/tim-kiem/benh-ly">Danh sách bệnh lý</a></div>
+            {{#ifEquals role "doctor"}}
+            <div><a class="px-2 text-white" href="/tim-kiem/benh-nhan"> Danh sách bệnh nhân</a>
+            </div>
+            <div><a class="px-2 text-white" href="/tai-lieu/danh-sach-kham-benh">Danh sách
+                    khám bệnh</a></div>
+            {{/ifEquals}}
+            {{#ifEquals role "admin"}}
+            <div>
+                <a class="px-2 text-white" href="/tim-kiem/nguoi-dung">Danh sách người dùng</a>
+            </div>
+            <div>
+                <a class="px-2 text-white" href="/tim-kiem/lich-hen">Danh sách đặt hẹn</a>
+            </div>
+            {{/ifEquals}}
+        </div>
         <div class="d-flex justify-content-end">
             <div class="d-flex flex-column">
                 <div class="d-flex">
-                    <div id="navbarSupportedContent">
+                    <div id="navbarSupportedContent" class="d-xl-none d-block">
                         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                          
                             <li class="nav-item dropdown me-2">
-                                <a class="nav-link" data-bs-toggle="dropdown" aria-expanded="false" href="#">Tra cứu thông tin</a>
-                                <ul class="dropdown-menu dropdown-menu-end dropdown-menu-lg-start">
+                                <a class="nav-link" data-bs-toggle="dropdown" aria-expanded="false" href="#"><i
+                                        class="bi bi-list"></i></a>
+                                <ul class="dropdown-menu dropdown-menu-end position-absolute right-4">
                                     <li><a class="dropdown-item" href="/tim-kiem/thuoc"> Danh sách thuốc</a></li>
                                     <li><a class="dropdown-item" href="/tim-kiem/bac-si">Danh sách bác sĩ</a></li>
                                     <li><a class="dropdown-item" href="/tim-kiem/dich-vu">Danh sách dịch vụ</a></li>
                                     <li><a class="dropdown-item" href="/tim-kiem/benh-ly">Danh sách bệnh lý</a></li>
                                     {{#ifEquals role "doctor"}}
-                                    <li><a class="dropdown-item" href="/tim-kiem/benh-nhan"> Danh sách bệnh nhân</a></li>
-                                    <li><a class="dropdown-item" href="/tai-lieu/danh-sach-kham-benh">Danh sách khám
-                                            bệnh</a></li>
-                                    <li><a class="dropdown-item" href="/tim-kiem/ho-so-benh-an">Hồ sơ bệnh án</a></li>
+                                    <div><a class="px-2 text-white" href="/tim-kiem/benh-nhan"> Danh sách bệnh nhân</a>
+                                    </div>
+                                    <div><a class="px-2 text-white" href="/tai-lieu/danh-sach-kham-benh">Danh sách
+                                            khám bệnh</a></div>
+                                    {{/ifEquals}}
+                                    {{#ifEquals role "admin"}}
+                                    <div>
+                                        <a class="px-2 text-white" href="/tim-kiem/nguoi-dung">Danh sách người dùng</a>
+                                    </div>
+                                    <div>
+                                        <a class="px-2 text-white" href="/tim-kiem/lich-hen">Danh sách đặt hẹn</a>
+                                    </div>
                                     {{/ifEquals}}
                                 </ul>
                             </li>
@@ -45,7 +73,7 @@
                                     d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z" />
                             </svg>
                         </a>
-                           {{#ifEquals role "patient"}}
+                        {{#ifEquals role "patient"}}
                         <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuAvatar">
                             <li>
                                 <a class="dropdown-item {{display1}}" href="/dang-nhap">Đăng nhập</a>
@@ -53,9 +81,9 @@
                                 <a class="dropdown-item {{display2}}" href="/dang-xuat">Đăng xuất</a>
                             </li>
                         </ul>
-                            {{/ifEquals}}
+                        {{/ifEquals}}
 
-                             {{#ifEquals role "doctor"}}
+                        {{#ifEquals role "user"}}
                         <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuAvatar">
                             <li>
                                 <a class="dropdown-item {{display1}}" href="/dang-nhap">Đăng nhập</a>
@@ -63,21 +91,32 @@
                                 <a class="dropdown-item {{display2}}" href="/dang-xuat">Đăng xuất</a>
                             </li>
                         </ul>
-                            {{/ifEquals}}
+                        {{/ifEquals}}
 
-                             {{#ifEquals role "admin"}}
+                        {{#ifEquals role "doctor"}}
                         <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuAvatar">
-                           <li>
+                            <li>
+                                <a class="dropdown-item {{display1}}" href="/dang-nhap">Đăng nhập</a>
+                                <a class="dropdown-item {{display2}}" href="/tai-khoan">Tài khoản</a>
                                 <a class="dropdown-item {{display2}}" href="/dang-xuat">Đăng xuất</a>
                             </li>
                         </ul>
-                            {{/ifEquals}}
+                        {{/ifEquals}}
+
+                        {{#ifEquals role "admin"}}
+                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuAvatar">
+                            <li>
+                                <a class="dropdown-item {{display2}}" href="/dang-xuat">Đăng xuất</a>
+                            </li>
+                        </ul>
+                        {{/ifEquals}}
                     </div>
                 </div>
                 <div class="text-white d-flex justify-content-end">
                     {{#if session.Name}}
                     <div class="row">
-                        <div class="d-flex alert alert-info alert-dismissible fade show mb-0" role="alert" style="display: inline-block;font-size: small; height: 30px;line-height: 30px;padding: 0px 20px;">
+                        <div class="d-flex alert alert-info alert-dismissible fade show mb-0" role="alert"
+                            style="display: inline-block;font-size: small; height: 30px;line-height: 30px;padding: 0px 20px;">
                             <div>Xin chào, {{session.Name}}!</div>
                         </div>
                     </div>
@@ -89,52 +128,52 @@
 </nav>
 
 <style>
-@import url("https://fonts.googleapis.com/css2?family=Audiowide&display=swap");
+    @import url("https://fonts.googleapis.com/css2?family=Audiowide&display=swap");
 
 
 
-p {
-	margin: auto;
-}
+    p {
+        margin: auto;
+    }
 
-.large {
-	font-size: 1.5rem;
-    	font-family: "Audiowide", cursive;
+    .large {
+        font-size: 1.5rem;
+        font-family: "Audiowide", cursive;
 
-}
+    }
 
-.small {
-	font-size: 3rem;
-}
+    .small {
+        font-size: 3rem;
+    }
 
-.rise {
-	text-shadow: -0.01em -0.01em 0.01em #000;
-	animation: rise 2s ease-in-out 0.5s forwards;
-}
+    .rise {
+        text-shadow: -0.01em -0.01em 0.01em #000;
+        animation: rise 2s ease-in-out 0.5s forwards;
+    }
 
-@keyframes rise {
-	to {
-		text-shadow: 0em 0.01em rgb(85, 136, 255), 0em 0.02em rgb(85, 136, 255), 0em 0.02em 0.03em rgb(85, 136, 255),
-			-0.01em 0.01em #333, -0.02em 0.02em #333, -0.03em 0.03em #333,
-			-0.04em 0.04em #333, -0.01em -0.01em 0.03em #000, -0.02em -0.02em 0.03em #000,
-			-0.03em -0.03em 0.03em #000;
-		transform: translateY(-0.025em) translateX(0.04em);
-	}
-}
+    @keyframes rise {
+        to {
+            text-shadow: 0em 0.01em rgb(85, 136, 255), 0em 0.02em rgb(85, 136, 255), 0em 0.02em 0.03em rgb(85, 136, 255),
+                -0.01em 0.01em #333, -0.02em 0.02em #333, -0.03em 0.03em #333,
+                -0.04em 0.04em #333, -0.01em -0.01em 0.03em #000, -0.02em -0.02em 0.03em #000,
+                -0.03em -0.03em 0.03em #000;
+            transform: translateY(-0.025em) translateX(0.04em);
+        }
+    }
 
-.outline {
-	background-clip: text;
-	color: #ffdd40;
-	animation: outline 1s ease-in-out 1.5s forwards;
-}
+    .outline {
+        background-clip: text;
+        color: #ffdd40;
+        animation: outline 1s ease-in-out 1.5s forwards;
+    }
 
-@keyframes outline {
-	from {
-		text-shadow: 0em -7em 10em #fff;
-	}
-	to {
-		text-shadow: 0 0.02em #fff, 0.02em 0 #fff, -0.02em 0 #fff, 0 -0.02em #fff;
-	}
-}
+    @keyframes outline {
+        from {
+            text-shadow: 0em -7em 10em #fff;
+        }
 
+        to {
+            text-shadow: 0 0.02em #fff, 0.02em 0 #fff, -0.02em 0 #fff, 0 -0.02em #fff;
+        }
+    }
 </style>

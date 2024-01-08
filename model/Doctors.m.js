@@ -3,6 +3,8 @@ module.exports = {
   add: async (data) => {
     const rs = await db.collection("Doctors").insertOne({
       Name: data.Name,
+      Username: data.Username,
+      Password: data.Password,
       Gender: data.Gender,
       Specialist: data.Specialist,
       Phone: data.Phone,
@@ -10,6 +12,7 @@ module.exports = {
       ID: data.ID,
       ID_Sick: data.Sick.ID,
       Sick: data.Sick.SickName,
+      Image: data.Image,
     });
     return rs;
   },

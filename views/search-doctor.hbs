@@ -10,59 +10,74 @@
 <div class="">
     <div class="alert alert-success alert-dismissible fade show mb-0" role="alert">
         <strong>Đã xóa bác sĩ.</strong>
-        <button type="button" class="btn-close" data-bs-dismiss="alert"  aria-label="Close"></button>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>
 </div>
 {{/ifEquals}}
 <div class="container" style="margin-top: 20px;">
-<h3 class="text-center mt-2"><b>Danh sách bác sĩ</b></h3>
+    <h3 class="text-center mt-2"><b>Danh sách bác sĩ</b></h3>
 
     <div class="container">
-	<table  id="example" >
-	  <thead>
-            <tr>
-                <th>Tên bác sĩ</th>
-                <th>Giới tính</th>
-                <th>Bệnh lý</th>
-                <th>Chuyên khoa</th>
-                <th>Điện thoại</th>
-                <th>Học vị</th>
-                  {{#ifEquals role "admin"}}
-                <th>Hành động</th>
-                {{/ifEquals}}
-            </tr>
-        </thead>
-         {{#ifEquals role "admin"}}
-       <button class="btn  py-3" type="submit" data-bs-toggle="modal" data-bs-target="#add" style="margin-top: 20px;background-color:#1eb2c5;color:#fff;width:200px;border-radius:10px;margin-bottom: 20px">       
-                   Thêm bác sĩ
-       </button>
-         {{/ifEquals}}
-        <tbody>
-            {{#each doctors}}
-            <tr>
-                <td ><a style="color: #000000;" href="/bac-si/{{ID}}-{{Name}}">{{Name}}</a></td>
-                <td>{{Gender}}</td>
-                <td>{{Sick}}</td>
-                <td>{{Specialist}}</td>
-                <td>{{Phone}}</td>
-                <td>{{Title}}</td>
-                 {{#ifEquals ../role "admin"}}
-                <td>
-                    <div class="d-flex">
-                        <a type="button" class="d-block me-2" data-bs-toggle="modal" data-bs-target="#editServiceModal{{ID}}">
-                            <i class="bi bi-pencil-square"></i>
-                        </button>
-                        <a type="button" class="d-block" data-bs-toggle="modal" data-bs-target="#deleteServiceModal{{ID}}">
-                            <i class="bi bi-trash3"></i>
-                        </a>
-                    </div>
-                </td>
-                {{/ifEquals}}
-            </tr>
-            {{/each}}
-        
-	</table>
-</div>
+        <table id="example">
+            <thead>
+                <tr>
+                    <th>Học vị</th>
+                    <th>Tên bác sĩ</th>
+                    <th>Chuyên khoa</th>
+                    <th>Bệnh lý</th>
+                    <th>Giới tính</th>
+                    <th>Điện thoại</th>
+                    {{#ifEquals role "admin"}}
+                    <th>Hành động</th>
+                    {{/ifEquals}}
+                    {{#ifEquals role "user"}}
+                    <th>Hành động</th>
+                    {{/ifEquals}}
+                </tr>
+            </thead>
+            {{#ifEquals role "admin"}}
+            <button class="btn  py-3" type="submit" data-bs-toggle="modal" data-bs-target="#add"
+                style="margin-top: 20px;background-color:#1eb2c5;color:#fff;width:200px;border-radius:10px;margin-bottom: 20px">
+                Thêm bác sĩ
+            </button>
+            {{/ifEquals}}
+            <tbody>
+                {{#each doctors}}
+                <tr>
+                    <td>{{Title}}</td>
+                    <td><a style="color: #000000;" href="/bac-si/{{ID}}-{{Name}}">{{Name}}</a></td>
+                    <td>{{Specialist}}</td>
+                    <td>{{Sick}}</td>
+                    <td>{{Gender}}</td>
+                    <td>{{Phone}}</td>
+                    {{#ifEquals ../role "user"}}
+                    <td>
+                        <div class="d-flex">
+                            <div class="btn btn-outline-success">Chi tiết</div>
+                            <div class="btn btn-outline-success"><a class="d-block me-2"
+                                    href="/tai-lieu/lap-phieu-hen?id={{ID}}">Đặt lịch</a></div>
+                        </div>
+                    </td>
+                    {{/ifEquals}}
+                    {{#ifEquals ../role "admin"}}
+                    <td>
+                        <div class="d-flex">
+                            <a type="button" class="d-block me-2" data-bs-toggle="modal"
+                                data-bs-target="#editServiceModal{{ID}}">
+                                <i class="bi bi-pencil-square"></i>
+                                </button>
+                                <a type="button" class="d-block" data-bs-toggle="modal"
+                                    data-bs-target="#deleteServiceModal{{ID}}">
+                                    <i class="bi bi-trash3"></i>
+                                </a>
+                        </div>
+                    </td>
+                    {{/ifEquals}}
+                </tr>
+                {{/each}}
+
+        </table>
+    </div>
 </div>
 {{#each doctors}}
 <!-- Modal -->
@@ -75,35 +90,55 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form class="px-md-2" id="editServiceForm{{ID}}" action="/chinh-sua/bac-si/{{ID}}" method="POST">
+                <form class="px-md-2" id="editServiceForm{{ID}}" action="/chinh-sua/bac-si/{{ID}}" method="POST"
+                    enctype="multipart/form-data">
                     <div class="form-floating mb-4">
-                        <input type="text" id="Name{{ID}}" class="form-control" name="Name"
-                            value="{{Name}}" required />
+                        <label class="form-label" for="Image"></label>
+                        <input type="file" class="form-control" id="Image" name="image" accept="image/*" value="" />
+                    </div>
+
+                    <div class="form-floating mb-4">
+                        <input type="text" id="Name{{ID}}" class="form-control" name="Name" value="{{Name}}" required />
                         <label class="form-label" for="Name{{ID}}">Tên bác sĩ</label>
                     </div>
-                     <div class="form-floating mb-4">
-                        
-                         <label style="margin-bottom: 50px; margin-left: 10px;"
-                                            class="form-check-label text-black" for="male">Nam</label>
-                       <input style="margin-bottom: 10px;" class="form-check-input bg-light" type="radio"
-                                            name="Gender" id="male" value="Nam" {{#ifEquals Gender "Nam"}}checked{{/ifEquals}} required>
-                                       
-                        <input style="margin-bottom: 10px; margin-left: 50px;"
-                            class="form-check-input bg-light" type="radio" name="Gender" id="female"
-                            value="Nữ"{{#ifEquals Gender "Nữ"}}checked{{/ifEquals}} required>
+
+                    <div class="form-floating mb-4">
+                        <input type="text" id="Name{{ID}}" class="form-control" name="Username" value="{{Username}}"
+                            required />
+                        <label class="form-label" for="Name{{ID}}">Tài khoản</label>
+                    </div>
+
+                    <div class="form-floating mb-4">
+                        <input type="password" id="Name{{ID}}" class="form-control" name="Password" value="{{Password}}"
+                            required />
+                        <label class="form-label" for="Name{{ID}}">Mật khẩu</label>
+                    </div>
+
+
+                    <div class="form-floating mb-4">
+
+                        <label style="margin-bottom: 50px; margin-left: 10px;" class="form-check-label text-black"
+                            for="male">Nam</label>
+                        <input style="margin-bottom: 10px;" class="form-check-input bg-light" type="radio" name="Gender"
+                            id="male" value="Nam" {{#ifEquals Gender "Nam" }}checked{{/ifEquals}} required>
+
+                        <input style="margin-bottom: 10px; margin-left: 50px;" class="form-check-input bg-light"
+                            type="radio" name="Gender" id="female" value="Nữ" {{#ifEquals Gender "Nữ"
+                            }}checked{{/ifEquals}} required>
                         <label style="margin-bottom: 50px; margin-left:80px" class="form-check-label text-black"
                             for="female">Nữ</label>
                     </div>
-                              <label class="form-label" for="Name{{ID}}">Tên bệnh lý</label>
+                    <label class="form-label" for="Name{{ID}}">Tên bệnh lý</label>
 
                     <div class="form-floating mb-4">
 
-                              <select class="form-select " style="height: 200px;"   name="Sick" id="multiple-select"  required multiple>
-                                 <option value="">{{ Sick }}</option>
-                                  {{#each ../sicks}}
-                                  <option  value="{{SickName}}">{{SickName}}</option>
-                                  {{/each}}
-                              </select>
+                        <select class="form-select " style="height: 200px;" name="Sick" id="multiple-select" required
+                            multiple>
+                            <option value="">{{ Sick }}</option>
+                            {{#each ../sicks}}
+                            <option value="{{SickName}}">{{SickName}}</option>
+                            {{/each}}
+                        </select>
                     </div>
 
                     <div class="form-floating mb-4">
@@ -112,15 +147,15 @@
                         <label class="form-label" for="Specialist{{ID}}">Chuyên môn</label>
                     </div>
 
-                     <div class="form-floating mb-4">
-                        <input type="text" id="Phone{{ID}}" class="form-control" name="Phone"
-                            value="{{Phone}}" required />
+                    <div class="form-floating mb-4">
+                        <input type="text" id="Phone{{ID}}" class="form-control" name="Phone" value="{{Phone}}"
+                            required />
                         <label class="form-label" for="Phone{{ID}}">Số điện thoại</label>
                     </div>
 
-                     <div class="form-floating mb-4">
-                        <input type="text" id="Title{{ID}}" class="form-control" name="Title"
-                            value="{{Title}}" required />
+                    <div class="form-floating mb-4">
+                        <input type="text" id="Title{{ID}}" class="form-control" name="Title" value="{{Title}}"
+                            required />
                         <label class="form-label" for="Title{{ID}}">Học vị</label>
                     </div>
 
@@ -159,8 +194,7 @@
 </div>
 {{/each}}
 
-<div class="modal fade" id="add" tabindex="-1" aria-labelledby="add"
-    aria-hidden="true">
+<div class="modal fade" id="add" tabindex="-1" aria-labelledby="add" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -168,124 +202,138 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form class="px-md-2" id="editServiceForm" action="/tai-lieu/them-bac-si" method="POST">
+                <form class="px-md-2" id="editServiceForm" action="/tai-lieu/them-bac-si" method="POST"
+                    enctype="multipart/form-data">
                     {{!-- Drug name input --}}
-                    
-
                     <div class="form-floating mb-4">
-                        <input type="text" id="NameDoctor" class="form-control" name="Name" value="" required />
-
-                        <label class="form-label" for="Name">Tên bác sĩ</label>
+                        <label class="form-label" for="Image"></label>
+                        <input type="file" class="form-control" id="Image" name="image" accept="image/*" value=""
+                            required />
                     </div>
 
                     <div class="form-floating mb-4">
-                        
-                         <label style="margin-bottom: 50px; margin-left: 10px;"
-                                            class="form-check-label text-black" for="male">Nam</label>
-                       <input style="margin-bottom: 10px;" class="form-check-input bg-light" type="radio"
-                                            name="Gender" id="male" value="Nam" required >
-                                       
-                        <input style="margin-bottom: 10px; margin-left: 50px;"
-                            class="form-check-input bg-light" type="radio" name="Gender" id="female"
-                            value="Nữ" required>
+                        <input type="text" id="NameDoctor" class="form-control" name="Name" value="" required />
+                        <label class="form-label" for="Name">Tên bác sĩ</label>
+                    </div>
+
+
+                    <div class="form-floating mb-4">
+                        <input type="text" id="Username" class="form-control" name="Username" value="" required />
+                        <label class="form-label" for="Name">Tài khoản</label>
+                    </div>
+
+                    <div class="form-floating mb-4">
+                        <input type="password" id="NameDoctor" class="form-control" name="Password" value="" required />
+                        <label class="form-label" for="Name">Mật khẩu</label>
+                    </div>
+
+                    <div class="form-floating mb-4">
+                        <label style="margin-bottom: 50px; margin-left: 10px;" class="form-check-label text-black"
+                            for="male">Nam</label>
+                        <input style="margin-bottom: 10px;" class="form-check-input bg-light" type="radio" name="Gender"
+                            id="male" value="Nam" required>
+
+                        <input style="margin-bottom: 10px; margin-left: 50px;" class="form-check-input bg-light"
+                            type="radio" name="Gender" id="female" value="Nữ" required>
                         <label style="margin-bottom: 50px; margin-left:80px" class="form-check-label text-black"
                             for="female">Nữ</label>
                     </div>
 
-                             <label class="form-label" for="Name{{ID}}">Tên bệnh lý</label>
-                     <div class="form-floating mb-4">
-                              <select class="form-select " style="height: 200px;"  name="Sick" required  multiple>
-                                  {{#each sicks}}
-                                   <option value='{"ID":"{{ID}}", "SickName":"{{SickName}}"}'>{{SickName}}</option>
-                                  {{/each}}
-                              </select>
+                    <label class="form-label" for="Name{{ID}}">Tên bệnh lý</label>
+                    <div class="form-floating mb-4">
+                        <select class="form-select " style="height: 200px;" name="Sick" required multiple>
+                            {{#each sicks}}
+                            <option value='{"ID":"{{ID}}", "SickName":"{{SickName}}"}'>{{SickName}}</option>
+                            {{/each}}
+                        </select>
                     </div>
 
                     <div class="form-floating mb-4">
-                        <input type="text" id="Specialist" class="form-control" name="Specialist"
-                            value="" required />
+                        <input type="text" id="Specialist" class="form-control" name="Specialist" value="" required />
                         <label class="form-label" for="Specialist">Chuyên khoa </label>
                     </div>
 
-                   <div class="form-floating mb-4">
-                        <input type="text" id="Phone" class="form-control" name="Phone"
-                            value="" required />
+                    <div class="form-floating mb-4">
+                        <input type="text" id="Phone" class="form-control" name="Phone" value="" required />
                         <label class="form-label" for="Phone">Số điện thoại</label>
                     </div>
 
                     <div class="form-floating mb-4">
-                        <input type="text" id="Title" class="form-control" name="Title"
-                            value="" required />
+                        <input type="text" id="Title" class="form-control" name="Title" value="" required />
                         <label class="form-label" for="Title">Học vị</label>
                     </div>
 
-                     <div class="form-floating mb-4" style="visibility: hidden;">
+                    <div class="form-floating mb-4" style="visibility: hidden;">
                         <input type="text" id="ID" class="form-control" name="ID" value="" readonly />
 
-                       <label class="form-label" for="ID">Mã bác sĩ</label>
+                        <label class="form-label" for="ID">Mã bác sĩ</label>
                     </div>
                     {{!-- Unit input --}}
-                     <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
-                <button type="submit" class="btn btn-primary" >Xác nhận</button>
-            </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+                        <button type="submit" class="btn btn-primary">Xác nhận</button>
+                    </div>
                 </form>
             </div>
-           
+
         </div>
     </div>
 </div>
 <style>
     html,
-body {
-  height: 100%;
-}
-body {
-  margin: 0;
-  font-family: sans-serif;
-  font-weight: 100;
-}
+    body {
+        height: 100%;
+    }
 
-table {
-  width: 1280px;
-  border-collapse: collapse;
-  border-radius: 5px;
-  overflow: hidden;
-  margin-bottom: 30px;
-   box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
-}
-th,
-td {
-  padding: 20px;
-  background-color: rgba(255, 255, 255, 0.2);
-  color: #000000;
-}
-th {
-  text-align: left;
-}
-thead th {
-  background-color: #1eb2c5;
-  color: aliceblue;
-}
-tbody tr:hover {
-  background-color: rgba(255, 255, 255, 0.3);
-}
-tbody td {
-  position: relative;
-}
-tbody td:hover:before {
-  content: "";
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: -9999px;
-  bottom: -9999px;
-  background-color: rgba(255, 255, 255, 0.2);
-  z-index: -1;
-}
+    body {
+        margin: 0;
+        font-family: sans-serif;
+        font-weight: 100;
+    }
 
+    table {
+        width: 1280px;
+        border-collapse: collapse;
+        border-radius: 5px;
+        overflow: hidden;
+        margin-bottom: 30px;
+        box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
+    }
 
+    th,
+    td {
+        padding: 20px;
+        background-color: rgba(255, 255, 255, 0.2);
+        color: #000000;
+    }
 
+    th {
+        text-align: left;
+    }
+
+    thead th {
+        background-color: #1eb2c5;
+        color: aliceblue;
+    }
+
+    tbody tr:hover {
+        background-color: rgba(255, 255, 255, 0.3);
+    }
+
+    tbody td {
+        position: relative;
+    }
+
+    tbody td:hover:before {
+        content: "";
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: -9999px;
+        bottom: -9999px;
+        background-color: rgba(255, 255, 255, 0.2);
+        z-index: -1;
+    }
 </style>
 
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
@@ -295,7 +343,7 @@ tbody td:hover:before {
         $('#NameDoctor').on('input', function () {
             // Lấy giá trị từ trường Tên bệnh lý
             var sickNameValue = $(this).val();
-            
+
             // Chuyển đổi giá trị thành slug và cập nhật trường Mã bệnh lý
             var slugValue = slugify(sickNameValue);
             $('#ID').val(slugValue);

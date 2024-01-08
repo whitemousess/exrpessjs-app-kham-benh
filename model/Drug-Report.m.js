@@ -9,6 +9,7 @@ module.exports = {
     const rs = await db.collection("Drug-Report").find({}).toArray();
     return rs;
   },
+  
   getByID: async (ID) => {
     const rs = await db
       .collection("Drug-Report")

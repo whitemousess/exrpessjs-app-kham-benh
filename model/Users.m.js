@@ -39,6 +39,11 @@ module.exports = {
       .collection("Users")
       .updateOne({ Username: user }, { $set: data }, { upsert: true });
   },
+
+  delete: async (ID) => {
+    await db.collection("Users").deleteOne({ ID: ID });
+  },
+
   changePassword: async (user, newpass) => {
     await db
       .collection("Users")

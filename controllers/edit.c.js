@@ -4,6 +4,7 @@ const SicksM = require("../model/Sicks.m");
 const fs = require("fs");
 const { dirname } = require("path");
 const DoctorsM = require("../model/Doctors.m");
+const UsersM = require("../model/Users.m");
 
 exports.getEditDrugService = async (req, res, next) => {
   let role = "patient";
@@ -254,7 +255,9 @@ exports.postEditDoctor = async (req, res, next) => {
 
   try {
     var ID = req.params.ID;
-
+    if (req.file) {
+      req.body.image = req.file.buffer.toString("base64");
+    }
     var data = req.body;
 
     data.ID = ID;
@@ -356,6 +359,7 @@ exports.deleteSick = async (req, res, next) => {
     next(err);
   }
 };
+
 exports.deleteDoctor = async (req, res, next) => {
   let role = "patient";
 
@@ -389,6 +393,17 @@ exports.deleteDoctor = async (req, res, next) => {
     res.redirect("/tim-kiem/bac-si");
   } catch (err) {
     next(err);
+  }
+};
+
+exports.deleteUser = async (req, res, next) => {
+  try {
+    var ID = req.params.ID;
+    await UsersM.delete(ID);
+    req.session.info = "delete";
+    res.redirect("/tim-kiem/nguoi-dung");
+  } catch (error) {
+    next(error);
   }
 };
 

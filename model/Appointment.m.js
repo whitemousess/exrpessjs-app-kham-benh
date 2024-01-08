@@ -53,4 +53,7 @@ module.exports = {
       .updateOne({ _id: new ObjectID(ID) }, { $set: { Note: Note } });
     return rs;
   },
+  delete: async (ID) => {
+    await db.collection("Appointments").deleteOne({ _id: ID });
+  },
 };

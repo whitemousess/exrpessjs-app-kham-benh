@@ -1,5 +1,9 @@
 const app = require("express");
 const router = app.Router();
+const multer = require("multer");
+
+const storage = multer.memoryStorage();
+const upload = multer({ storage: storage });
 
 const docC = require("../controllers/doc.c");
 router.get("/xuat-hoa-don", docC.createInvoice);
@@ -8,7 +12,7 @@ router.post("/xuat-hoa-don", docC.UpdateInvoice);
 router.get("/lap-phieu-hen", docC.getAppointment);
 router.post("/lap-phieu-hen", docC.postAppointment);
 router.post("/them-benh-ly", docC.postSick);
-router.post("/them-bac-si", docC.postDoctor);
+router.post("/them-bac-si", upload.single("image"), docC.postDoctor);
 router.post("/trang-thai-phieu-hen", docC.changeStatus);
 router.post("/ghi-chu-phieu-hen", docC.changeNote);
 router.get("/danh-sach-kham-benh", docC.getPatientsListInDay);

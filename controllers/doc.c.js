@@ -194,7 +194,7 @@ exports.UpdateInvoice = async (req, res, next) => {
 exports.getAppointment = async (req, res, next) => {
   try {
     const doctors = await DoctorsM.getAll();
-
+    const select = req.query.id;
     let role = "patient";
 
     if (req.session.Doctor) {
@@ -223,6 +223,7 @@ exports.getAppointment = async (req, res, next) => {
         display1: "d-none",
         display2: "d-block",
         role: role,
+        select: select,
       });
     } else {
       res.render("appointment", {
@@ -256,7 +257,9 @@ exports.postAppointment = async (req, res, next) => {
 exports.postDoctor = async (req, res, next) => {
   try {
     req.body.Sick = JSON.parse(req.body.Sick);
-
+    if (req.file) {
+      req.body.Image = req.file.buffer.toString("base64");
+    }
     await DoctorsM.add(req.body);
 
     res.redirect("/tim-kiem/bac-si");
