@@ -11,23 +11,28 @@ const AppointmentM = require("../model/Appointment.m");
 exports.viewAllDrugs = async (req, res, next) => {
   try {
     const rs = await drugM.getAll();
+    let login = false;
 
+    if (req.session.Username) {
+      login = true;
+    }
     let role = "patient";
-
+    
     if (req.session.Doctor) {
       role = "doctor";
     }
-
+    
     if (req.session.Admin) {
       role = "admin";
     }
-
+    
     if (req.session.Username) {
       res.render("search-drug", {
         drugs: rs,
         display1: "d-none",
         display2: "d-block",
         role: role,
+        login: login,
       });
     } else {
       res.render("search-drug", {
@@ -46,21 +51,21 @@ exports.viewAllDoctors = async (req, res, next) => {
   try {
     const rs = await doctorM.getAll();
     const rs2 = await sickM.getAll();
+    let login = false;
 
-    let role = "patient";
-
-    if(req.session.Username){
-      role = "user";
+    if (req.session.Username) {
+      login = true;
     }
+    let role = "patient";
     
     if (req.session.Doctor) {
       role = "doctor";
     }
-
+    
     if (req.session.Admin) {
       role = "admin";
     }
-
+    
     if (req.session.Username) {
       res.render("search-doctor", {
         doctors: rs,
@@ -68,6 +73,7 @@ exports.viewAllDoctors = async (req, res, next) => {
         display1: "d-none",
         display2: "d-block",
         role: role,
+        login: login,
       });
     } else {
       res.render("search-doctor", {
@@ -113,24 +119,28 @@ exports.viewAllUser = async (req, res, next) => {
 exports.viewAllServices = async (req, res, next) => {
   try {
     const rs = await serviceM.getAll();
+    let login = false;
 
+    if (req.session.Username) {
+      login = true;
+    }
     let role = "patient";
-
+    
     if (req.session.Doctor) {
       role = "doctor";
     }
     if (req.session.Admin) {
       role = "admin";
     }
-
+    
     var info = "";
-
+    
     if (req.session.info) {
       info = req.session.info;
-
+      
       delete req.session.info;
     }
-
+    
     if (req.session.Username) {
       res.render("search-service", {
         services: rs,
@@ -138,6 +148,7 @@ exports.viewAllServices = async (req, res, next) => {
         display2: "d-block",
         role: role,
         info: info,
+        login: login,
       });
     } else {
       res.render("search-service", {
@@ -157,38 +168,43 @@ exports.viewAllSicks = async (req, res, next) => {
     const rs = await sickM.getAll();
 
     let role = "patient";
+  let login = false;
 
-    if (req.session.Doctor) {
-      role = "doctor";
-    }
+if (req.session.Username) {
+  login = true;
+}
+if (req.session.Doctor) {
+  role = "doctor";
+}
 
-    if (req.session.Admin) {
-      role = "admin";
-    }
+if (req.session.Admin) {
+  role = "admin";
+}
 
-    var info = "";
+var info = "";
 
-    if (req.session.info) {
-      info = req.session.info;
+if (req.session.info) {
+  info = req.session.info;
+  
+  delete req.session.info;
+}
 
-      delete req.session.info;
-    }
-
-    if (req.session.Username) {
-      res.render("search-sick", {
-        sicks: rs,
-        display1: "d-none",
-        display2: "d-block",
-        role: role,
-        info: info,
-      });
-    } else {
-      res.render("search-sick", {
-        sicks: rs,
-        display1: "d-block",
-        display2: "d-none",
-        role: role,
-      });
+if (req.session.Username) {
+  res.render("search-sick", {
+    sicks: rs,
+    display1: "d-none",
+    display2: "d-block",
+    role: role,
+    info: info,
+    login: login,
+  });
+} else {
+  res.render("search-sick", {
+    sicks: rs,
+    display1: "d-block",
+    display2: "d-none",
+    role: role,
+  });
     }
   } catch (err) {
     next(err);
@@ -252,6 +268,36 @@ exports.viewAllRecords = async (req, res, next) => {
         display1: "d-none",
         display2: "d-block",
         role: role,
+      });
+    } else {
+      res.render("error", {
+        display1: "d-block",
+        display2: "d-none",
+        role: role,
+      });
+    }
+  } catch (err) {
+    next(err);
+  }
+};
+
+exports.viewRecordsUser = async (req, res, next) => {
+  try {
+    const rs = await RecordsM.getAll();
+    let role = "patient";
+    let login = false;
+
+    if (req.session.Username) {
+      login = true;
+    }
+
+    if (req.session.Username && role == "patient") {
+      res.render("search-user-record", {
+        records: rs,
+        display1: "d-none",
+        display2: "d-block",
+        role: role,
+        login: login,
       });
     } else {
       res.render("error", {

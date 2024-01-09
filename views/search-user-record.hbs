@@ -1,0 +1,84 @@
+<div class="container" style="margin-top: 20px;">
+    <table id="example" style="width:100%;background-color: aliceblue;">
+        <thead>
+            <tr>
+                <th>Mã bệnh án</th>
+                <th>Ngày khám</th>
+                <th>Giờ khám</th>
+                <th>Bác sĩ khám</th>
+                <th>Ghi chú khám</th>
+                <th>Tổng chi phí</th>
+            </tr>
+        </thead>
+        <tbody>
+            {{#each records}}
+            <tr>
+                <td><a href="/tai-lieu/ho-so-benh-an/{{ID}}">{{ID}}</a></td>
+                <td>{{Date}}</td>
+                <td>{{Time}}</td>
+                <td><a style="color: #000000;" href="/bac-si/{{DoctorID}}-{{DoctorName}}">{{DoctorName}}</a>
+                </td>
+                <td>{{Diagnosis}}</td>
+                <td>{{AllTotal}}</td>
+            </tr>
+            {{/each}}
+
+    </table>
+</div>
+
+<style>
+    html,
+    body {
+        height: 100%;
+    }
+
+    body {
+        margin: 0;
+        font-family: sans-serif;
+        font-weight: 100;
+    }
+
+    table {
+        width: 1280px;
+        border-collapse: collapse;
+        border-radius: 5px;
+        overflow: hidden;
+        margin-bottom: 30px;
+        box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
+    }
+
+    th,
+    td {
+        padding: 20px;
+        background-color: rgba(255, 255, 255, 0.2);
+        color: #000000;
+    }
+
+    th {
+        text-align: left;
+    }
+
+    thead th {
+        background-color: #1eb2c5;
+        color: aliceblue;
+    }
+
+    tbody tr:hover {
+        background-color: rgba(255, 255, 255, 0.3);
+    }
+
+    tbody td {
+        position: relative;
+    }
+
+    tbody td:hover:before {
+        content: "";
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: -9999px;
+        bottom: -9999px;
+        background-color: rgba(255, 255, 255, 0.2);
+        z-index: -1;
+    }
+</style>

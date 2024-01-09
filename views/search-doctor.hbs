@@ -18,7 +18,8 @@
     <h3 class="text-center mt-2"><b>Danh sách bác sĩ</b></h3>
 
     <div class="container">
-        <table id="example">
+        {{#other role "patient"}}
+        <table>
             <thead>
                 <tr>
                     <th>Học vị</th>
@@ -28,9 +29,6 @@
                     <th>Giới tính</th>
                     <th>Điện thoại</th>
                     {{#ifEquals role "admin"}}
-                    <th>Hành động</th>
-                    {{/ifEquals}}
-                    {{#ifEquals role "user"}}
                     <th>Hành động</th>
                     {{/ifEquals}}
                 </tr>
@@ -50,15 +48,6 @@
                     <td>{{Sick}}</td>
                     <td>{{Gender}}</td>
                     <td>{{Phone}}</td>
-                    {{#ifEquals ../role "user"}}
-                    <td>
-                        <div class="d-flex">
-                            <div class="btn btn-outline-success">Chi tiết</div>
-                            <div class="btn btn-outline-success"><a class="d-block me-2"
-                                    href="/tai-lieu/lap-phieu-hen?id={{ID}}">Đặt lịch</a></div>
-                        </div>
-                    </td>
-                    {{/ifEquals}}
                     {{#ifEquals ../role "admin"}}
                     <td>
                         <div class="d-flex">
@@ -75,8 +64,59 @@
                     {{/ifEquals}}
                 </tr>
                 {{/each}}
-
         </table>
+        {{/other}}
+
+        {{#ifEquals role "patient"}}
+        <table id="table_Us">
+            <thead>
+                <tr>
+                    <th>Hình ảnh</th>
+                    <th>Thông tin</th>
+                    <th>Hành động</th>
+                </tr>
+            </thead>
+            <tbody>
+                {{#each doctors}}
+                <tr>
+                    <td>
+                        <div style="width: 200px; height: 200px">
+                            {{#if image}}
+                            <img src='data:image/png;base64,{{image}}' class="img-fluid rounded-start"
+                                style="height: 200px; object-fit: cover ;border-right: 1px solid #ccc;"
+                                alt="Chưa có ảnh">
+                            {{else}}
+                            <img src="/img/doctor.png" alt="avatar" class="rounded-circle img-fluid"
+                                style="width: 150px;">
+                            {{/if}}
+                        </div>
+                    </td>
+                    <td>
+                        <div class="col-md-9 d-flex">
+                            <div class="card-body">
+                                <h5 class="card-title">{{Title}} {{Name}}</h5>
+                                <p class="card-text">Khoa : {{Specialist}}</p>
+                            </div>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="d-flex align-items-center">
+                            <a class="d-block me-2 link-hover" href="/bac-si/{{ID}}-{{Name}}">
+                                <div class="btn btn-outline-success">
+                                    Chi tiết
+                                </div>
+                            </a>
+                            <a class="d-block me-2 link-hover" href="/tai-lieu/lap-phieu-hen?id={{ID}}">
+                                <div class="btn btn-outline-success">
+                                    Đặt lịch
+                                </div>
+                            </a>
+                        </div>
+                    </td>
+                </tr>
+                {{/each}}
+        </table>
+        {{/ifEquals}}
     </div>
 </div>
 {{#each doctors}}

@@ -14,16 +14,23 @@
         </a>
         <div class="d-none d-xl-flex">
             <div><a class="px-2 text-white" href="/tim-kiem/thuoc"> Danh sách thuốc</a></div>
-            <div><a class="px-2 text-white" href="/tim-kiem/bac-si">Danh sách bác sĩ</a></div>
-            <div><a class="px-2 text-white" href="/tim-kiem/dich-vu">Danh sách dịch vụ</a></div>
             <div><a class="px-2 text-white" href="/tim-kiem/benh-ly">Danh sách bệnh lý</a></div>
             {{#ifEquals role "doctor"}}
-            <div><a class="px-2 text-white" href="/tim-kiem/benh-nhan"> Danh sách bệnh nhân</a>
-            </div>
             <div><a class="px-2 text-white" href="/tai-lieu/danh-sach-kham-benh">Danh sách
                     khám bệnh</a></div>
             {{/ifEquals}}
+            {{#ifEquals role "patient"}}
+            <div><a class="px-2 text-white" href="/tim-kiem/bac-si">Danh sách bác sĩ</a></div>
+            {{#ifEquals login true}}
+            <div>
+                <a class="px-2 text-white" href="/tim-kiem/ho-so-benh-ly"> Hồ sơ bệnh lý</a>
+            </div>
+            <div><a class="px-2 text-white" href="/tim-kiem/dich-vu">Danh sách dịch vụ</a></div>
+            {{/ifEquals}}
+            {{/ifEquals}}
             {{#ifEquals role "admin"}}
+            <div><a class="px-2 text-white" href="/tim-kiem/bac-si">Danh sách bác sĩ</a></div>
+            <div><a class="px-2 text-white" href="/tim-kiem/dich-vu">Danh sách dịch vụ</a></div>
             <div>
                 <a class="px-2 text-white" href="/tim-kiem/nguoi-dung">Danh sách người dùng</a>
             </div>
@@ -42,22 +49,30 @@
                                         class="bi bi-list"></i></a>
                                 <ul class="dropdown-menu dropdown-menu-end position-absolute right-4">
                                     <li><a class="dropdown-item" href="/tim-kiem/thuoc"> Danh sách thuốc</a></li>
-                                    <li><a class="dropdown-item" href="/tim-kiem/bac-si">Danh sách bác sĩ</a></li>
-                                    <li><a class="dropdown-item" href="/tim-kiem/dich-vu">Danh sách dịch vụ</a></li>
                                     <li><a class="dropdown-item" href="/tim-kiem/benh-ly">Danh sách bệnh lý</a></li>
                                     {{#ifEquals role "doctor"}}
-                                    <div><a class="px-2 text-white" href="/tim-kiem/benh-nhan"> Danh sách bệnh nhân</a>
-                                    </div>
-                                    <div><a class="px-2 text-white" href="/tai-lieu/danh-sach-kham-benh">Danh sách
-                                            khám bệnh</a></div>
+                                    <li><a class="dropdown-item" href="/tai-lieu/danh-sach-kham-benh">Danh sách
+                                            khám bệnh</a></li>
                                     {{/ifEquals}}
+
+                                    {{#ifEquals role "patient"}}
+                                    <li><a class="dropdown-item" href="/tim-kiem/bac-si">Danh sách bác sĩ</a></li>
+                                    {{#ifEquals login true}}
+                                    <li><a class="dropdown-item" href="/tim-kiem/dich-vu">Danh sách dịch vụ</a></li>
+                                    <li><a class="dropdown-item" href="/tim-kiem/benh-nhan"> Hồ sơ bệnh lý</a>
+                                    </li>
+                                    {{/ifEquals}}
+                                    {{/ifEquals}}
+
                                     {{#ifEquals role "admin"}}
-                                    <div>
-                                        <a class="px-2 text-white" href="/tim-kiem/nguoi-dung">Danh sách người dùng</a>
-                                    </div>
-                                    <div>
-                                        <a class="px-2 text-white" href="/tim-kiem/lich-hen">Danh sách đặt hẹn</a>
-                                    </div>
+                                    <li><a class="dropdown-item" href="/tim-kiem/bac-si">Danh sách bác sĩ</a></li>
+                                    <li><a class="dropdown-item" href="/tim-kiem/dich-vu">Danh sách dịch vụ</a></li>
+                                    <li>
+                                        <a class="dropdown-item" href="/tim-kiem/nguoi-dung">Danh sách người dùng</a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item" href="/tim-kiem/lich-hen">Danh sách đặt hẹn</a>
+                                    </li>
                                     {{/ifEquals}}
                                 </ul>
                             </li>

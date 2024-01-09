@@ -193,8 +193,14 @@ exports.UpdateInvoice = async (req, res, next) => {
 
 exports.getAppointment = async (req, res, next) => {
   try {
-    const doctors = await DoctorsM.getAll();
-    const select = req.query.id;
+    let doctors;
+    const id = req.query.id;
+    if (!id) {
+      doctors = await DoctorsM.getAll();
+    } else {
+      doctors = await DoctorsM.getByID(id);
+    }
+
     let role = "patient";
 
     if (req.session.Doctor) {
@@ -223,7 +229,6 @@ exports.getAppointment = async (req, res, next) => {
         display1: "d-none",
         display2: "d-block",
         role: role,
-        select: select,
       });
     } else {
       res.render("appointment", {

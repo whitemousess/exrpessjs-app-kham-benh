@@ -31,21 +31,29 @@
         </div>
 
         <div class="row">
-            <div class="col-lg-4" >
-                <div class="card mb-4"  style=" box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;">
+            <div class="col-lg-4">
+                <div class="card mb-4"
+                    style=" box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;">
                     <div class="card-body text-center">
-                        <img src="data:image/png;base64,{{u.image}}" alt="avatar" class="rounded-circle img-fluid" style="width: 150px;">
+                        {{#if u.image}}
+                        <img src='data:image/png;base64,{{image}}' class="img-fluid rounded-start"
+                            style="height: 200px; object-fit: cover ;border-right: 1px solid #ccc;" alt="Chưa có ảnh">
+                        {{else}}
+                        <img src="/img/user.png" alt="avatar" class="rounded-circle img-fluid" style="width: 150px;">
+                        {{/if}}
                         <h5 class="my-3">{{u.Name}}</h5>
                         <p class="text-muted mb-1">@{{u.Username}}</p>
                         <p class="text-muted mb-4">{{u.Address}}</p>
-                        <button type="button"><a data-bs-toggle="modal" data-bs-target="#editProfileModal"><i class="bi bi-pencil-square"></i></a></button>
+                        <button type="button"><a data-bs-toggle="modal" data-bs-target="#editProfileModal"><i
+                                    class="bi bi-pencil-square"></i></a></button>
                     </div>
                 </div>
-              
+
             </div>
             <div class="col-lg-8">
-                <div class="card mb-4"  style=" box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;">
-                    <div class="card-body" >
+                <div class="card mb-4"
+                    style=" box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;">
+                    <div class="card-body">
                         <div class="row">
                             <div class="col-sm-3">
                                 <p class="mb-0">Họ tên</p>
@@ -54,7 +62,7 @@
                                 <p class="text-muted mb-0">{{u.Name}}</p>
                             </div>
                         </div>
-                       <hr style="visibility: hidden;">
+                        <hr style="visibility: hidden;">
                         <div class="row">
                             <div class="col-sm-3">
                                 <p class="mb-0">Ngày sinh</p>
@@ -63,7 +71,7 @@
                                 <p class="text-muted mb-0">{{u.DOB}}</p>
                             </div>
                         </div>
-                       <hr style="visibility: hidden;">
+                        <hr style="visibility: hidden;">
                         <div class="row">
                             <div class="col-sm-3">
                                 <p class="mb-0">Giới tính</p>
@@ -72,7 +80,7 @@
                                 <p class="text-muted mb-0">{{u.Gender}}</p>
                             </div>
                         </div>
-                       <hr style="visibility: hidden;">
+                        <hr style="visibility: hidden;">
                         <div class="row">
                             <div class="col-sm-3">
                                 <p class="mb-0">Email</p>
@@ -81,7 +89,7 @@
                                 <p class="text-muted mb-0">{{u.Email}}</p>
                             </div>
                         </div>
-                       <hr style="visibility: hidden;">
+                        <hr style="visibility: hidden;">
                         <div class="row">
                             <div class="col-sm-3">
                                 <p class="mb-0">Điện thoại</p>
@@ -90,7 +98,7 @@
                                 <p class="text-muted mb-0">{{u.Phone}}</p>
                             </div>
                         </div>
-                       <hr style="visibility: hidden;">
+                        <hr style="visibility: hidden;">
                         <div class="row">
                             <div class="col-sm-3">
                                 <p class="mb-0">Địa chỉ</p>
@@ -99,7 +107,7 @@
                                 <p class="text-muted mb-0">{{u.Address}}</p>
                             </div>
                         </div>
-                       <hr style="visibility: hidden;">
+                        <hr style="visibility: hidden;">
                         <div class="row">
                             <div class="col-sm-3">
                                 <p class="mb-0"><a id="btnChangePassword" class="btn btn-secondary">Đổi mật khẩu</a></p>
@@ -134,47 +142,15 @@
                         </div>
                     </div>
                 </div>
-                <div class="card mb-4" style=" box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;" >
-                    <div class="card-body" >
-                        <p class="mb-4">Hồ sơ bệnh lý
-                        </p>
-                        <div class="container">
-                            <table id="example" 
-                                style="width:100%;background-color: aliceblue;">
-                                <thead>
-                                    <tr>
-                                        <th>Mã bệnh án</th>
-                                        <th>Ngày khám</th>
-                                        <th>Giờ khám</th>
-                                        <th>Bác sĩ khám</th>
-                                        <th>Chẩn đoán</th>
-                                        <th>Tổng chi phí</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    {{#each records}}
-                                    <tr>
-                                        <td><a href="/tai-lieu/ho-so-benh-an/{{ID}}">{{ID}}</a></td>
-                                        <td>{{Date}}</td>
-                                        <td>{{Time}}</td>
-                                        <td><a style="color: #000000;" href="/bac-si/{{DoctorID}}-{{DoctorName}}">{{DoctorName}}</a></td>
-                                        <td>{{Diagnosis}}</td>
-                                        <td>{{AllTotal}}</td>
-                                    </tr>
-                                    {{/each}}
-                             
-                            </table>
-                        </div>
-                    </div>
-                </div>
-                <div class="card mb-4" style=" box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;">
+                
+                <div class="card mb-4"
+                    style=" box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;">
                     <div class="card-body">
                         <p class="mb-4">Phiếu hẹn khám bệnh
                         </p>
                         <div class="container">
 
-                            <table id="table_appointment" 
-                                style="width:100%;background-color: aliceblue;">
+                            <table id="table_appointment" style="width:100%;background-color: aliceblue;">
                                 <thead>
                                     <tr>
                                         <th>Ngày </th>
@@ -190,16 +166,17 @@
                                     <tr>
                                         <td>{{Date}}</td>
                                         <td>{{Time}}</td>
-                                        <td><a style="color: #000000;" href="/bac-si/{{ID}}-{{Doctor}}">{{Doctor}}</a></td>
+                                        <td><a style="color: #000000;" href="/bac-si/{{ID}}-{{Doctor}}">{{Doctor}}</a>
+                                        </td>
                                         <td>{{Desc}}</td>
                                         <td>{{Status}}</td>
                                         <td>{{Note}}</td>
                                     </tr>
                                     {{/each}}
-                                
+
                             </table>
 
-                      
+
 
                         </div>
                     </div>
@@ -293,51 +270,57 @@
 
 <style>
     html,
-body {
-  height: 100%;
-}
-body {
-  margin: 0;
-  font-family: sans-serif;
-  font-weight: 100;
-}
+    body {
+        height: 100%;
+    }
 
-table {
-  width: 1280px;
-  border-collapse: collapse;
-  border-radius: 5px;
-  overflow: hidden;
-  margin-bottom: 30px;
-   box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
-}
-th,
-td {
-  padding: 15px;
-  background-color: rgba(255, 255, 255, 0.2);
-  color: #000000;
-}
-th {
-  text-align: left;
-}
-thead th {
-  background-color: #1eb2c5;
-  color: rgb(255, 255, 255);
-}
-tbody tr:hover {
-  background-color: rgba(255, 255, 255, 0.3);
-}
-tbody td {
-  position: relative;
-}
-tbody td:hover:before {
-  content: "";
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: -9999px;
-  bottom: -9999px;
-  background-color: rgba(255, 255, 255, 0.2);
-  z-index: -1;
-}
+    body {
+        margin: 0;
+        font-family: sans-serif;
+        font-weight: 100;
+    }
 
+    table {
+        width: 1280px;
+        border-collapse: collapse;
+        border-radius: 5px;
+        overflow: hidden;
+        margin-bottom: 30px;
+        box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
+    }
+
+    th,
+    td {
+        padding: 15px;
+        background-color: rgba(255, 255, 255, 0.2);
+        color: #000000;
+    }
+
+    th {
+        text-align: left;
+    }
+
+    thead th {
+        background-color: #1eb2c5;
+        color: rgb(255, 255, 255);
+    }
+
+    tbody tr:hover {
+        background-color: rgba(255, 255, 255, 0.3);
+    }
+
+    tbody td {
+        position: relative;
+    }
+
+    tbody td:hover:before {
+        content: "";
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: -9999px;
+        bottom: -9999px;
+        background-color: rgba(255, 255, 255, 0.2);
+        z-index: -1;
+    }
 </style>
