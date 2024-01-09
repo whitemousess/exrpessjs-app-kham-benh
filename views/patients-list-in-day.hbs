@@ -1,6 +1,5 @@
-<div class="container" style="margin-top: 20px;">
-  <h3 class="text-center mt-2"><b>Danh sách Đặt hẹn</b></h3>
-  <p class="text-center mt-2">Ngày {{today}}</p>
+{{!-- <div class="container" style="margin-top: 20px;">
+  <h3 class="text-center mt-2"><b>Danh sách khám bệnh</b></h3>
 
   <div class="container">
 
@@ -22,10 +21,8 @@
         Thêm lịch
       </button>
 
-      {{!-- <input type="date" id="filterDate">
-      <button onclick="filterTable()">Tìm kiếm</button> --}}
       <div class="d-flex my-2">
-        <input type="date" id="filterDate" class="mr-sm-2 col-2" style="">
+        <input type="date" id="filterDate" class="mr-sm-2 col-2" value="{{todayConvertInput}}" style="">
         <button class="btn btn-outline-success mx-3" onclick="filterTable()">Search</button>
       </div>
       <tbody>
@@ -176,7 +173,6 @@
                 <label class="form-label" for="Time">Thời gian</label>
               </div>
 
-              {{!-- Unit input --}}
               <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
                 <button type="submit" class="btn btn-primary">Xác nhận</button>
@@ -187,6 +183,7 @@
         </div>
       </div>
     </div>
+
     <style>
       html,
       body {
@@ -246,6 +243,7 @@
 
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <script>
+      const inputDate = document.getElementById('filterDate').value
       $(document).ready(function () {
         $('#NameDoctor').on('input', function () {
           var sickNameValue = $(this).val();
@@ -263,6 +261,7 @@
           .replace(/^-+/, '')             // Loại bỏ dấu gạch ngang ở đầu chuỗi
           .replace(/-+$/, '');            // Loại bỏ dấu gạch ngang ở cuối chuỗi
       }
+
       function filterTable() {
         var inputDate = document.getElementById('filterDate').value;
         const dateParts = inputDate.split('-');
@@ -280,4 +279,163 @@
         }
         location.href = href
       }
-    </script>
+    </script> --}}
+    <div class="container" style="margin-top: 20px;">
+      <h3 class="text-center mt-2"><b>Danh sách khám bệnh</b></h3>
+      <div class="row">
+        <div class="card mb-4">
+          <div class="card-body">
+            <p class="mb-4">Phiếu hẹn khám bệnh
+            </p>
+            <div class="container">
+              <table id="table_appointment">
+                <thead>
+                  <tr>
+                    <th>Ngày </th>
+                    <th>Bệnh nhân</th>
+                    <th>Sđt</th>
+                    <th>Nội dung </th>
+                    <th>Ghi chú</th>
+                    <th>Trạng thái</th>
+                    <th>Nhập ghi chú</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {{#each appointments}}
+                  <tr>
+                    <td>{{Date}}</td>
+                    <td>{{Name}}</td>
+                    <td>{{Phone}}</td>
+                    <td>{{Desc}}</td>
+                    <td>{{Note}}</td>
+                    <td class="select-container">
+                      <select class="changeStatus" id="{{_id}}">
+                        <option value="{{Status}}" selected>{{Status}}</option>
+                        {{#ifEquals Status "Hủy"}}
+                        <option value="Chấp nhận">Chấp nhận</option>
+                        <option value="Đã khám">Đã khám</option>
+                        {{/ifEquals}}
+                        {{#ifEquals Status "Chấp nhận"}}
+                        <option value="Hủy">Hủy</option>
+                        <option value="Đã khám">Đã khám</option>
+                        {{/ifEquals}}
+                        {{#ifEquals Status "Đã khám"}}
+                        <option value="Chấp nhận">Chấp nhận</option>
+                        <option value="Hủy">Hủy</option>
+                        {{/ifEquals}}
+                        {{#ifEquals Status "Đang chờ"}}
+                        <option value="Chấp nhận">Chấp nhận</option>
+                        <option value="Hủy">Hủy</option>
+                        <option value="Đã khám">Đã khám</option>
+                        {{/ifEquals}}
+                      </select>
+                    </td>
+                    <td class="input-container">
+                      <input type="text" class="changeNote" id="{{_id}}" value="{{Note}}">
+                      <a href="/tai-lieu/danh-sach-kham-benh">Lưu</a>
+                    </td>
+                  </tr>
+                  {{/each}}
+
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <style>
+      html,
+      body {
+        height: 100%;
+      }
+
+      body {
+        margin: 0;
+        font-family: sans-serif;
+        font-weight: 100;
+      }
+
+      table {
+        width: 1220px;
+        border-collapse: collapse;
+        border-radius: 5px;
+        overflow: hidden;
+        margin-bottom: 30px;
+        box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
+      }
+
+      th,
+      td {
+        padding: 20px;
+        background-color: rgba(255, 255, 255, 0.2);
+        color: #000000;
+      }
+
+      th {
+        text-align: left;
+      }
+
+      thead th {
+        background-color: #1eb2c5;
+        color: aliceblue;
+      }
+
+      tbody tr:hover {
+        background-color: rgba(255, 255, 255, 0.3);
+      }
+
+      tbody td {
+        position: relative;
+      }
+
+      tbody td:hover:before {
+        content: "";
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: -9999px;
+        bottom: -9999px;
+        background-color: rgba(255, 255, 255, 0.2);
+        z-index: -1;
+      }
+
+      /* Style cho thẻ select */
+      .select-container {
+        position: relative;
+      }
+
+      .select-container select {
+        width: 150px;
+        /* Điều chỉnh chiều rộng theo ý muốn */
+        padding: 8px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+      }
+
+      /* Style cho thẻ input và nút Lưu */
+      .input-container {
+        display: flex;
+        column-gap: 5px;
+      }
+
+      .input-container input {
+        width: 150px;
+        /* Điều chỉnh chiều rộng theo ý muốn */
+        padding: 8px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+      }
+
+      .input-container a {
+        display: inline-block;
+        padding: 8px;
+        background-color: #4CAF50;
+        color: white;
+        text-decoration: none;
+        border-radius: 4px;
+      }
+    </style>

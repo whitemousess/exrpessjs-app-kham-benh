@@ -319,38 +319,125 @@ exports.changeNote = async (req, res, next) => {
 };
 
 exports.getPatientsListInDay = async (req, res, next) => {
+  // try {
+  //   let role = "patient";
+  //   if (req.session.Doctor) {
+  //     role = "doctor";
+  //   }
+
+  //   if (!req.session.Doctor && !req.session.Username) {
+  //     return res.render("error", {
+  //       display1: "d-none",
+  //       display2: "d-block",
+  //       role: role,
+  //     });
+  //   } else {
+  //     let filter = req.query.day;
+  //     let list;
+  //     var today = new Date();
+  //     today = typeof today == "object" ? today.toLocaleDateString("vi-VN") : "";
+  //     if (filter) {
+  //       list = await PatientsInDayM.getByDateUser(filter, req.session.Username);
+  //       today = filter;
+  //     } else {
+  //       list = await PatientsInDayM.getByDateUser(today, req.session.Username);
+  //     }
+  //     const todayParts = today.split("/");
+  //     const day = todayParts[0].padStart(2, "0");
+  //     const month = todayParts[1].padStart(2, "0");
+  //     const year = todayParts[2];
+  //     const todayConvertInput = `${year}-${month}-${day}`;
+  //     res.render("patients-list-in-day", {
+  //       display1: "d-none",
+  //       display2: "d-block",
+  //       role: role,
+  //       today: todayConvertInput,
+  //       list: list,
+  //     });
+  //   }
+  // } catch (err) {
+  //   next(err);
+  // }
+
   try {
-    let role = "patient";
-    if (req.session.Doctor) {
-      role = "doctor";
-    }
+    if (req.session.Username) {
+      if (!req.session.Doctor) {
+        const rs = await UsersM.getByUsername(req.session.Username);
 
-    if (!req.session.Doctor && !req.session.Username) {
-      return res.render("error", {
-        display1: "d-none",
-        display2: "d-block",
-        role: role,
-      });
-    } else {
-      let filter = req.query.day;
-      let list;
-      var today = new Date();
-      today = typeof today == "object" ? today.toLocaleDateString("vi-VN") : "";
-      if (filter) {
-        list = await PatientsInDayM.getByDateUser(filter, req.session.Username);
-        today = filter;
+        var u = rs[0];
+
+        u.src = "img/";
+
+        if (u.Gender == "Nữ") {
+          u.src += "female.png";
+
+          u.female = "checked";
+        } else {
+          u.src += "male.png";
+
+          u.male = "checked";
+        }
+
+        u.DOBB =
+          typeof u.DOB == "object" ? u.DOB.toLocaleDateString("fr-CA") : "";
+
+        u.DOB =
+          typeof u.DOB == "object" ? u.DOB.toLocaleDateString("vi-VN") : "";
+
+        const records = await RecordsM.getByUsername(req.session.Username);
+
+        const appointments = await AppointmentM.getByUsername(
+          req.session.Username
+        );
+
+        for (let i = 0; i < appointments.length; i++) {
+          appointments[i].Date =
+            typeof appointments[i].Date == "object"
+              ? appointments[i].Date.toLocaleDateString("vi-VN")
+              : "";
+        }
+
+        res.render("profile", {
+          u: u,
+          uu: u,
+          display1: "d-none",
+          display2: "d-block",
+          editSuccess: "d-none",
+          editNoSuccess: "d-none",
+          changePasswordSuccess: "d-none",
+          changePasswordNoSuccess: "d-none",
+          records: records,
+          appointments: appointments,
+          role: "patient",
+        });
       } else {
-        list = await PatientsInDayM.getByDateUser(today, req.session.Username);
-      }
+        const rs = await DoctorsM.getByUsername(req.session.Username);
 
-      res.render("patients-list-in-day", {
-        display1: "d-none",
-        display2: "d-block",
-        role: role,
-        today: today,
-        list: list,
-        today: today,
-      });
+        const appointments = await AppointmentM.getByID(rs[0].ID);
+
+        for (let i = 0; i < appointments.length; i++) {
+          appointments[i].Date =
+            typeof appointments[i].Date == "object"
+              ? appointments[i].Date.toLocaleDateString("vi-VN")
+              : "";
+        }
+
+        rs[0].href =
+          "https://www.google.com/search?q=" + rs[0].Title + " " + rs[0].Name;
+
+        if (rs[0].schedule == undefined) rs[0].error = "empty";
+
+        res.render("patients-list-in-day", {
+          data: rs[0],
+          display1: "d-none",
+          display2: "d-block",
+          role: "doctor",
+          appointments: appointments,
+          username: req.session.Username,
+        });
+      }
+    } else {
+      res.redirect("/dang-nhap");
     }
   } catch (err) {
     next(err);

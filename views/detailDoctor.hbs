@@ -93,68 +93,6 @@
                 </div>
             </div>
         </div>
-        {{#ifEquals role "doctor"}}
-        <div class="row">
-            <div class="card mb-4">
-                <div class="card-body">
-                    <p class="mb-4">Phiếu hẹn khám bệnh
-                    </p>
-                    <div class="container">
-                        <table id="table_appointment">
-                            <thead>
-                                <tr>
-                                    <th>Ngày </th>
-                                    <th>Bệnh nhân</th>
-                                    <th>Sđt</th>
-                                    <th>Nội dung </th>
-                                    <th>Ghi chú</th>
-                                    <th>Trạng thái</th>
-                                    <th>Nhập ghi chú</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {{#each appointments}}
-                                <tr>
-                                    <td>{{Date}}</td>
-                                    <td>{{Name}}</td>
-                                    <td>{{Phone}}</td>
-                                    <td>{{Desc}}</td>
-                                    <td>{{Note}}</td>
-                                    <td class="select-container">
-                                        <select class="changeStatus" id="{{_id}}">
-                                            <option value="{{Status}}" selected>{{Status}}</option>
-                                            {{#ifEquals Status "Hủy"}}
-                                            <option value="Chấp nhận">Chấp nhận</option>
-                                            <option value="Đã khám">Đã khám</option>
-                                            {{/ifEquals}}
-                                            {{#ifEquals Status "Chấp nhận"}}
-                                            <option value="Hủy">Hủy</option>
-                                            <option value="Đã khám">Đã khám</option>
-                                            {{/ifEquals}}
-                                            {{#ifEquals Status "Đã khám"}}
-                                            <option value="Chấp nhận">Chấp nhận</option>
-                                            <option value="Hủy">Hủy</option>
-                                            {{/ifEquals}}
-                                            {{#ifEquals Status "Đang chờ"}}
-                                            <option value="Chấp nhận">Chấp nhận</option>
-                                            <option value="Hủy">Hủy</option>
-                                            <option value="Đã khám">Đã khám</option>
-                                            {{/ifEquals}}
-                                        </select>
-                                    </td>
-                                    <td class="input-container">
-                                        <input type="text" class="changeNote" id="{{_id}}" value="{{Note}}">
-                                        <a href="/tai-khoan">Lưu</a>
-                                    </td>
-                                </tr>
-                                {{/each}}
-
-                        </table>
-                    </div>
-                </div>
-            </div>
-        </div>
-        {{/ifEquals}}
     </div>
 </section>
 
