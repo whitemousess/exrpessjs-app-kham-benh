@@ -171,10 +171,9 @@
                     <label class="form-label" for="Name{{ID}}">Tên bệnh lý</label>
 
                     <div class="form-floating mb-4">
-
-                        <select class="form-select " style="height: 200px;" name="Sick" id="multiple-select" required
+                        <select class="form-select" style="height: 200px;" name="Sick" id="multiple-select" required
                             multiple>
-                            <option value="">{{ Sick }}</option>
+                            {{Sick}}
                             {{#each ../sicks}}
                             <option value="{{SickName}}">{{SickName}}</option>
                             {{/each}}
@@ -398,5 +397,11 @@
             .replace(/\-\-+/g, '-')         // Thay thế nhiều dấu gạch ngang liên tiếp bằng một dấu gạch ngang
             .replace(/^-+/, '')             // Loại bỏ dấu gạch ngang ở đầu chuỗi
             .replace(/-+$/, '');            // Loại bỏ dấu gạch ngang ở cuối chuỗi
+    }
+
+    const error = "{{error}}";
+    if (error) {
+        alert("Tài khoản đã tồn tại");
+        location.href = '/tim-kiem/bac-si'
     }
 </script>

@@ -5,6 +5,11 @@ const fs = require("fs");
 const { dirname } = require("path");
 const DoctorsM = require("../model/Doctors.m");
 const UsersM = require("../model/Users.m");
+const AdminM = require("../model/Admin.m");
+const { ObjectId } = require("mongodb");
+
+const PatientsInDayM = require("../model/PatientsInDay.m");
+const { db } = require("../model/Database.m");
 
 exports.getEditDrugService = async (req, res, next) => {
   let role = "patient";
@@ -261,12 +266,25 @@ exports.postEditDoctor = async (req, res, next) => {
     var data = req.body;
 
     data.ID = ID;
+    const checkUserM = await UsersM.getByUsername(req.body.Username);
+    const checkDoctorM = await DoctorsM.getByUsername(req.body.Username);
+    const checkAdmin = await AdminM.getByUsername(req.body.Username);
 
-    await DoctorsM.update(ID, data);
+    if (
+      (checkUserM.length > 0 && checkUserM[0].Name != req.body.Name) ||
+      (checkDoctorM.length > 0 && checkDoctorM[0].Name != req.body.Name) ||
+      (checkAdmin.length > 0 && checkAdmin[0].Name != req.body.Name)
+    ) {
+      res.render("search-doctor", {
+        error: true,
+      });
+    } else {
+      await DoctorsM.update(ID, data);
 
-    req.session.info = "edit";
+      req.session.info = "edit";
 
-    res.redirect("/tim-kiem/bac-si");
+      res.redirect("/tim-kiem/bac-si");
+    }
   } catch (err) {
     next(err);
   }
@@ -414,8 +432,6 @@ exports.getMaxPatients = async (req, res, next) => {
     role = "doctor";
   }
 
-  console.log(role);
-
   if (!req.session.Doctor) {
     if (req.session.Username) {
       return res.render("error", {
@@ -509,6 +525,77 @@ exports.postSchedule = async (req, res, next) => {
 
   try {
     await DoctorsM.update(req.session.Username, req.body);
+  } catch (err) {
+    next(err);
+  }
+};
+
+exports.deletePatientInDay = async (req, res, next) => {
+  let role = "patient";
+
+  if (req.session.Doctor) {
+    role = "doctor";
+  }
+
+  if (!req.session.Doctor) {
+    if (req.session.Username) {
+      return res.render("error", {
+        display1: "d-none",
+        display2: "d-block",
+        role: role,
+      });
+    } else {
+      return res.render("error", {
+        display1: "d-block",
+        display2: "d-none",
+        role: role,
+      });
+    }
+  }
+
+  try {
+    const rs = await PatientsInDayM.deleteID(req.params.ID);
+
+    if (rs) {
+      res.redirect("/tai-lieu/danh-sach-kham-benh");
+    }
+  } catch (err) {
+    next(err);
+  }
+};
+
+exports.updatePatientInDay = async (req, res, next) => {
+  let role = "patient";
+
+  if (req.session.Doctor) {
+    role = "doctor";
+  }
+
+  if (!req.session.Doctor) {
+    if (req.session.Username) {
+      return res.render("error", {
+        display1: "d-none",
+        display2: "d-block",
+        role: role,
+      });
+    } else {
+      return res.render("error", {
+        display1: "d-block",
+        display2: "d-none",
+        role: role,
+      });
+    }
+  }
+
+  const data = req.body;
+
+  try {
+   
+    const rs = await PatientsInDayM.update(req.params.ID, data);
+
+    if (rs) {
+      res.redirect("/tai-lieu/danh-sach-kham-benh");
+    }
   } catch (err) {
     next(err);
   }

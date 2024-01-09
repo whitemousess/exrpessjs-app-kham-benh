@@ -72,7 +72,7 @@ $(function () {
     table.buttons().container()
         .appendTo('#example_wrapper .col-md-6:eq(0)');
 
-        var table1 = $('#table_appointment').DataTable({
+     var table1 = $('#table_appointment').DataTable({
             lengthChange: false,
             buttons: ['copy', 'excel', 'pdf', 'colvis']
         });
@@ -540,12 +540,13 @@ function autoGeneratePatientList() {
     $('table tbody').append(`
     <tr>
       <td class="col-1 text-center"></td>
-      <td class="col-3 text-center"> <input type="text" data-index="${index + 1}" list="patients" id="Name${index + 1}" name="Name"  class="form-control mx-sm-3 border-0" value=""> </td>
+      <td class="col-2 text-center"><input type="text" data-index="${index + 1}" list="patients" id="Name${index + 1}" name="Name"  class="form-control mx-sm-3 border-0" value=""> </td>
       <td class="col-1 text-center"><input type="text" id="Gender${index + 1}" data-index="${index + 1}" class="form-control mx-sm-3 border-0"></td>
-      <td class="col-2 text-center"><input type="text" id="DOB${index + 1}" data-index="${index + 1}" id="DOB" class="form-control mx-sm-3 border-0" value=""></td>
-      <td class="col-4 text-center">  <input type="text" id="Address${index + 1}" data-index="${index + 1}" class="form-control mx-sm-3 border-0" value=""> </td>
-      <td class="col-1 text-center"><input type="time" id="Time${index + 1}" data-index="${index + 1}" class="form-control mx-sm-3 border-0"></td>
-      <td class="d-none"><input id="Username${index + 1}" class="d-none" type="text"></td>
+      <td class="col-1 text-center"><input type="date" id="DOB${index + 1}" data-index="${index + 1}" id="DOB" class="form-control mx-sm-3 border-0" value=""></td>
+      <td class="col-1 text-center"><input type="text" id="Address${index + 1}" data-index="${index + 1}" class="form-control mx-sm-3 border-0" value=""> </td>
+      <td class="col-4 text-center"><input type="text" id="Note${index + 1}" data-index="${index + 1}" class="form-control mx-sm-3 border-0" value=""> </td>
+      <td class="col-1 text-center"><input type="time" id="Time${index + 1}" data-index="${index + 1}" class="form-control mx-sm-3 border-0" value=""></td>
+     <td class="d-none"><input id="Username${index + 1}" class="d-none" type="text"></td>
       <td class="text-center"> <button class="btn btn-light rounded-circle"><i class="bi bi-x"></i></button> </td>
       </tr>
         `);
@@ -611,6 +612,8 @@ function savePatientsList() {
         x.Gender = $('#Gender' + i).val();
         x.DOB = $('#DOB' + i).val();
         x.Time = $('#Time' + i).val();
+        x.Day = $('#Day' + i).val();
+        x.Note = $('#Note' + i).val();
         PatientsList.push(x);
     }
     console.log(PatientsList);

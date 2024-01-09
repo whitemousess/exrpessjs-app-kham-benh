@@ -1,24 +1,46 @@
+const { ObjectId } = require("mongodb");
 const { db } = require("../model/Database.m");
 module.exports = {
   add: async (data) => {
-    var tomorow = new Date();
-    tomorow.setHours(24, 0, 0, 0);
     const rs = await db.collection("PatientsInDay").insertOne({
-      expireAt: tomorow,
       Username: data.Username,
       Name: data.Name,
       DOB: data.DOB,
       Gender: data.Gender,
       Address: data.Address,
+      Note: data.Note,
       Time: data.Time,
+      Day: data.Day,
     });
     return rs;
   },
-  deleteAll: async () => {
-    await db.collection("PatientsInDay").deleteMany({});
+  deleteID: async (ID) => {
+    return await db
+      .collection("PatientsInDay")
+      .deleteOne({ _id: ObjectId(ID) });
   },
+
+  update: async (ID, data) => {
+    return await db
+      .collection("PatientsInDay")
+      .updateOne({ _id: ObjectId(ID) }, { $set: data }, { upsert: true });
+  },
+
   getAll: async () => {
     const rs = await db.collection("PatientsInDay").find({}).toArray();
+    return rs;
+  },
+
+  getById: async (ID) => {
+    const rs = await db.collection("Doctors").findOne({ _id: ObjectId(ID) });
+    return rs;
+  },
+
+  getByDateUser: async (DATE, Username) => {
+    const rs = await db
+      .collection("PatientsInDay")
+      .find({ Day: DATE, Username: Username })
+      .toArray();
     return rs;
   },
 };

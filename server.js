@@ -66,6 +66,17 @@ app.engine(
         return a !== b ? options.fn(this) : options.inverse(this);
       },
 
+      formatBOD: (a) => {
+        const reverse = a.split("-");
+        return reverse.reverse().join("/");
+      },
+
+      formatMmDd: (data) => {
+        const dateArray = data.split("/");
+        const formattedDate = `${dateArray[1]}/${dateArray[0]}/${dateArray[2]}`;
+        return formattedDate;
+      },
+
       ifEquals: function (a, b, options) {
         if (a === b) {
           return options.fn(this);

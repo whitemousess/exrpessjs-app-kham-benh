@@ -21,4 +21,7 @@ router.post("/so-benh-nhan-toi-da", editC.postMaxPatients);
 router.post("/lich-lam-viec", editC.postSchedule);
 router.post("/nguoidung/xoa/:ID", editC.deleteUser);
 
+router.post("/lich-kham-benh/xoa/:ID",editC.deletePatientInDay)
+router.post("/lich-kham-benh/sua/:ID",editC.updatePatientInDay)
+
 module.exports = router;

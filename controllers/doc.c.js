@@ -8,6 +8,7 @@ const AppointmentM = require("../model/Appointment.m");
 const PatientsInDayM = require("../model/PatientsInDay.m");
 const RevenueM = require("../model/Revenue.m");
 const DrugReportM = require("../model/Drug-Report.m");
+const adminM = require("../model/Admin.m");
 const axios = require("axios");
 
 exports.callApi = async (req, res, next) => {
@@ -261,13 +262,27 @@ exports.postAppointment = async (req, res, next) => {
 
 exports.postDoctor = async (req, res, next) => {
   try {
-    req.body.Sick = JSON.parse(req.body.Sick);
-    if (req.file) {
-      req.body.Image = req.file.buffer.toString("base64");
-    }
-    await DoctorsM.add(req.body);
+    const checkUserM = await UsersM.getByUsername(req.body.Username);
+    const checkDoctorM = await DoctorsM.getByUsername(req.body.Username);
+    const checkAdmin = await adminM.getByUsername(req.body.Username);
 
-    res.redirect("/tim-kiem/bac-si");
+    if (
+      checkUserM.length > 0 ||
+      checkDoctorM.length > 0 ||
+      checkAdmin.length > 0
+    ) {
+      res.render("search-doctor", {
+        error: true,
+      });
+    } else {
+      req.body.Sick = JSON.parse(req.body.Sick);
+      if (req.file) {
+        req.body.Image = req.file.buffer.toString("base64");
+      }
+      await DoctorsM.add(req.body);
+
+      res.redirect("/tim-kiem/bac-si");
+    }
   } catch (err) {
     next(err);
   }
@@ -304,69 +319,57 @@ exports.changeNote = async (req, res, next) => {
 };
 
 exports.getPatientsListInDay = async (req, res, next) => {
-  let role = "patient";
+  try {
+    let role = "patient";
+    if (req.session.Doctor) {
+      role = "doctor";
+    }
 
-  if (req.session.Doctor) {
-    role = "doctor";
-  }
-
-  if (!req.session.Doctor) {
-    if (req.session.Username) {
+    if (!req.session.Doctor && !req.session.Username) {
       return res.render("error", {
         display1: "d-none",
         display2: "d-block",
         role: role,
       });
     } else {
-      return res.render("error", {
-        display1: "d-block",
-        display2: "d-none",
+      let filter = req.query.day;
+      let list;
+      var today = new Date();
+      today = typeof today == "object" ? today.toLocaleDateString("vi-VN") : "";
+      if (filter) {
+        list = await PatientsInDayM.getByDateUser(filter, req.session.Username);
+        today = filter;
+      } else {
+        list = await PatientsInDayM.getByDateUser(today, req.session.Username);
+      }
+
+      res.render("patients-list-in-day", {
+        display1: "d-none",
+        display2: "d-block",
         role: role,
+        today: today,
+        list: list,
+        today: today,
       });
     }
-  }
-
-  try {
-    //const rs=await AppointmentM.changeStatus(req.body.ID, req.body.Status);
-    var patients = await UsersM.getAll();
-
-    var today = new Date();
-
-    today = typeof today == "object" ? today.toLocaleDateString("vi-VN") : "";
-
-    var list = await PatientsInDayM.getAll();
-
-    res.render("patients-list-in-day", {
-      patients: patients,
-      display1: "d-none",
-      display2: "d-block",
-      role: role,
-      today: today,
-      list: list,
-    });
   } catch (err) {
     next(err);
   }
 };
 exports.postPatientsListInDay = async (req, res, next) => {
   try {
+    var today = new Date();
+
+    today = typeof today == "object" ? today.toLocaleDateString("vi-VN") : "";
+    req.body.Day = today;
+    if (req.session.Username) {
+      req.body.Username = req.session.Username;
+    }
     const data = req.body;
 
-    if (data.username) {
-      const rs = await UsersM.getByUsername(data.username);
-
-      rs[0].DOB =
-        typeof rs[0].DOB == "object"
-          ? rs[0].DOB.toLocaleDateString("vi-VN")
-          : "";
-
-      return res.send({ user: rs[0] });
-    } else {
-      await PatientsInDayM.deleteAll();
-
-      for (let i = 0; i < data.PatientsList.length; i++) {
-        let rs = await PatientsInDayM.add(data.PatientsList[i]);
-      }
+    const rs = PatientsInDayM.add(data);
+    if (rs) {
+      res.redirect("/tai-lieu/danh-sach-kham-benh");
     }
   } catch (err) {
     next(err);
