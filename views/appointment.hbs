@@ -1819,11 +1819,11 @@
                     <div class="bg-white text-center  p-5"
                         style=" box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px; border-radius:10px">
                         <h1 class="mb-4 text-black">Điền thông tin phiếu khám bệnh</h1>
-                        <form class="px-md-2" action="/tai-lieu/lap-phieu-hen" method="post">
+                        <form class="px-md-2" action="/tai-lieu/lap-phieu-hen" onsubmit="handleFormSubmit(event)" method="post">
                             <div class="row g-2">
                                 {{!-- Select doctors --}}
                                 <div class="col-12 text-start">
-                                     <label class="form-label text-left">Chọn bác sĩ &#8727;</label>
+                                    <label class="form-label text-left">Chọn bác sĩ &#8727;</label>
                                     <select class="form-select bg-light" style="border-radius: 10px;" name="Doctor"
                                         required>
                                         {{#each doctors}}
@@ -2117,3 +2117,10 @@
         background-color: #f2f2f2;
     }
 </style>
+<script>
+    function handleFormSubmit(event) {
+        event.preventDefault();
+        alert('Bạn đã đặt lịch thành công!','Thông báo!');
+        event.target.submit();
+    }
+</script>

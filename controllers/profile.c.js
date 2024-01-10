@@ -16,6 +16,11 @@ exports.render = async (req, res, next) => {
   try {
     if (req.session.Username) {
       if (!req.session.Doctor) {
+        let login = false;
+
+        if (req.session.Username) {
+          login = true;
+        }
         const rs = await userM.getByUsername(req.session.Username);
 
         var u = rs[0];
@@ -63,6 +68,7 @@ exports.render = async (req, res, next) => {
           records: records,
           appointments: appointments,
           role: "patient",
+          login: login,
         });
       } else {
         const rs = await doctorM.getByUsername(req.session.Username);

@@ -201,7 +201,11 @@ exports.getAppointment = async (req, res, next) => {
     } else {
       doctors = await DoctorsM.getByID(id);
     }
+    let login = false;
 
+    if (req.session.Username) {
+      login = true;
+    }
     let role = "patient";
 
     if (req.session.Doctor) {
@@ -230,6 +234,8 @@ exports.getAppointment = async (req, res, next) => {
         display1: "d-none",
         display2: "d-block",
         role: role,
+
+        login: login,
       });
     } else {
       res.render("appointment", {
@@ -237,6 +243,7 @@ exports.getAppointment = async (req, res, next) => {
         display1: "d-block",
         display2: "d-none",
         role: role,
+        login: login,
       });
     }
   } catch (err) {
