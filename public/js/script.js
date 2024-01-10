@@ -66,6 +66,23 @@ $(function () {
     });
     var table = $('#example').DataTable({
         lengthChange: false,
+        "language": {
+            "sProcessing": "Đang xử lý...",
+            "sLengthMenu": "Hiển thị _MENU_ dòng",
+            "sZeroRecords": "Không tìm thấy dữ liệu",
+            "sInfo": "Đang hiển thị _START_ đến _END_ của _TOTAL_ dòng",
+            "sInfoEmpty": "Đang hiển thị 0 đến 0 của 0 dòng",
+            "sInfoFiltered": "(được lọc từ _MAX_ dòng)",
+            "sInfoPostFix": "",
+            "sSearch": "Tìm kiếm:",
+            "sUrl": "",
+            "oPaginate": {
+              "sFirst": "Đầu",
+              "sPrevious": "Trước",
+              "sNext": "Tiếp",
+              "sLast": "Cuối"
+            }
+          },
         buttons: ['copy', 'excel', 'pdf', 'colvis']
     });
 
@@ -74,7 +91,23 @@ $(function () {
 
      var table1 = $('#table_appointment').DataTable({
             lengthChange: false,
-            buttons: ['copy', 'excel', 'pdf', 'colvis']
+            buttons: ['copy', 'excel', 'pdf', 'colvis'],"language": {
+                "sProcessing": "Đang xử lý...",
+                "sLengthMenu": "Hiển thị _MENU_ dòng",
+                "sZeroRecords": "Không tìm thấy dữ liệu",
+                "sInfo": "Đang hiển thị _START_ đến _END_ của _TOTAL_ dòng",
+                "sInfoEmpty": "Đang hiển thị 0 đến 0 của 0 dòng",
+                "sInfoFiltered": "(được lọc từ _MAX_ dòng)",
+                "sInfoPostFix": "",
+                "sSearch": "Tìm kiếm:",
+                "sUrl": "",
+                "oPaginate": {
+                  "sFirst": "Đầu",
+                  "sPrevious": "Trước",
+                  "sNext": "Tiếp",
+                  "sLast": "Cuối"
+                }
+              }
         });
     
         table1.buttons().container()
@@ -90,7 +123,24 @@ $(function () {
 
         var tableUS = $('#table_Us').DataTable({
             lengthChange: false,
-            buttons: ['colvis']
+            buttons: ['colvis'],
+            "language": {
+                "sProcessing": "Đang xử lý...",
+                "sLengthMenu": "Hiển thị _MENU_ dòng",
+                "sZeroRecords": "Không tìm thấy dữ liệu",
+                "sInfo": "Đang hiển thị _START_ đến _END_ của _TOTAL_ dòng",
+                "sInfoEmpty": "Đang hiển thị 0 đến 0 của 0 dòng",
+                "sInfoFiltered": "(được lọc từ _MAX_ dòng)",
+                "sInfoPostFix": "",
+                "sSearch": "Tìm kiếm:",
+                "sUrl": "",
+                "oPaginate": {
+                  "sFirst": "Đầu",
+                  "sPrevious": "Trước",
+                  "sNext": "Tiếp",
+                  "sLast": "Cuối"
+                }
+              }
         });
     
         tableUS.buttons().container()

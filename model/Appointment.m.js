@@ -34,6 +34,13 @@ module.exports = {
     const rs = await db.collection("Appointments").find({ ID: ID }).toArray();
     return rs;
   },
+
+  getByIDDate: async ({ID,DATE}) => {
+    const dateToFind = new Date(DATE);
+    const rs = await db.collection("Appointments").find({ID: ID ,Date: dateToFind}).toArray();
+    return rs;
+  },
+
   getByUsername: async (Username) => {
     const rs = await db
       .collection("Appointments")

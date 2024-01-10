@@ -368,59 +368,27 @@ exports.getPatientsListInDay = async (req, res, next) => {
 
   try {
     if (req.session.Username) {
-      if (!req.session.Doctor) {
-        const rs = await UsersM.getByUsername(req.session.Username);
-
-        var u = rs[0];
-
-        u.src = "img/";
-
-        if (u.Gender == "Nữ") {
-          u.src += "female.png";
-
-          u.female = "checked";
-        } else {
-          u.src += "male.png";
-
-          u.male = "checked";
-        }
-
-        u.DOBB =
-          typeof u.DOB == "object" ? u.DOB.toLocaleDateString("fr-CA") : "";
-
-        u.DOB =
-          typeof u.DOB == "object" ? u.DOB.toLocaleDateString("vi-VN") : "";
-
-        const records = await RecordsM.getByUsername(req.session.Username);
-
-        const appointments = await AppointmentM.getByUsername(
-          req.session.Username
-        );
-
-        for (let i = 0; i < appointments.length; i++) {
-          appointments[i].Date =
-            typeof appointments[i].Date == "object"
-              ? appointments[i].Date.toLocaleDateString("vi-VN")
-              : "";
-        }
-
-        res.render("profile", {
-          u: u,
-          uu: u,
-          display1: "d-none",
-          display2: "d-block",
-          editSuccess: "d-none",
-          editNoSuccess: "d-none",
-          changePasswordSuccess: "d-none",
-          changePasswordNoSuccess: "d-none",
-          records: records,
-          appointments: appointments,
-          role: "patient",
-        });
-      } else {
+      if (req.session.Doctor) {
         const rs = await DoctorsM.getByUsername(req.session.Username);
+        var today = new Date();
+        today =
+          typeof today == "object" ? today.toLocaleDateString("fr-CA") : "";
 
-        const appointments = await AppointmentM.getByID(rs[0].ID);
+        let filter = req.query.day;
+        let appointments;
+
+        if (filter) {
+          appointments = await AppointmentM.getByIDDate({
+            ID: rs[0].ID,
+            DATE: filter,
+          });
+          today = filter;
+        } else {
+          appointments = await AppointmentM.getByIDDate({
+            ID: rs[0].ID,
+            DATE: today,
+          });
+        }
 
         for (let i = 0; i < appointments.length; i++) {
           appointments[i].Date =
@@ -428,19 +396,20 @@ exports.getPatientsListInDay = async (req, res, next) => {
               ? appointments[i].Date.toLocaleDateString("vi-VN")
               : "";
         }
-
-        rs[0].href =
-          "https://www.google.com/search?q=" + rs[0].Title + " " + rs[0].Name;
-
-        if (rs[0].schedule == undefined) rs[0].error = "empty";
 
         res.render("patients-list-in-day", {
-          data: rs[0],
           display1: "d-none",
           display2: "d-block",
           role: "doctor",
           appointments: appointments,
           username: req.session.Username,
+          today: today,
+        });
+      } else {
+        return res.render("error", {
+          display1: "d-block",
+          display2: "d-none",
+          role: role,
         });
       }
     } else {

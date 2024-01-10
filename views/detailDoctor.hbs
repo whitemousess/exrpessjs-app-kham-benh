@@ -98,6 +98,7 @@
                             <div class="col-sm-3">
                                 <p class="mb-0"><a href="{{data.href}}" target="_blank">Tìm hiểu thêm</a></p>
                             </div>
+                            {{#ifEquals role "patient"}}
                             <div class="col-sm-3">
                                 <a class="d-block me-2 link-hover" href="/tai-lieu/lap-phieu-hen?id={{data.ID}}">
                                     <div class="btn btn-outline-success">
@@ -105,6 +106,7 @@
                                     </div>
                                 </a>
                             </div>
+                            {{/ifEquals}}
                         </div>
 
 

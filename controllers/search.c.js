@@ -92,7 +92,7 @@ exports.viewAllDoctors = async (req, res, next) => {
 exports.viewAllUser = async (req, res, next) => {
   try {
     const rs = await UsersM.getAll();
-
+    const resAp = await AppointmentM.getAll();
     let role = "patient";
     if (req.session.Admin) {
       role = "admin";
@@ -100,6 +100,7 @@ exports.viewAllUser = async (req, res, next) => {
     if (req.session.Username && req.session.Admin) {
       res.render("manager-user", {
         user: rs,
+        Appointments: resAp,
         display1: "d-none",
         display2: "d-block",
         role: role,
@@ -306,7 +307,6 @@ exports.viewRecordsUser = async (req, res, next) => {
     //     role: role,
     //   });
     // }
-
 
     let role = "patient";
 

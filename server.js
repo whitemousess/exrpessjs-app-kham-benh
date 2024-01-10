@@ -71,10 +71,13 @@ app.engine(
         return reverse.reverse().join("/");
       },
 
-      formatMmDd: (data) => {
-        const dateArray = data.split("/");
-        const formattedDate = `${dateArray[1]}/${dateArray[0]}/${dateArray[2]}`;
-        return formattedDate;
+      CountAppointments: (a, b) => {
+        const count = a.filter((user) => user.Username === b);
+        if (count.length > 0) {
+          return count.length;
+        }else{
+          return "Chưa khám"
+        }
       },
 
       ifEquals: function (a, b, options) {
